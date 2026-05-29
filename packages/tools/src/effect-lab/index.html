@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spell Effect Lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #1a1a2e; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    h1 { font-size: 1.5rem; margin-bottom: 16px; color: #7b68ee; }
+    .main { display: flex; gap: 20px; width: 100%; max-width: 1100px; flex-wrap: wrap; }
+    .controls { width: 320px; background: #0a0a16; border: 1px solid #333; border-radius: 4px; padding: 16px; }
+    .controls h3 { color: #7b68ee; font-size: 14px; margin-bottom: 12px; }
+    .control-group { margin-bottom: 16px; }
+    .control-group label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+    .control-group label .val { color: #7b68ee; }
+    .control-group input[type=range] { width: 100%; accent-color: #7b68ee; }
+    select { width: 100%; padding: 6px 10px; background: #0a0a16; color: #e0e0e0; border: 1px solid #333; border-radius: 4px; font-size: 13px; }
+    button { padding: 8px 16px; border: 1px solid #7b68ee; background: transparent; color: #e0e0e0; border-radius: 4px; cursor: pointer; font-size: 14px; margin-right: 8px; margin-bottom: 8px; }
+    button:hover { background: #7b68ee22; }
+    button:active { background: #7b68ee44; }
+    button.primary { background: #7b68ee; color: #fff; }
+    .check-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .check-group label { display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; }
+    .check-group input[type=checkbox] { accent-color: #7b68ee; }
+    canvas { border: 2px solid #333; background: #000; border-radius: 4px; }
+    .preview-panel { flex: 1; min-width: 300px; }
+    .info { display: flex; gap: 20px; margin-top: 10px; font-size: 13px; }
+    .info span { color: #7b68ee; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Spell Effect Lab</h1>
+  <div class="main">
+    <div class="controls" id="controlsPanel">
+      <h3>Effect Parameters</h3>
+
+      <div class="control-group">
+        <label>Element</label>
+        <select id="elementSelect">
+          <option value="fire">Fire</option>
+          <option value="water">Water</option>
+          <option value="wind">Wind</option>
+          <option value="earth">Earth</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="lightning">Lightning</option>
+          <option value="ice">Ice</option>
+          <option value="nature">Nature</option>
+          <option value="arcane" selected>Arcane</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>Force <span class="val" id="forceVal">0.50</span></label>
+        <input type="range" id="forceSlider" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+
+      <div class="control-group">
+        <label>Spread <span class="val" id="spreadVal">0.50</span></label>
+        <input type="range" id="spreadSlider" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+
+      <div class="control-group">
+        <label>Focus <span class="val" id="focusVal">0.50</span></label>
+        <input type="range" id="focusSlider" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+
+      <div class="control-group">
+        <label>Range <span class="val" id="rangeVal">0.50</span></label>
+        <input type="range" id="rangeSlider" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+
+      <div class="control-group">
+        <label>Gravity <span class="val" id="gravityVal">1.00</span></label>
+        <input type="range" id="gravitySlider" min="0" max="2" step="0.01" value="1" />
+      </div>
+
+      <div class="control-group">
+        <label>Stability <span class="val" id="stabilityVal">0.50</span></label>
+        <input type="range" id="stabilitySlider" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+
+      <div class="control-group">
+        <h3>Manifestations</h3>
+        <div class="check-group">
+          <label><input type="checkbox" id="mAura" checked /> Aura</label>
+          <label><input type="checkbox" id="mColumn" /> Column</label>
+          <label><input type="checkbox" id="mLevitation" /> Levitation</label>
+          <label><input type="checkbox" id="mConvergence" /> Convergence</label>
+          <label><input type="checkbox" id="mBarrier" /> Barrier</label>
+          <label><input type="checkbox" id="mProjectile" /> Projectile</label>
+          <label><input type="checkbox" id="mArea" /> Area</label>
+          <label><input type="checkbox" id="mShield" /> Shield</label>
+        </div>
+      </div>
+
+      <div>
+        <button id="btnStart" class="primary">Start Preview</button>
+        <button id="btnStop">Stop</button>
+        <button id="btnReset">Reset</button>
+      </div>
+    </div>
+    <div class="preview-panel">
+      <canvas id="effectCanvas" width="500" height="500"></canvas>
+      <div class="info">
+        <div>FPS: <span id="fpsDisplay">0</span></div>
+        <div>Frames: <span id="frameDisplay">0</span></div>
+        <div>Status: <span id="statusDisplay">idle</span></div>
+      </div>
+    </div>
+  </div>
+<script>
+  const canvas = document.getElementById('effectCanvas')
+  const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false })
+  let animId = null
+  let active = false
+  let frameCount = 0
+  let fpsCounter = 0
+  let fpsTimer = 0
+  let lastTime = 0
+  let currentFPS = 0
+
+  const params = {
+    force: 0.5, spread: 0.5, focus: 0.5, range: 0.5,
+    gravity: 1.0, stability: 0.5, element: 'arcane',
+    manifestations: ['aura']
+  }
+
+  if (gl) {
+    gl.enable(gl.BLEND)
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE)
+  }
+
+  const elementColors = {
+    fire: [1, 0.3, 0], water: [0, 0.4, 1], wind: [0.5, 0.8, 0.5],
+    earth: [0.6, 0.4, 0.2], light: [1, 0.9, 0.5], dark: [0.2, 0, 0.4],
+    lightning: [0.8, 0.8, 0], ice: [0.6, 0.9, 1], nature: [0, 0.7, 0.2],
+    arcane: [0.5, 0.4, 0.9]
+  }
+
+  function loop() {
+    if (!active) return
+    animId = requestAnimationFrame(loop)
+    const now = performance.now()
+    if (!lastTime) lastTime = now
+    frameCount++; fpsCounter++
+    if (now - fpsTimer >= 1000) { currentFPS = fpsCounter; fpsCounter = 0; fpsTimer = now }
+
+    const c = elementColors[params.element] || elementColors.arcane
+    const duration = (now - (lastTime === 0 ? now : startTime)) / 1000
+    gl.clearColor(
+      c[0] * params.force * 0.2,
+      c[1] * params.focus * 0.2,
+      c[2] * params.spread * 0.2,
+      params.stability * params.range * 0.5
+    )
+    gl.clear(gl.COLOR_BUFFER_BIT)
+
+    document.getElementById('fpsDisplay').textContent = currentFPS
+    document.getElementById('frameDisplay').textContent = frameCount
+  }
+
+  let startTime = 0
+
+  function updateSlider(id, valId, key) {
+    document.getElementById(id).addEventListener('input', (e) => {
+      params[key] = parseFloat(e.target.value)
+      document.getElementById(valId).textContent = params[key].toFixed(2)
+    })
+  }
+
+  updateSlider('forceSlider', 'forceVal', 'force')
+  updateSlider('spreadSlider', 'spreadVal', 'spread')
+  updateSlider('focusSlider', 'focusVal', 'focus')
+  updateSlider('rangeSlider', 'rangeVal', 'range')
+  updateSlider('gravitySlider', 'gravityVal', 'gravity')
+  updateSlider('stabilitySlider', 'stabilityVal', 'stability')
+
+  document.getElementById('elementSelect').addEventListener('change', (e) => {
+    params.element = e.target.value
+  })
+
+  const mIds = ['aura', 'column', 'levitation', 'convergence', 'barrier', 'projectile', 'area', 'shield']
+  const mMap = { aura: 'mAura', column: 'mColumn', levitation: 'mLevitation', convergence: 'mConvergence',
+    barrier: 'mBarrier', projectile: 'mProjectile', area: 'mArea', shield: 'mShield' }
+  for (const mid of mIds) {
+    document.getElementById(mMap[mid]).addEventListener('change', (e) => {
+      if (e.target.checked) { if (!params.manifestations.includes(mid)) params.manifestations.push(mid) }
+      else { params.manifestations = params.manifestations.filter(m => m !== mid) }
+    })
+  }
+
+  document.getElementById('btnStart').addEventListener('click', () => {
+    if (active) return
+    active = true
+    startTime = performance.now()
+    lastTime = performance.now()
+    frameCount = 0
+    document.getElementById('statusDisplay').textContent = 'running'
+    loop()
+  })
+
+  document.getElementById('btnStop').addEventListener('click', () => {
+    active = false
+    if (animId) { cancelAnimationFrame(animId); animId = null }
+    document.getElementById('statusDisplay').textContent = 'stopped'
+  })
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    params.force = 0.5; params.spread = 0.5; params.focus = 0.5; params.range = 0.5
+    params.gravity = 1.0; params.stability = 0.5; params.element = 'arcane'
+    params.manifestations = ['aura']
+    document.getElementById('forceSlider').value = 0.5; document.getElementById('forceVal').textContent = '0.50'
+    document.getElementById('spreadSlider').value = 0.5; document.getElementById('spreadVal').textContent = '0.50'
+    document.getElementById('focusSlider').value = 0.5; document.getElementById('focusVal').textContent = '0.50'
+    document.getElementById('rangeSlider').value = 0.5; document.getElementById('rangeVal').textContent = '0.50'
+    document.getElementById('gravitySlider').value = 1; document.getElementById('gravityVal').textContent = '1.00'
+    document.getElementById('stabilitySlider').value = 0.5; document.getElementById('stabilityVal').textContent = '0.50'
+    document.getElementById('elementSelect').value = 'arcane'
+    for (const mid of mIds) { document.getElementById(mMap[mid]).checked = mid === 'aura' }
+    frameCount = 0
+    document.getElementById('fpsDisplay').textContent = '0'
+    document.getElementById('frameDisplay').textContent = '0'
+  })
+</script>
+</body>
+</html>

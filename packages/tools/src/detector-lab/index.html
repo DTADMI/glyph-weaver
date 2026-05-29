@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sigil/Sign Detector Lab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #1a1a2e; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    h1 { font-size: 1.5rem; margin-bottom: 16px; color: #7b68ee; }
+    .main { display: flex; gap: 20px; width: 100%; max-width: 1100px; flex-wrap: wrap; }
+    .panel { flex: 1; min-width: 300px; }
+    .toolbar { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+    button { padding: 8px 16px; border: 1px solid #7b68ee; background: transparent; color: #e0e0e0; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    button:hover { background: #7b68ee22; }
+    button:active { background: #7b68ee44; }
+    button.primary { background: #7b68ee; color: #fff; }
+    button.primary:hover { background: #6a57d9; }
+    canvas { border: 2px solid #333; background: #0a0a16; border-radius: 4px; cursor: crosshair; width: 100%; max-width: 500px; }
+    select { padding: 6px 10px; background: #0a0a16; color: #e0e0e0; border: 1px solid #333; border-radius: 4px; font-size: 13px; }
+    .results { background: #0a0a16; border: 1px solid #333; border-radius: 4px; padding: 12px; margin-top: 12px; }
+    .results h3 { color: #7b68ee; margin-bottom: 8px; font-size: 14px; }
+    .result-item { padding: 6px 0; border-bottom: 1px solid #222; font-size: 13px; display: flex; justify-content: space-between; }
+    .result-item .label { color: #999; min-width: 120px; }
+    .result-item .value { color: #e0e0e0; font-weight: bold; text-align: right; }
+    .confidence-bar { height: 6px; background: #333; border-radius: 3px; margin-top: 4px; overflow: hidden; }
+    .confidence-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+    .alt-match { display: flex; justify-content: space-between; padding: 3px 0; font-size: 12px; }
+    .alt-match .id { color: #7b68ee; }
+    .alt-match .conf { color: #999; }
+    .warn { color: #ff6b6b; font-size: 12px; margin-top: 4px; }
+    label { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    input[type=color] { width: 32px; height: 24px; border: none; cursor: pointer; }
+    input[type=range] { width: 80px; }
+  </style>
+</head>
+<body>
+  <h1>Sigil/Sign Detector Lab</h1>
+  <div class="main">
+    <div class="panel">
+      <div class="toolbar">
+        <button id="btnClear" class="primary">Clear Canvas</button>
+        <button id="btnDetect">Detect</button>
+        <label>Color: <input type="color" id="strokeColor" value="#7b68ee" /></label>
+        <label>Width: <input type="range" id="strokeWidth" min="1" max="10" value="2" /></label>
+      </div>
+      <canvas id="drawCanvas" width="500" height="500"></canvas>
+    </div>
+    <div class="panel">
+      <div class="toolbar">
+        <select id="dictSelect">
+          <option value="default">Default Dictionary</option>
+          <option value="minimal">Minimal Dictionary</option>
+          <option value="custom">Custom...</option>
+        </select>
+      </div>
+      <div class="results" id="resultsPanel">
+        <h3>Detection Results</h3>
+        <div id="resultsContent">
+          <div class="result-item"><span class="label">Status</span><span class="value" id="rStatus">Idle</span></div>
+        </div>
+      </div>
+      <div class="results" id="diagPanel">
+        <h3>Diagnostics</h3>
+        <div id="diagContent">
+          <div class="result-item"><span class="label">Processing Time</span><span class="value" id="dTime">--</span></div>
+          <div class="result-item"><span class="label">Ring Found</span><span class="value" id="dRing">--</span></div>
+          <div class="result-item"><span class="label">Candidates</span><span class="value" id="dCandidates">--</span></div>
+        </div>
+        <div id="warningsList"></div>
+      </div>
+    </div>
+  </div>
+<script>
+  const canvas = document.getElementById('drawCanvas')
+  const ctx = canvas.getContext('2d')
+  const strokeColorInput = document.getElementById('strokeColor')
+  const strokeWidthInput = document.getElementById('strokeWidth')
+
+  let strokes = []
+  let currentStroke = null
+
+  function redraw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    for (const stroke of strokes) {
+      ctx.beginPath()
+      ctx.strokeStyle = stroke.color
+      ctx.lineWidth = stroke.lineWidth
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      for (let i = 0; i < stroke.points.length; i++) {
+        const p = stroke.points[i]
+        if (i === 0) ctx.moveTo(p.x, p.y)
+        else ctx.lineTo(p.x, p.y)
+      }
+      ctx.stroke()
+    }
+    if (currentStroke && currentStroke.points.length > 0) {
+      ctx.beginPath()
+      ctx.strokeStyle = currentStroke.color
+      ctx.lineWidth = currentStroke.lineWidth
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      const pts = currentStroke.points
+      ctx.moveTo(pts[0].x, pts[0].y)
+      for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y)
+      ctx.stroke()
+    }
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    const rect = canvas.getBoundingClientRect()
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width)
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height)
+    currentStroke = { points: [{ x, y }], color: strokeColorInput.value, lineWidth: +strokeWidthInput.value }
+    redraw()
+  })
+
+  canvas.addEventListener('pointermove', (e) => {
+    if (!currentStroke) return
+    const rect = canvas.getBoundingClientRect()
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width)
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height)
+    currentStroke.points.push({ x, y })
+    redraw()
+  })
+
+  canvas.addEventListener('pointerup', () => {
+    if (currentStroke) { strokes.push(currentStroke); currentStroke = null }
+    redraw()
+  })
+
+  canvas.addEventListener('pointerleave', () => {
+    if (currentStroke) { strokes.push(currentStroke); currentStroke = null }
+    redraw()
+  })
+
+  document.getElementById('btnClear').addEventListener('click', () => {
+    strokes = []; currentStroke = null
+    document.getElementById('rStatus').textContent = 'Idle'
+    document.getElementById('dTime').textContent = '--'
+    document.getElementById('dRing').textContent = '--'
+    document.getElementById('dCandidates').textContent = '--'
+    document.getElementById('warningsList').innerHTML = ''
+    redraw()
+  })
+
+  document.getElementById('btnDetect').addEventListener('click', () => {
+    const t0 = performance.now()
+    const totalStrokes = strokes.length
+    const totalPoints = strokes.reduce((s, st) => s + st.points.length, 0)
+
+    document.getElementById('rStatus').textContent = 'Analyzed'
+    const resultsHTML = `
+      <div class="result-item"><span class="label">Status</span><span class="value" id="rStatus">Analyzed</span></div>
+      <div class="result-item"><span class="label">Primary Sigil</span><span class="value">~~detection pending~~</span></div>
+      <div class="result-item"><span class="label">Confidence</span><span class="value">--</span></div>
+      <div class="result-item"><span class="label">Signs Detected</span><span class="value">0</span></div>
+      <div class="result-item"><span class="label">Unknowns</span><span class="value">0</span></div>
+    `
+    document.getElementById('resultsContent').innerHTML = resultsHTML
+
+    const t1 = performance.now()
+    document.getElementById('dTime').textContent = (t1 - t0).toFixed(1) + ' ms'
+    document.getElementById('dRing').textContent = 'Not evaluated'
+    document.getElementById('dCandidates').textContent = totalStrokes
+
+    const warnings = []
+    if (totalStrokes < 2) warnings.push('Minimum 2 strokes recommended for detection')
+    if (totalPoints < 10) warnings.push('Low point count — strokes may be too short')
+    document.getElementById('warningsList').innerHTML = warnings.map(w => '<div class="warn">' + w + '</div>').join('')
+  })
+
+  redraw()
+</script>
+</body>
+</html>

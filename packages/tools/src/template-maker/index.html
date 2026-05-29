@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stroke Template Maker</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #1a1a2e; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    h1 { font-size: 1.5rem; margin-bottom: 16px; color: #7b68ee; }
+    .toolbar { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+    button { padding: 8px 16px; border: 1px solid #7b68ee; background: transparent; color: #e0e0e0; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    button:hover { background: #7b68ee22; }
+    button:active { background: #7b68ee44; }
+    canvas { border: 2px solid #333; background: #0a0a16; cursor: crosshair; border-radius: 4px; }
+    .info { display: flex; gap: 20px; margin-top: 12px; font-size: 13px; }
+    .info span { color: #7b68ee; font-weight: bold; }
+    textarea { width: 100%; max-width: 800px; height: 120px; margin-top: 12px; background: #0a0a16; color: #7fff7f; border: 1px solid #333; border-radius: 4px; padding: 8px; font-family: monospace; font-size: 12px; }
+    label { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    input[type=color] { width: 32px; height: 24px; border: none; cursor: pointer; }
+    input[type=range] { width: 80px; }
+  </style>
+</head>
+<body>
+  <h1>Stroke Template Maker</h1>
+  <div class="toolbar">
+    <button id="btnNew">New Recording</button>
+    <button id="btnFinish">Finish &amp; Export</button>
+    <button id="btnClear">Clear Strokes</button>
+    <button id="btnExport">Copy JSON to Clipboard</button>
+    <label>Color: <input type="color" id="strokeColor" value="#7b68ee" /></label>
+    <label>Width: <input type="range" id="strokeWidth" min="1" max="10" value="2" /></label>
+    <label>Aspect: <span id="aspectDisplay">4:3</span></label>
+  </div>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <div class="info">
+    <div>Strokes: <span id="strokeCount">0</span></div>
+    <div>Points: <span id="pointCount">0</span></div>
+    <div>Status: <span id="statusDisplay">idle</span></div>
+  </div>
+  <textarea id="jsonOutput" placeholder="Exported JSON appears here..." readonly></textarea>
+<script>
+  const canvas = document.getElementById('canvas')
+  const ctx = canvas.getContext('2d')
+  const strokeColorInput = document.getElementById('strokeColor')
+  const strokeWidthInput = document.getElementById('strokeWidth')
+  const aspectDisplay = document.getElementById('aspectDisplay')
+
+  let strokes = []
+  let currentStroke = null
+  let recording = false
+
+  function updateAspect() {
+    const w = +canvas.width
+    const h = +canvas.height
+    const ratio = w / h
+    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b)
+    const g = gcd(w, h)
+    aspectDisplay.textContent = `${w / g}:${h / g} (${ratio.toFixed(2)})`
+  }
+  updateAspect()
+
+  function redraw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    for (const stroke of strokes) {
+      ctx.beginPath()
+      ctx.strokeStyle = stroke.color || '#7b68ee'
+      ctx.lineWidth = stroke.width || 2
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      for (let i = 0; i < stroke.points.length; i++) {
+        const p = stroke.points[i]
+        if (i === 0) ctx.moveTo(p.x, p.y)
+        else ctx.lineTo(p.x, p.y)
+      }
+      ctx.stroke()
+    }
+    if (currentStroke && currentStroke.points.length > 0) {
+      ctx.beginPath()
+      ctx.strokeStyle = currentStroke.color
+      ctx.lineWidth = currentStroke.lineWidth
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      const pts = currentStroke.points
+      ctx.moveTo(pts[0].x, pts[0].y)
+      for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y)
+      ctx.stroke()
+    }
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    const rect = canvas.getBoundingClientRect()
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width)
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height)
+    currentStroke = { points: [{ x, y }], color: strokeColorInput.value, lineWidth: +strokeWidthInput.value }
+    if (!recording) { recording = true; document.getElementById('statusDisplay').textContent = 'recording' }
+    redraw()
+  })
+
+  canvas.addEventListener('pointermove', (e) => {
+    if (!currentStroke) return
+    const rect = canvas.getBoundingClientRect()
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width)
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height)
+    currentStroke.points.push({ x, y })
+    redraw()
+  })
+
+  canvas.addEventListener('pointerup', () => {
+    if (currentStroke) {
+      strokes.push({ points: currentStroke.points, color: currentStroke.color, width: currentStroke.lineWidth })
+      currentStroke = null
+    }
+    document.getElementById('strokeCount').textContent = strokes.length
+    let pc = 0; for (const s of strokes) pc += s.points.length
+    document.getElementById('pointCount').textContent = pc
+    redraw()
+  })
+
+  canvas.addEventListener('pointerleave', () => {
+    if (currentStroke) {
+      strokes.push({ points: currentStroke.points, color: currentStroke.color, width: currentStroke.lineWidth })
+      currentStroke = null
+    }
+    redraw()
+  })
+
+  function exportTemplate() {
+    const normalized = strokes.map((s) =>
+      s.points.map((p) => ({ x: p.x / canvas.width, y: p.y / canvas.height }))
+    )
+    return {
+      sourceAspectRatio: canvas.width / canvas.height,
+      strokes: normalized,
+    }
+  }
+
+  document.getElementById('btnNew').addEventListener('click', () => {
+    strokes = []
+    currentStroke = null
+    recording = false
+    document.getElementById('strokeCount').textContent = '0'
+    document.getElementById('pointCount').textContent = '0'
+    document.getElementById('statusDisplay').textContent = 'idle'
+    document.getElementById('jsonOutput').value = ''
+    redraw()
+  })
+
+  document.getElementById('btnClear').addEventListener('click', () => {
+    strokes = []
+    currentStroke = null
+    document.getElementById('strokeCount').textContent = '0'
+    document.getElementById('pointCount').textContent = '0'
+    redraw()
+  })
+
+  document.getElementById('btnFinish').addEventListener('click', () => {
+    recording = false
+    const json = JSON.stringify(exportTemplate(), null, 2)
+    document.getElementById('jsonOutput').value = json
+    document.getElementById('statusDisplay').textContent = 'finished'
+  })
+
+  document.getElementById('btnExport').addEventListener('click', async () => {
+    const json = JSON.stringify(exportTemplate(), null, 2)
+    document.getElementById('jsonOutput').value = json
+    await navigator.clipboard.writeText(json)
+    document.getElementById('statusDisplay').textContent = 'copied!'
+    setTimeout(() => { if (document.getElementById('statusDisplay').textContent === 'copied!') document.getElementById('statusDisplay').textContent = 'finished' }, 2000)
+  })
+
+  redraw()
+</script>
+</body>
+</html>

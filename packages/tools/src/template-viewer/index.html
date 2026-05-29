@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stroke Template Viewer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #1a1a2e; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    h1 { font-size: 1.5rem; margin-bottom: 16px; color: #7b68ee; }
+    .main { display: flex; gap: 20px; width: 100%; max-width: 1000px; flex-wrap: wrap; }
+    .panel { flex: 1; min-width: 300px; }
+    textarea { width: 100%; height: 200px; background: #0a0a16; color: #7fff7f; border: 1px solid #333; border-radius: 4px; padding: 10px; font-family: monospace; font-size: 12px; resize: vertical; }
+    button { padding: 8px 16px; border: 1px solid #7b68ee; background: transparent; color: #e0e0e0; border-radius: 4px; cursor: pointer; font-size: 14px; margin-top: 10px; }
+    button:hover { background: #7b68ee22; }
+    button:active { background: #7b68ee44; }
+    canvas { border: 2px solid #333; background: #0a0a16; border-radius: 4px; width: 100%; max-width: 500px; }
+    .metrics { background: #0a0a16; border: 1px solid #333; border-radius: 4px; padding: 12px; margin-top: 12px; }
+    .metrics h3 { color: #7b68ee; margin-bottom: 8px; font-size: 14px; }
+    .metric-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; border-bottom: 1px solid #222; }
+    .metric-row .label { color: #999; }
+    .metric-row .value { color: #7b68ee; font-weight: bold; }
+    .error { color: #ff6b6b; margin-top: 8px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Stroke Template Viewer</h1>
+  <div class="main">
+    <div class="panel">
+      <textarea id="jsonInput" placeholder="Paste StrokeTemplate JSON here..."></textarea>
+      <button id="btnRender">Render</button>
+      <canvas id="preview" width="500" height="400"></canvas>
+    </div>
+    <div class="panel">
+      <div class="metrics" id="metricsPanel">
+        <h3>Metrics</h3>
+        <div id="metricsContent">
+          <div class="metric-row"><span class="label">Status</span><span class="value" id="mStatus">No template loaded</span></div>
+        </div>
+      </div>
+      <div id="errorDisplay" class="error"></div>
+    </div>
+  </div>
+<script>
+  const previewCanvas = document.getElementById('preview')
+  const previewCtx = previewCanvas.getContext('2d')
+  const errorDisplay = document.getElementById('errorDisplay')
+
+  function renderTemplate(json) {
+    errorDisplay.textContent = ''
+    let data
+    try { data = JSON.parse(json) } catch (e) { errorDisplay.textContent = `Invalid JSON: ${e.message}`; return }
+    if (!data || typeof data !== 'object') { errorDisplay.textContent = 'Invalid template: not an object'; return }
+    if (typeof data.sourceAspectRatio !== 'number' || !Array.isArray(data.strokes)) {
+      errorDisplay.textContent = 'Invalid template: missing sourceAspectRatio or strokes array'
+      return
+    }
+
+    const strokes = data.strokes
+    let pointCount = 0
+    for (const s of strokes) { pointCount += s.length }
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
+    for (const s of strokes) {
+      for (const pt of s) {
+        if (pt.x < minX) minX = pt.x; if (pt.y < minY) minY = pt.y
+        if (pt.x > maxX) maxX = pt.x; if (pt.y > maxY) maxY = pt.y
+      }
+    }
+    const boundsW = maxX !== -Infinity ? maxX - minX : 0
+    const boundsH = maxY !== -Infinity ? maxY - minY : 0
+
+    document.getElementById('mStatus').textContent = 'Loaded'
+    let inner = '<div class="metric-row"><span class="label">Stroke Count</span><span class="value">' + strokes.length + '</span></div>'
+    inner += '<div class="metric-row"><span class="label">Point Count</span><span class="value">' + pointCount + '</span></div>'
+    inner += '<div class="metric-row"><span class="label">Aspect Ratio</span><span class="value">' + data.sourceAspectRatio.toFixed(3) + '</span></div>'
+    inner += '<div class="metric-row"><span class="label">Bounds</span><span class="value">[' + minX.toFixed(3) + ', ' + minY.toFixed(3) + '] to [' + maxX.toFixed(3) + ', ' + maxY.toFixed(3) + ']</span></div>'
+    inner += '<div class="metric-row"><span class="label">Bounds Size</span><span class="value">' + boundsW.toFixed(3) + ' x ' + boundsH.toFixed(3) + '</span></div>'
+    document.getElementById('metricsContent').innerHTML = inner
+
+    previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height)
+    const pw = previewCanvas.width
+    const ph = previewCanvas.height
+    for (const stroke of strokes) {
+      previewCtx.beginPath()
+      previewCtx.strokeStyle = '#7b68ee'
+      previewCtx.lineWidth = 2
+      previewCtx.lineCap = 'round'
+      previewCtx.lineJoin = 'round'
+      for (let i = 0; i < stroke.length; i++) {
+        const pt = stroke[i]
+        const x = pt.x * pw
+        const y = pt.y * ph
+        if (i === 0) previewCtx.moveTo(x, y)
+        else previewCtx.lineTo(x, y)
+      }
+      previewCtx.stroke()
+    }
+  }
+
+  document.getElementById('btnRender').addEventListener('click', () => {
+    renderTemplate(document.getElementById('jsonInput').value)
+  })
+</script>
+</body>
+</html>

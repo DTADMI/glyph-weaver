@@ -9,12 +9,13 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "echo 'lint: not yet configured'",
-    "test": "echo 'test: not yet configured'"
+    "test": "vitest run"
   },
   "dependencies": {
     "@glyph-weaver/core": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.9"
   }
 }

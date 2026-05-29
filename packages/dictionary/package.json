@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "echo 'lint: not yet configured'"
+    "lint": "echo 'lint: handled by root'"
   },
   "dependencies": {
     "@glyph-weaver/core": "workspace:*"

@@ -1,16 +1,45 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": ".",
+    "jsx": "preserve",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["src"],
+  "include": [
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
   "references": [
-    { "path": "../../packages/core" },
-    { "path": "../../packages/dictionary" },
-    { "path": "../../packages/parser" },
-    { "path": "../../packages/compiler" },
-    { "path": "../../packages/renderer" },
-    { "path": "../../packages/ui" }
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/dictionary"
+    },
+    {
+      "path": "../../packages/parser"
+    },
+    {
+      "path": "../../packages/compiler"
+    },
+    {
+      "path": "../../packages/renderer"
+    },
+    {
+      "path": "../../packages/ui"
+    }
   ]
 }

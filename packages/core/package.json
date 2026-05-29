@@ -22,8 +22,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "echo 'lint: not yet configured'",
-    "test": "echo 'test: not yet configured'"
+    "lint": "echo 'lint: handled by root'"
   },
   "dependencies": {
     "zod": "^3.24.4"
