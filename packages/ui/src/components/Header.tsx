@@ -19,11 +19,11 @@ export function Header({
 }: HeaderProps) {
   const { t, locale, setLocale } = useI18n()
   const { theme, toggleTheme } = useTheme()
-  const canUndo = useStore((s: any) => s.canUndo())
-  const canRedo = useStore((s: any) => s.canRedo())
-  const undo = useStore((s: any) => s.undo)
-  const redo = useStore((s: any) => s.redo)
-  const spellState = useStore((s: any) => s.spellState)
+  const canUndo = useStore((s) => s.canUndo())
+  const canRedo = useStore((s) => s.canRedo())
+  const undo = useStore((s) => s.undo)
+  const redo = useStore((s) => s.redo)
+  const spellState = useStore((s) => s.spellState)
 
   return (
     <header

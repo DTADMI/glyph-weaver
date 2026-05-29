@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { loadDictionary } from '@glyph-weaver/dictionary'
 import type { SigilEntry, SignEntry, SampleSpellEntry } from '@glyph-weaver/core'
 import { useI18n } from '../../i18n/index.js'
+import { FeatureFlagGate } from '../FeatureFlagGate.js'
 
 type DictionaryTab = 'sigils' | 'signs' | 'samples'
 
@@ -74,7 +75,9 @@ export function DictionaryPanel() {
           <SignList signs={filteredSigns} t={t} emptyMessage={t('dictionary.noSigns')} />
         )}
         {activeTab === 'samples' && (
-          <SampleList samples={filteredSamples} t={t} emptyMessage={t('dictionary.noSamples')} />
+          <FeatureFlagGate flag="enableMultiSigil" fallback={null}>
+            <SampleList samples={filteredSamples} t={t} emptyMessage={t('dictionary.noSamples')} />
+          </FeatureFlagGate>
         )}
       </div>
     </div>

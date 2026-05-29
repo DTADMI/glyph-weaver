@@ -3,6 +3,7 @@
 import { useI18n } from '../../i18n/index.js'
 import { useTheme, type Theme } from '../../theme/index.js'
 import { useStore } from '../../state/store.js'
+import { FeatureFlagGate } from '../FeatureFlagGate.js'
 
 export function SettingsPanel() {
   const { t, locale, setLocale } = useI18n()
@@ -19,30 +20,32 @@ export function SettingsPanel() {
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-4">
-        <section>
-          <h3 className="text-xs font-medium mb-2" style={{ color: 'var(--gw-text-secondary)' }}>
-            {t('settings.recognition')}
-          </h3>
-          <label className="flex flex-col gap-1">
-            <span className="text-xs" style={{ color: 'var(--gw-text-muted)' }}>
-              {t('settings.minConfidence')}: {config.recognition.minConfidence.toFixed(2)}
-            </span>
-            <input
-              type="range"
-              min="0.3"
-              max="0.95"
-              step="0.05"
-              value={config.recognition.minConfidence}
-              onChange={(e) =>
-                updateConfig({
-                  recognition: { ...config.recognition, minConfidence: Number(e.target.value) },
-                })
-              }
-              className="w-full"
-              aria-label={t('settings.minConfidence')}
-            />
-          </label>
-        </section>
+        <FeatureFlagGate flag="enableLLMRecognition" fallback={null}>
+          <section>
+            <h3 className="text-xs font-medium mb-2" style={{ color: 'var(--gw-text-secondary)' }}>
+              {t('settings.recognition')}
+            </h3>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs" style={{ color: 'var(--gw-text-muted)' }}>
+                {t('settings.minConfidence')}: {config.recognition.minConfidence.toFixed(2)}
+              </span>
+              <input
+                type="range"
+                min="0.3"
+                max="0.95"
+                step="0.05"
+                value={config.recognition.minConfidence}
+                onChange={(e) =>
+                  updateConfig({
+                    recognition: { ...config.recognition, minConfidence: Number(e.target.value) },
+                  })
+                }
+                className="w-full"
+                aria-label={t('settings.minConfidence')}
+              />
+            </label>
+          </section>
+        </FeatureFlagGate>
 
         <section>
           <h3 className="text-xs font-medium mb-2" style={{ color: 'var(--gw-text-secondary)' }}>
@@ -109,6 +112,17 @@ export function SettingsPanel() {
           </div>
         </section>
 
+        <FeatureFlagGate flag="enableExperimentalEffects" fallback={null}>
+          <section>
+            <h3 className="text-xs font-medium mb-2" style={{ color: 'var(--gw-text-secondary)' }}>
+              {t('settings.experimentalEffects')}
+            </h3>
+            <p className="text-xs" style={{ color: 'var(--gw-text-muted)' }}>
+              {t('settings.experimentalEffectsDesc')}
+            </p>
+          </section>
+        </FeatureFlagGate>
+
         <section>
           <h3 className="text-xs font-medium mb-2" style={{ color: 'var(--gw-text-secondary)' }}>
             {t('settings.theme')}
@@ -147,7 +161,7 @@ export function SettingsPanel() {
                   borderColor: 'var(--gw-border)',
                 }}
               >
-                {lang === 'fr' ? 'Français' : 'English'}
+                {t(`settings.language${lang === 'fr' ? 'Fr' : 'En'}`)}
               </button>
             ))}
           </div>

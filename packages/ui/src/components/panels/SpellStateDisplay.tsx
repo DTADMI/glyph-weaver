@@ -5,7 +5,7 @@ import { useStore } from '../../state/store.js'
 
 export function SpellStateDisplay() {
   const { t } = useI18n()
-  const spellState = useStore((s: any) => s.spellState)
+  const spellState = useStore((s) => s.spellState)
 
   if (!spellState) {
     return (
@@ -110,7 +110,7 @@ export function SpellStateDisplay() {
               {t('labels.warnings')}
             </span>
             <ul className="mt-1 flex flex-col gap-0.5">
-              {spellState.warnings.map((w: any, i: any) => (
+              {spellState.warnings.map((w, i) => (
                 <li key={i} className="text-xs" style={{ color: 'var(--gw-text-muted)' }}>
                   {w}
                 </li>

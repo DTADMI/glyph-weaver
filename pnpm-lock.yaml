@@ -175,12 +175,21 @@ importers:
 
   packages/ui:
     dependencies:
+      '@glyph-weaver/compiler':
+        specifier: workspace:*
+        version: link:../compiler
       '@glyph-weaver/core':
         specifier: workspace:*
         version: link:../core
       '@glyph-weaver/dictionary':
         specifier: workspace:*
         version: link:../dictionary
+      '@glyph-weaver/parser':
+        specifier: workspace:*
+        version: link:../parser
+      '@glyph-weaver/renderer':
+        specifier: workspace:*
+        version: link:../renderer
       react:
         specifier: ^19.0.0
         version: 19.2.6

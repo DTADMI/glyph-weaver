@@ -8,5 +8,11 @@
     "resolveJsonModule": true
   },
   "include": ["src"],
-  "references": [{ "path": "../core" }]
+  "references": [
+    { "path": "../core" },
+    { "path": "../parser" },
+    { "path": "../compiler" },
+    { "path": "../renderer" },
+    { "path": "../dictionary" }
+  ]
 }

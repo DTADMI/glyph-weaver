@@ -5,7 +5,7 @@ import { EffectsOverlay } from '../canvas/EffectsOverlay.js'
 import { useStore } from '../state/store.js'
 
 export function CanvasArea() {
-  const spellState = useStore((s: any) => s.spellState)
+  const spellState = useStore((s) => s.spellState)
 
   return (
     <div className="flex-1 relative overflow-hidden">

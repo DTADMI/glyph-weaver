@@ -388,7 +388,7 @@ export function parse(
 
   const cleanedStrokes = processStrokes(strokes, tolerance)
 
-  let ring = detectRing(cleanedStrokes)
+  const ring = detectRing(cleanedStrokes)
   if (!ring.found) {
     warnings.push('no_ring_detected')
     return {

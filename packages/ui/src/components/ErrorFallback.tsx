@@ -1,4 +1,5 @@
 import { type FC, useState } from 'react'
+import { useI18n } from '../i18n/index.js'
 
 interface ErrorFallbackProps {
   error: Error
@@ -8,6 +9,7 @@ interface ErrorFallbackProps {
 }
 
 export const ErrorFallback: FC<ErrorFallbackProps> = ({ error, message, onRetry, onReset }) => {
+  const { t } = useI18n()
   const [showStack, setShowStack] = useState(false)
 
   return (
@@ -24,7 +26,7 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({ error, message, onRetry,
       role="alert"
     >
       <h3 style={{ color: '#ff6b6b', margin: '0 0 8px 0', fontSize: '16px' }}>
-        {message ?? 'An unexpected error occurred'}
+        {message ?? t('errors.anUnexpectedError')}
       </h3>
 
       <button
@@ -40,7 +42,7 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({ error, message, onRetry,
           textDecoration: 'underline',
         }}
       >
-        {showStack ? 'Hide' : 'Show'} stack trace
+        {showStack ? t('errors.hideStack') : t('errors.showStack')} stack trace
       </button>
 
       {showStack && (
@@ -75,7 +77,7 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({ error, message, onRetry,
               fontSize: '13px',
             }}
           >
-            Retry
+            {t('errors.retry')}
           </button>
         )}
         {onReset && (
@@ -91,7 +93,7 @@ export const ErrorFallback: FC<ErrorFallbackProps> = ({ error, message, onRetry,
               fontSize: '13px',
             }}
           >
-            Reset
+            {t('errors.reset')}
           </button>
         )}
       </div>

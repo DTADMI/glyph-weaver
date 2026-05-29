@@ -1,0 +1,44 @@
+$ErrorActionPreference = "Stop"
+
+Write-Host "--- Glyph Weaver pre-commit hook ---" -ForegroundColor Cyan
+
+$pnpmVersion = pnpm --version
+Write-Host "pnpm version: $pnpmVersion" -ForegroundColor Gray
+
+Write-Host "Running format:check..." -ForegroundColor Yellow
+pnpm format:check
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "format:check failed. Fix formatting before committing." -ForegroundColor Red
+    exit 1
+}
+
+Write-Host "Running typecheck..." -ForegroundColor Yellow
+pnpm typecheck
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "typecheck failed. Fix errors before committing." -ForegroundColor Red
+    exit 1
+}
+
+Write-Host "Running lint..." -ForegroundColor Yellow
+pnpm lint
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "lint failed. Fix errors before committing." -ForegroundColor Red
+    exit 1
+}
+
+Write-Host "Running test..." -ForegroundColor Yellow
+pnpm test
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "test failed. Fix errors before committing." -ForegroundColor Red
+    exit 1
+}
+
+Write-Host "Running build..." -ForegroundColor Yellow
+pnpm build
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "build failed. Fix errors before committing." -ForegroundColor Red
+    exit 1
+}
+
+Write-Host "--- All checks passed ---" -ForegroundColor Green
+exit 0

@@ -16,6 +16,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "run-all-checks": "pnpm typecheck ; if ($?) { pnpm lint } ; if ($?) { pnpm test } ; if ($?) { pnpm build }",
+    "check-encoding": "pwsh scripts/check-encoding.ps1",
     "clean": "pnpm -r exec rm -rf dist .tsbuildinfo"
   },
   "devDependencies": {

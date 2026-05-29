@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { cookies, headers } from 'next/headers'
+import { resolveLocale } from '@glyph-weaver/ui'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -11,13 +13,18 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const cookieStore = await cookies()
+  const localeCookie = cookieStore.get('glyph-weaver-locale')?.value
+  const acceptLanguage = (await headers()).get('accept-language') ?? undefined
+  const locale = resolveLocale(localeCookie, acceptLanguage)
+
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#1a1423" />

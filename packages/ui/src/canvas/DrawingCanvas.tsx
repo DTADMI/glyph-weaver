@@ -4,6 +4,7 @@ import { useRef, useEffect, useCallback } from 'react'
 import type { Point, Stroke } from '@glyph-weaver/core'
 import { useStore } from '../state/store.js'
 import { getCursorStyle } from './cursor.js'
+import { pipelineManager } from '../pipeline/index.js'
 
 function drawStroke(ctx: CanvasRenderingContext2D, stroke: Stroke): void {
   if (stroke.points.length < 2) return
@@ -34,10 +35,11 @@ export function DrawingCanvas() {
   const isDrawingRef = useRef(false)
   const currentStrokeRef = useRef<Point[]>([])
 
-  const strokes = useStore((s: any) => s.strokes)
-  const currentTool = useStore((s: any) => s.currentTool)
-  const brushSettings = useStore((s: any) => s.brushSettings)
-  const addStrokes = useStore((s: any) => s.addStrokes)
+  const strokes = useStore((s) => s.strokes)
+  const currentTool = useStore((s) => s.currentTool)
+  const brushSettings = useStore((s) => s.brushSettings)
+  const addStrokes = useStore((s) => s.addStrokes)
+  const updateSpellState = useStore((s) => s.updateSpellState)
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current
@@ -172,10 +174,18 @@ export function DrawingCanvas() {
           timestamp: Date.now(),
         }
         addStrokes([newStroke])
+
+        const allStrokes = useStore.getState().strokes
+        const result = pipelineManager.processStrokes(allStrokes, {
+          found: false,
+          complete: false,
+          activationEvent: false,
+        })
+        updateSpellState(result.spellIR)
       }
       currentStrokeRef.current = []
     },
-    [addStrokes, currentTool, brushSettings],
+    [addStrokes, updateSpellState, currentTool, brushSettings],
   )
 
   const cursorStyle = getCursorStyle(currentTool)

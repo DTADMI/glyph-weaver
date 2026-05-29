@@ -2,6 +2,7 @@
 
 import { ToolPalette } from './ToolPalette.js'
 import { BrushSettings } from './BrushSettings.js'
+import { FeatureFlagGate } from './FeatureFlagGate.js'
 import { useI18n } from '../i18n/index.js'
 import { useStore } from '../state/store.js'
 
@@ -12,12 +13,12 @@ interface SidebarProps {
 
 export function Sidebar({ open, onClose }: SidebarProps) {
   const { t } = useI18n()
-  const currentTool = useStore((s: any) => s.currentTool)
-  const brushSettings = useStore((s: any) => s.brushSettings)
-  const setTool = useStore((s: any) => s.setTool)
-  const setBrush = useStore((s: any) => s.setBrush)
-  const togglePanel = useStore((s: any) => s.togglePanel)
-  const panels = useStore((s: any) => s.panels)
+  const currentTool = useStore((s) => s.currentTool)
+  const brushSettings = useStore((s) => s.brushSettings)
+  const setTool = useStore((s) => s.setTool)
+  const setBrush = useStore((s) => s.setBrush)
+  const togglePanel = useStore((s) => s.togglePanel)
+  const panels = useStore((s) => s.panels)
 
   return (
     <>
@@ -57,6 +58,15 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         <div className="mx-2 border-t" style={{ borderColor: 'var(--gw-border)' }} />
 
         <BrushSettings settings={brushSettings} onChange={setBrush} />
+
+        <FeatureFlagGate flag="enableExperimentalEffects" fallback={null}>
+          <div className="mx-2 border-t" style={{ borderColor: 'var(--gw-border)' }} />
+          <div className="p-2">
+            <span className="text-xs font-medium px-1" style={{ color: 'var(--gw-text-muted)' }}>
+              {t('labels.experimentalEffects')}
+            </span>
+          </div>
+        </FeatureFlagGate>
 
         <div className="mx-2 border-t" style={{ borderColor: 'var(--gw-border)' }} />
 

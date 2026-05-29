@@ -79,8 +79,17 @@ const en: TranslationMap = {
     seconds: 's',
     percent: '%',
   },
+  common: {
+    loading: 'Loading',
+  },
   errors: {
     generic: 'Something went wrong.',
+    somethingWentWrong: 'Something went wrong.',
+    anUnexpectedError: 'An unexpected error occurred',
+    retry: 'Retry',
+    hideStack: 'Hide',
+    showStack: 'Show',
+    reset: 'Reset',
     save: 'Failed to save.',
     export: 'Failed to export.',
     load: 'Failed to load.',
@@ -106,6 +115,9 @@ const en: TranslationMap = {
     diagnostics: 'Diagnostics',
     spellState: 'Spell State',
     settings: 'Settings',
+  },
+  shell: {
+    initializing: 'Initializing...',
   },
   dictionary: {
     noSigils: 'No sigils found.',
@@ -133,6 +145,8 @@ const en: TranslationMap = {
     renderer: 'Renderer',
     theme: 'Theme',
     language: 'Language',
+    languageFr: 'Français',
+    languageEn: 'English',
     about: 'About',
     particleCap: 'Particle Cap',
     portalOpacity: 'Portal Opacity',

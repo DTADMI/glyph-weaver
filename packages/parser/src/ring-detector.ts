@@ -23,8 +23,6 @@ function fitCircleLeastSquares(points: Point[]): CircleFit {
   let sumX2Y = 0
   let sumXY2 = 0
   let sumZ = 0
-  let sumZX = 0
-  let sumZY = 0
   const n = points.length
 
   for (let i = 0; i < n; i++) {
@@ -42,8 +40,6 @@ function fitCircleLeastSquares(points: Point[]): CircleFit {
     sumX2Y += x * x * y
     sumXY2 += x * y * y
     sumZ += z
-    sumZX += z * x
-    sumZY += z * y
   }
 
   const a11 = 2 * (sumX2 - sumX * sumX / n)

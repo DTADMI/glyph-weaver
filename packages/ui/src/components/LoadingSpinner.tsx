@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { useI18n } from '../i18n/index.js'
 
 interface LoadingSpinnerProps {
   size?: number
@@ -11,6 +12,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = ({
   color = '#7b68ee',
   message,
 }) => {
+  const { t } = useI18n()
   const borderWidth = Math.max(3, Math.round(size * 0.1))
 
   return (
@@ -22,7 +24,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = ({
         gap: message ? '8px' : '0',
       }}
       role="status"
-      aria-label={message ?? 'Loading'}
+      aria-label={message ?? t('common.loading')}
     >
       <div
         style={{

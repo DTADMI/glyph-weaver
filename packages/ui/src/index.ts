@@ -22,8 +22,11 @@ export { useKeyboardShortcuts, getShortcutLabel, DEFAULT_SHORTCUTS } from './sho
 export type { ShortcutAction, ActionHandler } from './shortcuts/index.js'
 
 export { useStore } from './state/index.js'
-export type { ToolType, PanelState, AppStoreState } from './state/index.js'
+export type { ToolType, PanelState, AppStoreState, PipelineStatus } from './state/index.js'
 export type { BrushSettings as BrushSettingsConfig } from './state/index.js'
+
+export { pipelineManager } from './pipeline/index.js'
+export type { PipelineManager, RingStatus, PipelineResult } from './pipeline/index.js'
 
 export { GLYPH_WEAVER_VERSION, GLYPH_WEAVER_NAME } from '@glyph-weaver/core'
 

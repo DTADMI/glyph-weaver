@@ -79,8 +79,17 @@ const fr: TranslationMap = {
     seconds: 's',
     percent: '%',
   },
+  common: {
+    loading: 'Chargement',
+  },
   errors: {
     generic: 'Une erreur est survenue.',
+    somethingWentWrong: 'Une erreur est survenue.',
+    anUnexpectedError: 'Une erreur inattendue est survenue.',
+    retry: 'Réessayer',
+    hideStack: 'Masquer',
+    showStack: 'Afficher',
+    reset: 'Réinitialiser',
     save: 'Échec de la sauvegarde.',
     export: 'Échec de l\'exportation.',
     load: 'Échec du chargement.',
@@ -106,6 +115,9 @@ const fr: TranslationMap = {
     diagnostics: 'Diagnostics',
     spellState: 'État du sort',
     settings: 'Paramètres',
+  },
+  shell: {
+    initializing: 'Initialisation...',
   },
   dictionary: {
     noSigils: 'Aucun sigil trouvé.',
@@ -133,6 +145,8 @@ const fr: TranslationMap = {
     renderer: 'Rendu',
     theme: 'Thème',
     language: 'Langue',
+    languageFr: 'Français',
+    languageEn: 'English',
     about: 'À propos',
     particleCap: 'Limite de particules',
     portalOpacity: 'Opacité du portail',

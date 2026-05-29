@@ -43,7 +43,7 @@ export function compileMultiRing(
   const outer = asts[0]!
   const inner = asts.slice(1)
 
-  let result = compileSpell(outer, config)
+  const result = compileSpell(outer, config)
 
   if (!result.valid) {
     return result
@@ -190,7 +190,6 @@ export function compileLinkedRings(
   let totalQuality = 0
   let totalNeatness = 0
   let totalCoherence = 0
-  let totalDuration = 0
 
   const allManifestations: Record<string, { totalStrength: number; count: number }> = {}
 
@@ -202,7 +201,6 @@ export function compileLinkedRings(
     totalQuality += r.quality
     totalNeatness += r.neatness
     totalCoherence += r.directionCoherence
-    totalDuration += r.duration
 
     for (const [key, profile] of Object.entries(r.manifestations)) {
       if (!allManifestations[key]) {

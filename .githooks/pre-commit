@@ -1,49 +1,13 @@
-#!/usr/bin/env pwsh
-# Pre-commit hook for Glyph Weaver
-# Runs typecheck, lint, and test before every commit.
+#!/bin/sh
+# Glyph Weaver pre-commit hook
+# Invokes PowerShell script for checks
 
-$ErrorActionPreference = "Stop"
-
-Write-Host "--- Glyph Weaver pre-commit hook ---" -ForegroundColor Cyan
-
-# Check pnpm version
-$pnpmVersion = pnpm --version
-Write-Host "pnpm version: $pnpmVersion" -ForegroundColor Gray
-
-Write-Host "Running format:check..." -ForegroundColor Yellow
-pnpm format:check
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "format:check failed. Fix formatting before committing." -ForegroundColor Red
-    exit 1
-}
-
-Write-Host "Running typecheck..." -ForegroundColor Yellow
-pnpm typecheck
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "typecheck failed. Fix errors before committing." -ForegroundColor Red
-    exit 1
-}
-
-Write-Host "Running lint..." -ForegroundColor Yellow
-pnpm lint
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "lint failed. Fix errors before committing." -ForegroundColor Red
-    exit 1
-}
-
-Write-Host "Running test..." -ForegroundColor Yellow
-pnpm test
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "test failed. Fix errors before committing." -ForegroundColor Red
-    exit 1
-}
-
-Write-Host "Running build..." -ForegroundColor Yellow
-pnpm build
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "build failed. Fix errors before committing." -ForegroundColor Red
-    exit 1
-}
-
-Write-Host "--- All checks passed ---" -ForegroundColor Green
-exit 0
+DIR=$(cd "$(dirname "$0")" && pwd)
+if command -v pwsh.exe >/dev/null 2>&1; then
+    pwsh.exe -NoProfile -File "$DIR/pre-commit.ps1"
+elif command -v pwsh >/dev/null 2>&1; then
+    pwsh -NoProfile -File "$DIR/pre-commit.ps1"
+else
+    echo "WARNING: pwsh not found, skipping pre-commit checks"
+    exit 0
+fi

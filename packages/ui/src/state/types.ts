@@ -1,6 +1,9 @@
-import type { Stroke, SpellIR, AppConfig } from '@glyph-weaver/core'
+import type { Stroke, SpellIR, AppConfig, GlyphAST } from '@glyph-weaver/core'
+import type { PipelineManager } from '../pipeline/index.js'
 
 export type ToolType = 'pen' | 'eraser' | 'select' | 'hand'
+
+export type PipelineStatus = 'idle' | 'processing' | 'ready'
 
 export interface BrushSettings {
   size: number
@@ -21,10 +24,13 @@ export interface AppStoreState {
   currentTool: ToolType
   brushSettings: BrushSettings
   spellState: SpellIR | null
+  ast: GlyphAST | null
+  pipelineStatus: PipelineStatus
   undoStack: Stroke[][]
   redoStack: Stroke[][]
   panels: PanelState
   config: AppConfig
+  pipelineManager: PipelineManager | null
 
   addStrokes: (strokes: Stroke[]) => void
   undo: () => void
@@ -36,6 +42,7 @@ export interface AppStoreState {
   togglePanel: (panel: keyof PanelState) => void
   setPanel: (panel: keyof PanelState, open: boolean) => void
   updateConfig: (config: Partial<AppConfig>) => void
+  setPipelineManager: (pm: PipelineManager) => void
   canUndo: () => boolean
   canRedo: () => boolean
 }

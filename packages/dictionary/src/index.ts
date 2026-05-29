@@ -6,6 +6,8 @@ import { sampleSpells } from './sample-spells.js'
 export { sigils } from './sigils.js'
 export { signs } from './signs.js'
 export { sampleSpells } from './sample-spells.js'
+export { validateDictionary, assertValidDictionary } from './validate.js'
+export { DictionaryWatcher, watchDictionary } from './loader.js'
 
 export const DEFAULT_DICTIONARY: Dictionary = {
   sigils,

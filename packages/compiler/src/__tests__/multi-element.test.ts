@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { getCombinedElement, ELEMENT_COMBINATION_RULES, compileMultiElement } from '../multi-element.js'
-import type { ElementId, GlyphAST } from '@glyph-weaver/core'
+import type { ElementId, GlyphAST, RecognizedSign } from '@glyph-weaver/core'
 
 function makeRing() {
   return {
@@ -56,7 +56,7 @@ function makeSigil(element: ElementId, overrides = {}) {
   }
 }
 
-function makeAst(element: ElementId, signs: any[] = []): GlyphAST {
+function makeAst(element: ElementId, signs: RecognizedSign[] = []): GlyphAST {
   return {
     type: 'GlyphAST',
     version: '0.1.0',

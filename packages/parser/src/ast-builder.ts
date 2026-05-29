@@ -28,7 +28,7 @@ export function buildGlyphAST(params: {
   const candidates = params.candidates.map(buildCandidateOutput)
 
   let primarySigil: RecognizedSigil | null = null
-  let unsupportedMultipleSigils: RecognizedSigil[] = []
+  const unsupportedMultipleSigils: RecognizedSigil[] = []
   const signs: RecognizedSign[] = []
   const unknowns: UnknownSymbol[] = []
 

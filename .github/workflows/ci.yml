@@ -3,8 +3,14 @@ name: CI
 on:
   push:
     branches: [master, main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
   pull_request:
     branches: [master, main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
 
 jobs:
   ci:
@@ -40,6 +46,13 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Check encoding
+        run: pnpm run check-encoding
+
+      - name: Check outdated dependencies (informational)
+        run: pnpm outdated
+        continue-on-error: true
 
       - name: Build
         run: pnpm build

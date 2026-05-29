@@ -8,8 +8,8 @@ type DiagSection = 'parser' | 'ast' | 'ir' | 'warnings'
 
 export function DiagnosticsPanel() {
   const { t } = useI18n()
-  const spellState = useStore((s: any) => s.spellState)
-  const strokes = useStore((s: any) => s.strokes)
+  const spellState = useStore((s) => s.spellState)
+  const strokes = useStore((s) => s.strokes)
   const [expanded, setExpanded] = useState<Record<DiagSection, boolean>>({
     parser: true,
     ast: false,
@@ -34,8 +34,8 @@ export function DiagnosticsPanel() {
   const parserData = JSON.stringify(
     {
       strokeCount: strokes.length,
-      totalPoints: strokes.reduce((sum: number, s: any) => sum + s.points.length, 0),
-      strokes: strokes.map((s: any) => ({
+      totalPoints: strokes.reduce((sum, s) => sum + s.points.length, 0),
+      strokes: strokes.map((s) => ({
         id: s.id,
         points: s.points.length,
         color: s.color,
