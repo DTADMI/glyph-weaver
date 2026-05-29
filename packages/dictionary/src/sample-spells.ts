@@ -1,0 +1,68 @@
+import type { SampleSpellEntry } from '@glyph-weaver/core'
+
+export const sampleSpells: SampleSpellEntry[] = [
+  {
+    id: 'simple-fire',
+    displayName: 'Simple Fire',
+    description: 'A basic fire sigil in a clean ring. Produces a warm aura.',
+    element: 'fire',
+    manifestations: ['aura'],
+    strokes: [],
+  },
+  {
+    id: 'fire-column',
+    displayName: 'Fire Column',
+    description: 'Fire sigil with a column sign at the bottom. Produces a directional beam of fire.',
+    element: 'fire',
+    manifestations: ['column'],
+    strokes: [],
+  },
+  {
+    id: 'water-levitation',
+    displayName: 'Suspended Water',
+    description: 'Water sigil with levitation signs. Creates floating water droplets.',
+    element: 'water',
+    manifestations: ['levitation'],
+    strokes: [],
+  },
+  {
+    id: 'wind-convergence',
+    displayName: 'Focusing Wind',
+    description: 'Wind sigil with convergence signs. Compresses wind into a narrow, focused stream.',
+    element: 'wind',
+    manifestations: ['convergence'],
+    strokes: [],
+  },
+  {
+    id: 'earth-barrier',
+    displayName: 'Earth Barrier',
+    description: 'Earth sigil forming a protective barrier.',
+    element: 'earth',
+    manifestations: ['aura'],
+    strokes: [],
+  },
+  {
+    id: 'light-beam',
+    displayName: 'Light Beam',
+    description: 'Light sigil with column sign producing a focused beam of light.',
+    element: 'light',
+    manifestations: ['column'],
+    strokes: [],
+  },
+  {
+    id: 'water-convergence',
+    displayName: 'Water Jet',
+    description: 'Water sigil with convergence. Creates a high-pressure water jet.',
+    element: 'water',
+    manifestations: ['convergence'],
+    strokes: [],
+  },
+  {
+    id: 'fire-levitation-convergence',
+    displayName: "Witch's Flame",
+    description: 'Fire with levitation and convergence. A controlled, floating flame.',
+    element: 'fire',
+    manifestations: ['levitation', 'convergence'],
+    strokes: [],
+  },
+]

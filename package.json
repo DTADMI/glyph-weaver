@@ -2,17 +2,21 @@
   "name": "glyph-weaver",
   "version": "0.1.0",
   "private": true,
-  "description": "A tool for crafting and manipulating symbolic glyph systems, runic alphabets, and custom character sets.",
+  "description": "A tool for crafting and manipulating symbolic glyph systems, runic alphabets, and custom character sets. Monorepo root.",
   "packageManager": "pnpm@10.33.4",
   "engines": {
     "node": "^22.22.3",
     "pnpm": ">=10.33.4"
   },
   "scripts": {
-    "lint": "echo 'lint: not yet configured'",
-    "typecheck": "echo 'typecheck: not yet configured'",
-    "test": "echo 'test: not yet configured'",
-    "build": "echo 'build: not yet configured'",
-    "run-all-checks": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "run-all-checks": "pnpm typecheck ; if ($?) { pnpm lint } ; if ($?) { pnpm test } ; if ($?) { pnpm build }",
+    "clean": "pnpm -r exec rm -rf dist .tsbuildinfo"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }

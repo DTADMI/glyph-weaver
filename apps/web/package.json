@@ -1,0 +1,23 @@
+{
+  "name": "@glyph-weaver/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo 'build: not yet configured (Next.js)'",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo 'lint: not yet configured'",
+    "test": "echo 'test: not yet configured'"
+  },
+  "dependencies": {
+    "@glyph-weaver/core": "workspace:*",
+    "@glyph-weaver/dictionary": "workspace:*",
+    "@glyph-weaver/parser": "workspace:*",
+    "@glyph-weaver/compiler": "workspace:*",
+    "@glyph-weaver/renderer": "workspace:*",
+    "@glyph-weaver/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

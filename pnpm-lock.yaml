@@ -1,0 +1,137 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  apps/web:
+    dependencies:
+      '@glyph-weaver/compiler':
+        specifier: workspace:*
+        version: link:../../packages/compiler
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@glyph-weaver/dictionary':
+        specifier: workspace:*
+        version: link:../../packages/dictionary
+      '@glyph-weaver/parser':
+        specifier: workspace:*
+        version: link:../../packages/parser
+      '@glyph-weaver/renderer':
+        specifier: workspace:*
+        version: link:../../packages/renderer
+      '@glyph-weaver/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/compiler:
+    dependencies:
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/core:
+    dependencies:
+      zod:
+        specifier: ^3.24.4
+        version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/dictionary:
+    dependencies:
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/dsl:
+    dependencies:
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/parser:
+    dependencies:
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../core
+      '@glyph-weaver/dictionary':
+        specifier: workspace:*
+        version: link:../dictionary
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/renderer:
+    dependencies:
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/tools:
+    dependencies:
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+  packages/ui:
+    dependencies:
+      '@glyph-weaver/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
+packages:
+
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  zod@3.25.76:
+    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+
+snapshots:
+
+  typescript@5.9.3: {}
+
+  zod@3.25.76: {}
