@@ -8,7 +8,7 @@ function makeStroke(id: string): Stroke {
     points: [{ x: 0, y: 0, t: 0 }],
     color: '#000',
     width: 2,
-    timestamp: Date.now(),
+    timestamp: 0,
   }
 }
 

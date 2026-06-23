@@ -5,7 +5,7 @@ Project-specific rules and guidance for coding agents.
 ## Repo Policy
 
 - Follow the cross-project rules defined in `nebula-forge/AGENTS.md`.
-- Node.js target: 22.22.3. pnpm target: 10.33.4.
+- Node.js target: 26.3.0. pnpm target: 11.5.0.
 - TypeScript strict mode everywhere. No `any` without explicit justification.
 - Keep docs aligned with code and schema changes.
 - Run `pnpm run-all-checks` before every commit. Never skip hooks.
@@ -63,3 +63,9 @@ This project is inspired by the magic system in *Witch Hat Atelier* (Kamome Shir
 - Reproduce canonical sigil designs 1:1 without fan-art disclaimers
 
 The reference implementation ytnrvdf/wha-spell-simulator (288 stars, MIT) provides architectural inspiration.
+
+## Continuous Improvement Rule
+
+- Never bypass or work around a failing check, guardrail, deployment gate, or quality/security policy just to proceed. Fix the real root cause.
+- For every incident or failure, add at least one durable prevention mechanism in-repo before closing the work (rule, skill, script, hook, or test) so the same class of issue is less likely to recur.
+- Document the incident and the prevention change in the relevant technical docs/runbook when applicable.
