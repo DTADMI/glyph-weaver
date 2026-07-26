@@ -1,3 +1,5 @@
+<!-- CLUSTER-C CANONICAL: NF-root rules. Project-specific delta below. -->
+> **Canonical rules/process**: `../../../docs/technical/feature-flags-testing.md` (NF root). This doc keeps project-specific values/catalog only.
 # Feature Flags
 
 All feature flags are defined in `packages/core/src/feature-flags.ts` and re-exported from `packages/ui/src/lib/feature-flags.ts`.
