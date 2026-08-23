@@ -1,5 +1,11 @@
 export { EffectEngine, createRenderer } from './effect-engine.js'
-export type { Effect, EffectConfig, EffectContext, EffectFactory, ActiveEffects } from './effect-types.js'
+export type {
+  Effect,
+  EffectConfig,
+  EffectContext,
+  EffectFactory,
+  ActiveEffects,
+} from './effect-types.js'
 
 export { createWebGLContext, createShaderProgram, createQuad } from './webgl/context.js'
 export type { QuadGeometry } from './webgl/context.js'

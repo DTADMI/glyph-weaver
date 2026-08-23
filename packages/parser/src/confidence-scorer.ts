@@ -9,7 +9,12 @@ export function computeConfidence(
   config: RecognitionConfig,
 ): number {
   const weights = {
-    ink: 1 - config.structuralWeight - config.compositionalWeight - config.positionWeight - config.sizeWeight,
+    ink:
+      1 -
+      config.structuralWeight -
+      config.compositionalWeight -
+      config.positionWeight -
+      config.sizeWeight,
     structural: config.structuralWeight,
     compositional: config.compositionalWeight,
     position: config.positionWeight,
@@ -68,10 +73,7 @@ export function detectContamination(
   return nearbyCount > 0
 }
 
-export function computePositionScore(
-  layer: string,
-  allowedLayers: string[],
-): number {
+export function computePositionScore(layer: string, allowedLayers: string[]): number {
   if (allowedLayers.length === 0) return 0.5
   if (allowedLayers.includes(layer)) return 1.0
   return 0.3

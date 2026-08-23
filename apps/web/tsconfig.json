@@ -16,12 +16,7 @@
       }
     ]
   },
-  "include": [
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["app/**/*.ts", "app/**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
   "references": [
     {
       "path": "../../packages/core"

@@ -17,7 +17,11 @@ export function exportProject(
   }
 }
 
-export function importProject(data: ProjectData): { strokes: Stroke[]; config: Record<string, unknown>; name: string } {
+export function importProject(data: ProjectData): {
+  strokes: Stroke[]
+  config: Record<string, unknown>
+  name: string
+} {
   return {
     strokes: data.strokes,
     config: data.config,

@@ -40,7 +40,13 @@ export class IceEffect implements Effect {
     const stability = this.config.stability
 
     const crystalSpawnInterval = 0.12 - stability * 0.06
-    if (this.elapsed - (this.crystals.length > 0 ? Math.floor(this.elapsed / crystalSpawnInterval) * crystalSpawnInterval : 0) < dt) {
+    if (
+      this.elapsed -
+        (this.crystals.length > 0
+          ? Math.floor(this.elapsed / crystalSpawnInterval) * crystalSpawnInterval
+          : 0) <
+      dt
+    ) {
       const angle = Math.random() * Math.PI * 2
       const distance = Math.random() * spread * 200
       this.crystals.push({
@@ -102,7 +108,12 @@ export class IceEffect implements Effect {
   render(): void {
     if (!this.config || !this.particles || !this.program) return
     const gl = this.config.ctx.gl
-    this.particles.render(gl, this.program, this.config.ctx.canvas.width, this.config.ctx.canvas.height)
+    this.particles.render(
+      gl,
+      this.program,
+      this.config.ctx.canvas.width,
+      this.config.ctx.canvas.height,
+    )
   }
 
   dispose(): void {

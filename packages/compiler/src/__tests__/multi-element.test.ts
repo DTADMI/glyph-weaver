@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { getCombinedElement, ELEMENT_COMBINATION_RULES, compileMultiElement } from '../multi-element.js'
+import {
+  getCombinedElement,
+  ELEMENT_COMBINATION_RULES,
+  compileMultiElement,
+} from '../multi-element.js'
 import type { ElementId, GlyphAST, RecognizedSign } from '@glyph-weaver/core'
 
 function makeRing() {
@@ -112,8 +116,16 @@ describe('ELEMENT_COMBINATION_RULES', () => {
 
   it('has rules for all element pairs', () => {
     const elements: ElementId[] = [
-      'fire', 'water', 'wind', 'earth', 'light', 'dark',
-      'lightning', 'ice', 'nature', 'arcane',
+      'fire',
+      'water',
+      'wind',
+      'earth',
+      'light',
+      'dark',
+      'lightning',
+      'ice',
+      'nature',
+      'arcane',
     ]
     for (const a of elements) {
       const row = RULES[a]

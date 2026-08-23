@@ -71,7 +71,9 @@ describe('Parser', () => {
 
   it('parses sign with block', () => {
     const lexer = new Lexer()
-    const tokens = lexer.tokenize('ring sigil fire-sigil sign fire-blast at 90 deg { range: 0.8; force: 0.9; };')
+    const tokens = lexer.tokenize(
+      'ring sigil fire-sigil sign fire-blast at 90 deg { range: 0.8; force: 0.9; };',
+    )
     const parser = new Parser()
     const program = parser.parse(tokens)
     const stmt = program.statements[0]
@@ -85,7 +87,9 @@ describe('Parser', () => {
 
   it('parses multiple signs', () => {
     const lexer = new Lexer()
-    const tokens = lexer.tokenize('ring sigil fire-sigil sign fire-blast at 0 deg sign fire-wave at 90 deg;')
+    const tokens = lexer.tokenize(
+      'ring sigil fire-sigil sign fire-blast at 0 deg sign fire-wave at 90 deg;',
+    )
     const parser = new Parser()
     const program = parser.parse(tokens)
     const stmt = program.statements[0]

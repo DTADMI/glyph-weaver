@@ -1,9 +1,4 @@
-import type {
-  ElementId,
-  ManifestationId,
-  DirectionMode,
-  LayerLabel,
-} from './primitives.js'
+import type { ElementId, ManifestationId, DirectionMode, LayerLabel } from './primitives.js'
 import type { SigilSemantic, SignSemantic } from './glyph-ast.js'
 
 export interface StrokeTemplatePoint {

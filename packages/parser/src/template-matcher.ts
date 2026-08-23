@@ -8,10 +8,7 @@ import type {
   SymbolCandidate,
 } from '@glyph-weaver/core'
 
-function rasterizeStrokes(
-  strokes: Point[][],
-  gridSize: number,
-): number[][] {
+function rasterizeStrokes(strokes: Point[][], gridSize: number): number[][] {
   const grid: number[][] = Array.from({ length: gridSize }, () => new Array(gridSize).fill(0))
 
   for (let si = 0; si < strokes.length; si++) {
@@ -153,7 +150,12 @@ export function rotationInvariantMatch(
   for (let i = 0; i < resolution; i++) {
     const angleRad = (i / resolution) * 2 * Math.PI
     const rotated = rotatePoints(candidate, angleRad)
-    const score = templateMatch(rotated, entry.strokeTemplate, config.rasterGridSize, config.maskRadius)
+    const score = templateMatch(
+      rotated,
+      entry.strokeTemplate,
+      config.rasterGridSize,
+      config.maskRadius,
+    )
     if (score > bestScore) {
       bestScore = score
     }
@@ -171,7 +173,8 @@ export function computeStructuralScore(
 
   const templateStrokeCount = template.strokes.length
   const candidateStrokeCount = candidate.rawStrokeCount
-  const strokeCountRatio = Math.min(candidateStrokeCount, templateStrokeCount) /
+  const strokeCountRatio =
+    Math.min(candidateStrokeCount, templateStrokeCount) /
     Math.max(candidateStrokeCount, templateStrokeCount)
   score += strokeCountRatio * 0.3
   weightSum += 0.3
@@ -205,9 +208,11 @@ function computeTemplateClosedness(template: StrokeTemplate): number {
 }
 
 function computeAspectDiff(candidate: SymbolCandidate, template: StrokeTemplate): number {
-  const candAspect = candidate.bounds.maxX - candidate.bounds.minX > 0
-    ? (candidate.bounds.maxY - candidate.bounds.minY) / (candidate.bounds.maxX - candidate.bounds.minX)
-    : 1
+  const candAspect =
+    candidate.bounds.maxX - candidate.bounds.minX > 0
+      ? (candidate.bounds.maxY - candidate.bounds.minY) /
+        (candidate.bounds.maxX - candidate.bounds.minX)
+      : 1
 
   const tmplAspect = template.sourceAspectRatio
 
@@ -220,7 +225,8 @@ export function computeCompositionalScore(
 ): number {
   if (template.strokes.length === 0) return 0
 
-  const countMatch = Math.min(candidate.rawStrokeCount, template.strokes.length) /
+  const countMatch =
+    Math.min(candidate.rawStrokeCount, template.strokes.length) /
     Math.max(candidate.rawStrokeCount, template.strokes.length, 1)
 
   return countMatch * 0.5 + 0.5

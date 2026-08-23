@@ -30,7 +30,8 @@ describe('Compiler', () => {
   })
 
   it('compiles sigil semantic block into SpellIR', () => {
-    const source = 'ring sigil wind-sigil { force: 0.6; spread: 0.4; range: 0.9; } sign wind-dash at 180 deg;'
+    const source =
+      'ring sigil wind-sigil { force: 0.6; spread: 0.4; range: 0.9; } sign wind-dash at 180 deg;'
     const result = compileDSL(source)
     expect(result.ir.force).toBe(0.6)
     expect(result.ir.spread).toBe(0.4)

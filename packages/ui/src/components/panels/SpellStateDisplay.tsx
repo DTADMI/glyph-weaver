@@ -41,7 +41,10 @@ export function SpellStateDisplay() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex justify-between items-center p-2 border-b shrink-0" style={{ borderColor: 'var(--gw-border)' }}>
+      <div
+        className="flex justify-between items-center p-2 border-b shrink-0"
+        style={{ borderColor: 'var(--gw-border)' }}
+      >
         <span className="text-xs font-medium" style={{ color: 'var(--gw-accent-gold)' }}>
           {t('panels.spellState')}
         </span>
@@ -61,7 +64,8 @@ export function SpellStateDisplay() {
               {spellState.element}
             </span>
             <span className="text-xs" style={{ color: 'var(--gw-text-muted)' }}>
-              {t('diagnostics.confidence')}: {Math.round(spellState.elementConfidence * 100)}{t('labels.percent')}
+              {t('diagnostics.confidence')}: {Math.round(spellState.elementConfidence * 100)}
+              {t('labels.percent')}
             </span>
           </div>
         )}
@@ -85,15 +89,26 @@ export function SpellStateDisplay() {
           </div>
         )}
 
-        <BarMeter label={t('labels.quality')} value={spellState.quality} max={1} color="var(--gw-success)" />
-        <BarMeter label={t('labels.stability')} value={spellState.stability} max={1} color="var(--gw-accent-purple)" />
+        <BarMeter
+          label={t('labels.quality')}
+          value={spellState.quality}
+          max={1}
+          color="var(--gw-success)"
+        />
+        <BarMeter
+          label={t('labels.stability')}
+          value={spellState.stability}
+          max={1}
+          color="var(--gw-accent-purple)"
+        />
 
         <div>
           <span className="text-xs" style={{ color: 'var(--gw-text-secondary)' }}>
             {t('labels.duration')}
           </span>
           <span className="text-xs ml-2 font-medium" style={{ color: 'var(--gw-text-primary)' }}>
-            {spellState.duration.toFixed(1)}{t('labels.seconds')}
+            {spellState.duration.toFixed(1)}
+            {t('labels.seconds')}
           </span>
         </div>
 
@@ -123,7 +138,17 @@ export function SpellStateDisplay() {
   )
 }
 
-function BarMeter({ label, value, max, color }: { label: string; value: number; max: number; color: string }) {
+function BarMeter({
+  label,
+  value,
+  max,
+  color,
+}: {
+  label: string
+  value: number
+  max: number
+  color: string
+}) {
   const pct = Math.min(100, Math.max(0, (value / max) * 100))
   return (
     <div>
@@ -147,7 +172,9 @@ function BarMeter({ label, value, max, color }: { label: string; value: number; 
 function StatRow({ label, value }: { label: string; value: number }) {
   return (
     <div className="flex justify-between items-center">
-      <span className="text-xs" style={{ color: 'var(--gw-text-muted)' }}>{label}</span>
+      <span className="text-xs" style={{ color: 'var(--gw-text-muted)' }}>
+        {label}
+      </span>
       <span className="text-xs font-medium" style={{ color: 'var(--gw-text-primary)' }}>
         {value.toFixed(2)}
       </span>

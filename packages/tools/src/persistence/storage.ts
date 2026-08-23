@@ -113,7 +113,10 @@ export class PersistenceManager {
   }
 
   listSlots(): string[] {
-    return this.adapter.list().filter((k) => k.startsWith('slot:')).map((k) => k.slice(5))
+    return this.adapter
+      .list()
+      .filter((k) => k.startsWith('slot:'))
+      .map((k) => k.slice(5))
   }
 
   saveLastSession(data: unknown): void {

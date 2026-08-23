@@ -112,24 +112,25 @@ export const SymbolCandidateSchema = z.object({
   neatness: z.number(),
 })
 
-export const RingCandidateSchema: z.ZodType<import('../types/glyph-ast.js').RingCandidate> = z.object({
-  found: z.boolean(),
-  center: PointSchema.nullable(),
-  radius: z.number(),
-  complete: z.boolean(),
-  activationEvent: z.boolean(),
-  completeness: z.number(),
-  strokeIds: z.array(z.string()),
-  gap: z.number(),
-  gapArcLength: z.number(),
-  coverageRatio: z.number(),
-  roundness: z.number(),
-  lineSmoothness: z.number(),
-  neatness: z.number(),
-  overdrawAmount: z.number(),
-  unsupportedMultipleRings: z.array(z.lazy(() => RingCandidateSchema)),
-  unsupportedNestedRings: z.array(z.lazy(() => RingCandidateSchema)),
-})
+export const RingCandidateSchema: z.ZodType<import('../types/glyph-ast.js').RingCandidate> =
+  z.object({
+    found: z.boolean(),
+    center: PointSchema.nullable(),
+    radius: z.number(),
+    complete: z.boolean(),
+    activationEvent: z.boolean(),
+    completeness: z.number(),
+    strokeIds: z.array(z.string()),
+    gap: z.number(),
+    gapArcLength: z.number(),
+    coverageRatio: z.number(),
+    roundness: z.number(),
+    lineSmoothness: z.number(),
+    neatness: z.number(),
+    overdrawAmount: z.number(),
+    unsupportedMultipleRings: z.array(z.lazy(() => RingCandidateSchema)),
+    unsupportedNestedRings: z.array(z.lazy(() => RingCandidateSchema)),
+  })
 
 export const GlobalMetricsSchema = z.object({
   neatness: z.number(),

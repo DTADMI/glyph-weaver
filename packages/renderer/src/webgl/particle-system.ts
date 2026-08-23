@@ -124,7 +124,12 @@ export class ParticleSystem {
     return data
   }
 
-  render(gl: WebGL2RenderingContext, program: WebGLProgram, viewportW: number, viewportH: number): void {
+  render(
+    gl: WebGL2RenderingContext,
+    program: WebGLProgram,
+    viewportW: number,
+    viewportH: number,
+  ): void {
     const uRes = gl.getUniformLocation(program, 'u_resolution')
     const uTime = gl.getUniformLocation(program, 'u_time')
 

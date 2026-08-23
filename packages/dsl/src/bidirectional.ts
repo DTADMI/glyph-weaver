@@ -41,7 +41,9 @@ export function glyphASTtoDSL(ast: GlyphAST): string {
   if (ast.primarySigil) {
     parts.push(sigilToDSL(ast.primarySigil))
   } else {
-    parts.push('sigil generic-sigil { force: 0.7; focus: 0.7; spread: 0.5; range: 0.7; lifetimeBias: 0.5; }')
+    parts.push(
+      'sigil generic-sigil { force: 0.7; focus: 0.7; spread: 0.5; range: 0.7; lifetimeBias: 0.5; }',
+    )
   }
 
   for (const sign of ast.signs) {

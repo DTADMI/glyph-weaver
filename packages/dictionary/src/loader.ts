@@ -8,7 +8,8 @@ export function loadDictionary(): Dictionary {
   return dict
 }
 
-export type DictionaryChangeEvent = 'add-sigil' | 'remove-sigil' | 'add-sign' | 'remove-sign' | 'change'
+export type DictionaryChangeEvent =
+  'add-sigil' | 'remove-sigil' | 'add-sign' | 'remove-sign' | 'change'
 
 type Listener = () => void
 type ErrorListener = (err: Error) => void

@@ -13,11 +13,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies()
   const localeCookie = cookieStore.get('glyph-weaver-locale')?.value
   const acceptLanguage = (await headers()).get('accept-language') ?? undefined

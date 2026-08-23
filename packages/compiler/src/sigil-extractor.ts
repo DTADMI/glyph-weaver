@@ -17,9 +17,7 @@ export function extractPrimarySigil(ast: GlyphAST): SigilExtractionResult {
   }
 
   const allSigils = [primarySigil, ...unsupportedMultipleSigils]
-  const best = allSigils.reduce((a, b) =>
-    a.confidence >= b.confidence ? a : b,
-  )
+  const best = allSigils.reduce((a, b) => (a.confidence >= b.confidence ? a : b))
 
   return { sigil: best, hadMultiple: true }
 }

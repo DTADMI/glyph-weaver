@@ -18,7 +18,11 @@ export function createWebGLContext(canvas: HTMLCanvasElement): WebGL2RenderingCo
   return gl
 }
 
-export function compileShader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader {
+export function compileShader(
+  gl: WebGL2RenderingContext,
+  type: number,
+  source: string,
+): WebGLShader {
   const shader = gl.createShader(type)
   if (!shader) {
     throw new Error('Failed to create shader object.')
@@ -73,19 +77,9 @@ export interface QuadGeometry {
 }
 
 export function createQuad(gl: WebGL2RenderingContext): QuadGeometry {
-  const vertices = new Float32Array([
-    -1, -1,
-     1, -1,
-    -1,  1,
-     1,  1,
-  ])
+  const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1])
 
-  const texCoords = new Float32Array([
-    0, 0,
-    1, 0,
-    0, 1,
-    1, 1,
-  ])
+  const texCoords = new Float32Array([0, 0, 1, 0, 0, 1, 1, 1])
 
   const vao = gl.createVertexArray()
   if (!vao) {

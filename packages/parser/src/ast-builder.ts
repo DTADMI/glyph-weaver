@@ -33,7 +33,9 @@ export function buildGlyphAST(params: {
   const unknowns: UnknownSymbol[] = []
 
   if (params.sigilMatch) {
-    const candidate = params.candidates.find((c) => c.candidateId === params.sigilMatch!.candidateId)
+    const candidate = params.candidates.find(
+      (c) => c.candidateId === params.sigilMatch!.candidateId,
+    )
     const rec = buildRecognitionOutput(
       params.sigilMatch,
       'sigil',
@@ -48,7 +50,12 @@ export function buildGlyphAST(params: {
   for (let i = 0; i < params.signMatches.length; i++) {
     const match = params.signMatches[i]!
     const candidate = params.candidates.find((c) => c.candidateId === match.candidateId)
-    const rec = buildRecognitionOutput(match, 'sign', candidate ?? null, params.config) as RecognizedSign
+    const rec = buildRecognitionOutput(
+      match,
+      'sign',
+      candidate ?? null,
+      params.config,
+    ) as RecognizedSign
     if (rec.recognized) {
       signs.push(rec)
     }
@@ -141,9 +148,11 @@ function computeSymbolShape(candidate: SymbolCandidate | null): SymbolShape {
     return { elongation: 0, dominantAxisStrength: 0, strokeCount: 0, closedness: 0 }
   }
   return {
-    elongation: candidate.bounds.maxX - candidate.bounds.minX > 0
-      ? (candidate.bounds.maxY - candidate.bounds.minY) / (candidate.bounds.maxX - candidate.bounds.minX)
-      : 1,
+    elongation:
+      candidate.bounds.maxX - candidate.bounds.minX > 0
+        ? (candidate.bounds.maxY - candidate.bounds.minY) /
+          (candidate.bounds.maxX - candidate.bounds.minX)
+        : 1,
     dominantAxisStrength: 0.5,
     strokeCount: candidate.rawStrokeCount,
     closedness: candidate.closedness,

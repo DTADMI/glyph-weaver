@@ -80,7 +80,10 @@ describe('normalizeStroke', () => {
 
 describe('smoothStroke', () => {
   it('returns copy for fewer than 3 points', () => {
-    const points = [{ x: 0, y: 0 }, { x: 1, y: 1 }]
+    const points = [
+      { x: 0, y: 0 },
+      { x: 1, y: 1 },
+    ]
     const result = smoothStroke(points)
     expect(result).toEqual(points)
     expect(result).not.toBe(points)
@@ -113,7 +116,10 @@ describe('smoothStroke', () => {
 
 describe('simplifyStroke', () => {
   it('returns copy for fewer than 3 points', () => {
-    const points = [{ x: 0, y: 0 }, { x: 1, y: 1 }]
+    const points = [
+      { x: 0, y: 0 },
+      { x: 1, y: 1 },
+    ]
     const result = simplifyStroke(points, 0.1)
     expect(result).toEqual(points)
     expect(result).not.toBe(points)

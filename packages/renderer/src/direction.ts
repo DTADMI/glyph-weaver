@@ -1,6 +1,10 @@
 import type { Direction3D } from '@glyph-weaver/core'
 
-export function screenDirection(direction3D: Direction3D): { x: number; y: number; length: number } {
+export function screenDirection(direction3D: Direction3D): {
+  x: number
+  y: number
+  length: number
+} {
   const x = direction3D.x
   const y = direction3D.y
   const length = Math.sqrt(x * x + y * y)
@@ -34,7 +38,8 @@ export function project3Dto2D(
 
   const clipX = f * point3D.x
   const clipY = f * point3D.y * (viewportWidth / viewportHeight)
-  const clipZ = -(camera.far + camera.near) * rangeInv * point3D.z - 2 * camera.far * camera.near * rangeInv
+  const clipZ =
+    -(camera.far + camera.near) * rangeInv * point3D.z - 2 * camera.far * camera.near * rangeInv
 
   if (Math.abs(point3D.z) < 1e-9) {
     return {

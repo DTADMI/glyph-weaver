@@ -36,7 +36,10 @@ export class EarthEffect implements Effect {
     const force = this.config.force
     const emissionRate = 0.04
 
-    if (this.emitTimer >= emissionRate && this.particles.activeCount < this.config.ctx.particleCap) {
+    if (
+      this.emitTimer >= emissionRate &&
+      this.particles.activeCount < this.config.ctx.particleCap
+    ) {
       const canvasW = this.config.ctx.canvas.width
       const canvasH = this.config.ctx.canvas.height
 
@@ -75,7 +78,12 @@ export class EarthEffect implements Effect {
   render(): void {
     if (!this.config || !this.particles || !this.program) return
     const gl = this.config.ctx.gl
-    this.particles.render(gl, this.program, this.config.ctx.canvas.width, this.config.ctx.canvas.height)
+    this.particles.render(
+      gl,
+      this.program,
+      this.config.ctx.canvas.width,
+      this.config.ctx.canvas.height,
+    )
   }
 
   dispose(): void {

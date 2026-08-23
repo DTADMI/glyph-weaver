@@ -1,5 +1,9 @@
 export { compileSpell } from './compile.js'
-export { compileMultiElement, getCombinedElement, ELEMENT_COMBINATION_RULES } from './multi-element.js'
+export {
+  compileMultiElement,
+  getCombinedElement,
+  ELEMENT_COMBINATION_RULES,
+} from './multi-element.js'
 export { compileMultiRing, compileLinkedRings } from './multi-ring.js'
 export { buildSpellIR, buildInvalidSpell, generateSignature } from './spell-builder.js'
 export { extractPrimarySigil } from './sigil-extractor.js'

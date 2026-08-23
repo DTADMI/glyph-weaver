@@ -30,8 +30,12 @@ function makeEllipsePoints(center: Point, rx: number, ry: number, count: number)
 }
 
 function makeCleanedStroke(points: Point[], id: string): CleanedStroke {
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
-  let sumX = 0, sumY = 0
+  let minX = Infinity,
+    minY = Infinity,
+    maxX = -Infinity,
+    maxY = -Infinity
+  let sumX = 0,
+    sumY = 0
   for (const p of points) {
     if (p.x < minX) minX = p.x
     if (p.y < minY) minY = p.y

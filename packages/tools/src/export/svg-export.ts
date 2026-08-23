@@ -1,7 +1,12 @@
 import type { Stroke, GlyphAST } from '@glyph-weaver/core'
 
 function escapeXml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
 }
 
 function strokeToPath(stroke: Stroke, id: number): string {
@@ -18,8 +23,16 @@ function strokeToPath(stroke: Stroke, id: number): string {
   return `<path id="stroke-${id}" d="${d}" fill="none" stroke="${color}" stroke-width="${stroke.width.toFixed(2)}" stroke-linecap="round" stroke-linejoin="round" />`
 }
 
-export function exportToSVG(strokes: Stroke[], width: number, height: number, ringHighlight?: boolean): string {
-  const paths = strokes.map((s, i) => strokeToPath(s, i)).filter(Boolean).join('\n  ')
+export function exportToSVG(
+  strokes: Stroke[],
+  width: number,
+  height: number,
+  ringHighlight?: boolean,
+): string {
+  const paths = strokes
+    .map((s, i) => strokeToPath(s, i))
+    .filter(Boolean)
+    .join('\n  ')
   let ringOverlay = ''
   if (ringHighlight) {
     const cx = width / 2
@@ -46,13 +59,17 @@ export function exportGlyphToSVG(ast: GlyphAST, width: number = 800, height: num
     const r = ringRadius * scale
     let ringClass = ast.ring.complete ? 'ring-complete' : 'ring-incomplete'
     if (ast.ring.activationEvent) ringClass += ' ring-activated'
-    labels.push(`<circle cx="${cx.toFixed(2)}" cy="${cy.toFixed(2)}" r="${r.toFixed(2)}" class="${ringClass}" fill="none" stroke="#7b68ee" stroke-width="2" />`)
+    labels.push(
+      `<circle cx="${cx.toFixed(2)}" cy="${cy.toFixed(2)}" r="${r.toFixed(2)}" class="${ringClass}" fill="none" stroke="#7b68ee" stroke-width="2" />`,
+    )
   }
 
   for (const sigil of ast.unsupportedMultipleSigils) {
     const x = sigil.radiusNorm * cx + cx
     const y = cy
-    labels.push(`<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" class="sigil-label" fill="#ff6b6b" font-size="10" font-family="monospace">${escapeXml(sigil.id)} (alt)</text>`)
+    labels.push(
+      `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" class="sigil-label" fill="#ff6b6b" font-size="10" font-family="monospace">${escapeXml(sigil.id)} (alt)</text>`,
+    )
   }
 
   if (ast.primarySigil) {
@@ -61,8 +78,12 @@ export function exportGlyphToSVG(ast: GlyphAST, width: number = 800, height: num
     const r = s.radiusNorm * ringRadius * scale
     const x = cx + r * Math.cos(angleRad)
     const y = cy + r * Math.sin(angleRad)
-    labels.push(`<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="12" class="sigil-highlight" fill="none" stroke="#ff6b6b" stroke-width="2" />`)
-    labels.push(`<text x="${(x + 16).toFixed(2)}" y="${(y + 4).toFixed(2)}" class="sigil-label" fill="#ff6b6b" font-size="11" font-family="monospace">sigil: ${escapeXml(s.id)} (${escapeXml(s.element)}) ${(s.confidence * 100).toFixed(0)}%</text>`)
+    labels.push(
+      `<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="12" class="sigil-highlight" fill="none" stroke="#ff6b6b" stroke-width="2" />`,
+    )
+    labels.push(
+      `<text x="${(x + 16).toFixed(2)}" y="${(y + 4).toFixed(2)}" class="sigil-label" fill="#ff6b6b" font-size="11" font-family="monospace">sigil: ${escapeXml(s.id)} (${escapeXml(s.element)}) ${(s.confidence * 100).toFixed(0)}%</text>`,
+    )
   }
 
   for (const sign of ast.signs) {
@@ -70,8 +91,12 @@ export function exportGlyphToSVG(ast: GlyphAST, width: number = 800, height: num
     const r = sign.radiusNorm * ringRadius * scale
     const x = cx + r * Math.cos(angleRad)
     const y = cy + r * Math.sin(angleRad)
-    labels.push(`<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="8" class="sign-marker" fill="none" stroke="#4ecdc4" stroke-width="1.5" />`)
-    labels.push(`<text x="${(x + 12).toFixed(2)}" y="${(y + 3).toFixed(2)}" class="sign-label" fill="#4ecdc4" font-size="10" font-family="monospace">sign: ${escapeXml(sign.id)} ${(sign.confidence * 100).toFixed(0)}%</text>`)
+    labels.push(
+      `<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="8" class="sign-marker" fill="none" stroke="#4ecdc4" stroke-width="1.5" />`,
+    )
+    labels.push(
+      `<text x="${(x + 12).toFixed(2)}" y="${(y + 3).toFixed(2)}" class="sign-label" fill="#4ecdc4" font-size="10" font-family="monospace">sign: ${escapeXml(sign.id)} ${(sign.confidence * 100).toFixed(0)}%</text>`,
+    )
   }
 
   const labelStr = labels.join('\n  ')

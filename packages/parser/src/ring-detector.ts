@@ -42,13 +42,15 @@ function fitCircleLeastSquares(points: Point[]): CircleFit {
     sumZ += z
   }
 
-  const a11 = 2 * (sumX2 - sumX * sumX / n)
-  const a12 = 2 * (sumXY - sumX * sumY / n)
-  const a21 = 2 * (sumXY - sumX * sumY / n)
-  const a22 = 2 * (sumY2 - sumY * sumY / n)
+  const a11 = 2 * (sumX2 - (sumX * sumX) / n)
+  const a12 = 2 * (sumXY - (sumX * sumY) / n)
+  const a21 = 2 * (sumXY - (sumX * sumY) / n)
+  const a22 = 2 * (sumY2 - (sumY * sumY) / n)
 
-  const b1 = sumX3 + sumXY2 - sumX * sumZ / n - sumX * (sumX2 + sumY2) / n + (sumX2 + sumY2) * sumX / n
-  const b2 = sumX2Y + sumY3 - sumY * sumZ / n - sumY * (sumX2 + sumY2) / n + (sumX2 + sumY2) * sumY / n
+  const b1 =
+    sumX3 + sumXY2 - (sumX * sumZ) / n - (sumX * (sumX2 + sumY2)) / n + ((sumX2 + sumY2) * sumX) / n
+  const b2 =
+    sumX2Y + sumY3 - (sumY * sumZ) / n - (sumY * (sumX2 + sumY2)) / n + ((sumX2 + sumY2) * sumY) / n
 
   const det = a11 * a22 - a12 * a21
   if (Math.abs(det) < 1e-12) {
@@ -87,9 +89,7 @@ function fitCircleLeastSquares(points: Point[]): CircleFit {
   return { center: { x: cx, y: cy }, radius, error }
 }
 
-export function detectRing(
-  strokes: CleanedStroke[],
-): RingCandidate {
+export function detectRing(strokes: CleanedStroke[]): RingCandidate {
   if (strokes.length === 0) {
     return createEmptyRing()
   }
@@ -182,7 +182,13 @@ function createEmptyRing(): RingCandidate {
 export function detectCompleteness(
   points: Point[],
   center: Point,
-): { complete: boolean; completeness: number; gap: number; gapArcLength: number; coverageRatio: number } {
+): {
+  complete: boolean
+  completeness: number
+  gap: number
+  gapArcLength: number
+  coverageRatio: number
+} {
   if (points.length < 3) {
     return { complete: false, completeness: 0, gap: 360, gapArcLength: 0, coverageRatio: 0 }
   }
@@ -231,11 +237,12 @@ export function detectCompleteness(
   }
 }
 
-export function computeRingQuality(ring: {
-  center: Point
-  radius: number
-  points: Point[]
-}): { roundness: number; lineSmoothness: number; neatness: number; overdrawAmount: number } {
+export function computeRingQuality(ring: { center: Point; radius: number; points: Point[] }): {
+  roundness: number
+  lineSmoothness: number
+  neatness: number
+  overdrawAmount: number
+} {
   const r = roundness(ring.points, ring.center, ring.radius)
   const s = smoothness(ring.points)
   const n = computeNeatness(ring.points, ring.center, ring.radius)
@@ -249,12 +256,7 @@ export function computeRingQuality(ring: {
   }
 }
 
-function computeOverdraw(
-  points: Point[],
-  _center: Point,
-  radius: number,
-  error: number,
-): number {
+function computeOverdraw(points: Point[], _center: Point, radius: number, error: number): number {
   if (points.length < 2) return 0
 
   let totalLength = 0

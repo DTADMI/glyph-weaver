@@ -39,9 +39,7 @@ export const Skeleton: FC<SkeletonProps> = ({
   count = 1,
 }) => {
   const variantStyle =
-    variant === 'text' ? textStyle
-    : variant === 'circle' ? circleStyle
-    : rectStyle
+    variant === 'text' ? textStyle : variant === 'circle' ? circleStyle : rectStyle
 
   const finalStyle: React.CSSProperties = {
     ...variantStyle,
@@ -56,9 +54,7 @@ export const Skeleton: FC<SkeletonProps> = ({
     finalStyle.height = w
   }
 
-  const items = Array.from({ length: count }, (_, i) => (
-    <div key={i} style={finalStyle} />
-  ))
+  const items = Array.from({ length: count }, (_, i) => <div key={i} style={finalStyle} />)
 
   return <>{items}</>
 }

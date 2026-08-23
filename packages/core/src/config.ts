@@ -11,8 +11,8 @@ export const DEFAULT_CONFIG: AppConfig = {
     inkOverlapThreshold: 0.3,
     structuralWeight: 0.25,
     compositionalWeight: 0.15,
-    positionWeight: 0.30,
-    sizeWeight: 0.10,
+    positionWeight: 0.3,
+    sizeWeight: 0.1,
   },
   renderer: {
     particleCap: 500,

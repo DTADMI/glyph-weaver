@@ -17,34 +17,34 @@ SpellIR → EffectEngine → { ElementEffect, ManifestationEffect } → WebGL2 C
 Each element produces a distinct visual style with colour palettes tuned to the element's theme.
 All element effects implement the `Effect` interface (`init` / `update` / `render` / `dispose`).
 
-| Element | Class | Colours | Behaviour Highlights |
-| --- | --- | --- | --- |
-| Fire | `FireEffect` | Orange/red (`1.0, 0.4, 0.05`) | Upward stream when `gravity > 0`. Suspended flame cloud when `gravity < 0.3`. Flicker scales with `stability`. Particle size scales with `force`. |
-| Water | `WaterEffect` | Blue/cyan (`0.2, 0.6, 1.0`) | Dual-pass: outer blob layer + inner core highlight layer. Blob/cluster mode when `gravity` is low. |
-| Wind | `WindEffect` | Green/white (`0.6, 1.0, 0.7`) | Curved line particles with sinusoidal curl velocity. Thinner lines with higher `focus`. Faster speed with higher `force`. Near-zero gravity. |
-| Earth | `EarthEffect` | Brown/gray (`0.5, 0.35, 0.15`) | Square/boulder-shaped heavy particles. Large damping (`0.92`). Size grows with lifetime. |
-| Light | `LightEffect` | Golden/white (`1.0, 0.95, 0.7`) | Three-pass system: wide glow → middle beam → bright core. Lane cohesion pulls particles back to beam path. Lateral damping proportional to `focus`. |
-| Dark | `DarkEffect` | Purple/black (`0.15, 0.0, 0.35`) | Reverse-glow (darkens area). Slow creeping movement. Particles drift back toward origin. |
-| Lightning | `LightningEffect` | Blue-white (`0.8, 0.85, 1.0`) | Branching bolt segments with chain-branch algorithm. Rapid jitter inversely proportional to `stability`. Brief bright flashes. |
-| Ice | `IceEffect` | Cyan/white (`0.75, 0.9, 1.0`) | Slow-growing crystalline structures with hexagonal arm symmetry. Freeze-spread: crystals spawn at random positions around origin. |
-| Nature | `NatureEffect` | Green (`0.25, 0.75, 0.2`) | Vine/leaf tendrils with organic curl growth. Spiral spread pattern. Tendril growth speed and count proportional to `force`. |
-| Arcane | `ArcaneEffect` | Purple/magenta (`0.55, 0.1, 0.75`) | Floating rune-like particles. Spiral orbital patterns around origin. Ethereal anti-gravity effect. |
+| Element   | Class             | Colours                            | Behaviour Highlights                                                                                                                                |
+| --------- | ----------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fire      | `FireEffect`      | Orange/red (`1.0, 0.4, 0.05`)      | Upward stream when `gravity > 0`. Suspended flame cloud when `gravity < 0.3`. Flicker scales with `stability`. Particle size scales with `force`.   |
+| Water     | `WaterEffect`     | Blue/cyan (`0.2, 0.6, 1.0`)        | Dual-pass: outer blob layer + inner core highlight layer. Blob/cluster mode when `gravity` is low.                                                  |
+| Wind      | `WindEffect`      | Green/white (`0.6, 1.0, 0.7`)      | Curved line particles with sinusoidal curl velocity. Thinner lines with higher `focus`. Faster speed with higher `force`. Near-zero gravity.        |
+| Earth     | `EarthEffect`     | Brown/gray (`0.5, 0.35, 0.15`)     | Square/boulder-shaped heavy particles. Large damping (`0.92`). Size grows with lifetime.                                                            |
+| Light     | `LightEffect`     | Golden/white (`1.0, 0.95, 0.7`)    | Three-pass system: wide glow → middle beam → bright core. Lane cohesion pulls particles back to beam path. Lateral damping proportional to `focus`. |
+| Dark      | `DarkEffect`      | Purple/black (`0.15, 0.0, 0.35`)   | Reverse-glow (darkens area). Slow creeping movement. Particles drift back toward origin.                                                            |
+| Lightning | `LightningEffect` | Blue-white (`0.8, 0.85, 1.0`)      | Branching bolt segments with chain-branch algorithm. Rapid jitter inversely proportional to `stability`. Brief bright flashes.                      |
+| Ice       | `IceEffect`       | Cyan/white (`0.75, 0.9, 1.0`)      | Slow-growing crystalline structures with hexagonal arm symmetry. Freeze-spread: crystals spawn at random positions around origin.                   |
+| Nature    | `NatureEffect`    | Green (`0.25, 0.75, 0.2`)          | Vine/leaf tendrils with organic curl growth. Spiral spread pattern. Tendril growth speed and count proportional to `force`.                         |
+| Arcane    | `ArcaneEffect`    | Purple/magenta (`0.55, 0.1, 0.75`) | Floating rune-like particles. Spiral orbital patterns around origin. Ethereal anti-gravity effect.                                                  |
 
 ## Manifestation Effects
 
 Manifestation effects control the spatial behaviour of particles (projection shape, movement constraints,
 boundary conditions). They layer on top of the element effect's visual style.
 
-| Manifestation | Class | Spatial Behaviour |
-| --- | --- | --- |
-| Aura | `AuraEffect` | Ambient glow around the portal. Particles orbit in a ring around the origin. |
-| Column | `ColumnEffect` | Particles travel in a beam/column along the spell's direction. Convergence compresses the column width proportional to `focus`. |
-| Levitation | `LevitationEffect` | Anti-gravity hovering (negative gravity). Particles float with a sinusoidal hover wave. Orbital motion when `stability > 0.6` (balanced). |
-| Convergence | `ConvergenceEffect` | Particles emit from lateral positions and converge toward the beam centreline. Compression tightness scales with `rigidity` (derived from `focus`). |
-| Barrier | `BarrierEffect` | Particles form a protective shell/hemisphere around the portal. Equally-spaced segments along the shell circumference. |
-| Projectile | `ProjectileEffect` | Particles launch as discrete projectiles along the spell's direction. Fixed launch interval with speed proportional to `force`. |
-| Area | `AreaEffect` | Particles spread in an expanding circular zone. Radius grows from 0 to `maxRadius` (proportional to `spread` and `range`). |
-| Shield | `ShieldEffect` | Particles form hexagonal/polygonal shield panels at equiangular positions. Panel count proportional to `focus`. |
+| Manifestation | Class               | Spatial Behaviour                                                                                                                                   |
+| ------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Aura          | `AuraEffect`        | Ambient glow around the portal. Particles orbit in a ring around the origin.                                                                        |
+| Column        | `ColumnEffect`      | Particles travel in a beam/column along the spell's direction. Convergence compresses the column width proportional to `focus`.                     |
+| Levitation    | `LevitationEffect`  | Anti-gravity hovering (negative gravity). Particles float with a sinusoidal hover wave. Orbital motion when `stability > 0.6` (balanced).           |
+| Convergence   | `ConvergenceEffect` | Particles emit from lateral positions and converge toward the beam centreline. Compression tightness scales with `rigidity` (derived from `focus`). |
+| Barrier       | `BarrierEffect`     | Particles form a protective shell/hemisphere around the portal. Equally-spaced segments along the shell circumference.                              |
+| Projectile    | `ProjectileEffect`  | Particles launch as discrete projectiles along the spell's direction. Fixed launch interval with speed proportional to `force`.                     |
+| Area          | `AreaEffect`        | Particles spread in an expanding circular zone. Radius grows from 0 to `maxRadius` (proportional to `spread` and `range`).                          |
+| Shield        | `ShieldEffect`      | Particles form hexagonal/polygonal shield panels at equiangular positions. Panel count proportional to `focus`.                                     |
 
 ## Layer Order
 

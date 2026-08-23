@@ -2,7 +2,7 @@
 
 ## Overview
 
-Glyph Weaver is a tool for crafting and manipulating symbolic glyph systems, runic alphabets, and custom character sets. Inspired by the magic system in *Witch Hat Atelier* (Kamome Shirahama / Kodansha) and the fan-made spell simulator by ytnrvdf (288 stars, MIT), Glyph Weaver provides a programmable glyph engine with a domain-specific language, multi-ring compilation, visual rendering, and extensible dictionary authoring.
+Glyph Weaver is a tool for crafting and manipulating symbolic glyph systems, runic alphabets, and custom character sets. Inspired by the magic system in _Witch Hat Atelier_ (Kamome Shirahama / Kodansha) and the fan-made spell simulator by ytnrvdf (288 stars, MIT), Glyph Weaver provides a programmable glyph engine with a domain-specific language, multi-ring compilation, visual rendering, and extensible dictionary authoring.
 
 ## Source Material Research
 
@@ -83,94 +83,94 @@ Glyph Weaver should be the definitive tool for creating, editing, and simulating
 
 ### Core Engine (Phase 1)
 
-| Feature | Priority | Status | Notes |
-| --- | --- | --- | --- |
-| Multi-ring compilation | P0 | Not started | Nested rings, linked rings |
-| Multi-sigil support | P0 | Not started | Element mixing, combining |
-| Extensible dictionary system | P0 | Not started | JSON/YAML authoring, hot-reload |
-| WHA-DSL (Domain-Specific Language) | P0 | Not started | Textual spell definition language |
-| Canvas renderer (GPU-accelerated) | P0 | Not started | WebGL/WebGPU particle system |
-| Undo/redo stack | P1 | Not started | Full history with snapshots |
-| Project persistence | P1 | Not started | Save/load to localStorage, file |
-| Export pipeline | P1 | Not started | SVG, PNG, JSON, GLTF |
-| TypeScript rewrite | P0 | Not started | Full type safety |
+| Feature                            | Priority | Status      | Notes                             |
+| ---------------------------------- | -------- | ----------- | --------------------------------- |
+| Multi-ring compilation             | P0       | Not started | Nested rings, linked rings        |
+| Multi-sigil support                | P0       | Not started | Element mixing, combining         |
+| Extensible dictionary system       | P0       | Not started | JSON/YAML authoring, hot-reload   |
+| WHA-DSL (Domain-Specific Language) | P0       | Not started | Textual spell definition language |
+| Canvas renderer (GPU-accelerated)  | P0       | Not started | WebGL/WebGPU particle system      |
+| Undo/redo stack                    | P1       | Not started | Full history with snapshots       |
+| Project persistence                | P1       | Not started | Save/load to localStorage, file   |
+| Export pipeline                    | P1       | Not started | SVG, PNG, JSON, GLTF              |
+| TypeScript rewrite                 | P0       | Not started | Full type safety                  |
 
 ### Drawing & Recognition (Phase 1)
 
-| Feature | Priority | Status | Notes |
-| --- | --- | --- | --- |
-| Freehand canvas with paper texture | P0 | Not started | HTML5 Canvas + WebGL overlay |
-| Ring detection (multi-ring) | P0 | Not started | Topological analysis |
-| ML-enhanced recognition | P1 | Not started | TensorFlow.js or ONNX for stroke matching |
-| Stroke order preservation | P1 | Not started | Temporal stroke data |
-| Layer system (center, middle, outer) | P0 | Not started | Radial layer detection |
-| Symbol grouping and segmentation | P0 | Not started | Connected components + spatial clustering |
-| Neatness / quality scoring | P1 | Not started | Multi-metric evaluation |
-| Pressure sensitivity | P2 | Not started | Pointer Events API |
-| Touch and pen optimization | P1 | Not started | Mobile-first responsive |
+| Feature                              | Priority | Status      | Notes                                     |
+| ------------------------------------ | -------- | ----------- | ----------------------------------------- |
+| Freehand canvas with paper texture   | P0       | Not started | HTML5 Canvas + WebGL overlay              |
+| Ring detection (multi-ring)          | P0       | Not started | Topological analysis                      |
+| ML-enhanced recognition              | P1       | Not started | TensorFlow.js or ONNX for stroke matching |
+| Stroke order preservation            | P1       | Not started | Temporal stroke data                      |
+| Layer system (center, middle, outer) | P0       | Not started | Radial layer detection                    |
+| Symbol grouping and segmentation     | P0       | Not started | Connected components + spatial clustering |
+| Neatness / quality scoring           | P1       | Not started | Multi-metric evaluation                   |
+| Pressure sensitivity                 | P2       | Not started | Pointer Events API                        |
+| Touch and pen optimization           | P1       | Not started | Mobile-first responsive                   |
 
 ### Compiler & DSL (Phase 1-2)
 
-| Feature | Priority | Status | Notes |
-| --- | --- | --- | --- |
-| Parser: Strokes → Candidates → Recognitions | P0 | Not started | Pipeline architecture |
-| GlyphAST output | P0 | Not started | Structured parse result |
-| Compiler: GlyphAST → SpellIR | P0 | Not started | Multi-sigil, multi-ring |
-| SpellIR output contract | P0 | Not started | Behavior model |
-| WHA-DSL lexer/parser/compiler | P0 | Not started | PEG or hand-written parser |
-| DSL → GlyphAST bidirectional | P1 | Not started | Draw → DSL, DSL → Draw |
-| Effect parameter system | P1 | Not started | force, spread, focus, range, etc. |
-| Runtime type validation | P0 | Not started | Zod or similar |
-| Compiler warnings and diagnostics | P1 | Not started | User-facing error messages |
+| Feature                                     | Priority | Status      | Notes                             |
+| ------------------------------------------- | -------- | ----------- | --------------------------------- |
+| Parser: Strokes → Candidates → Recognitions | P0       | Not started | Pipeline architecture             |
+| GlyphAST output                             | P0       | Not started | Structured parse result           |
+| Compiler: GlyphAST → SpellIR                | P0       | Not started | Multi-sigil, multi-ring           |
+| SpellIR output contract                     | P0       | Not started | Behavior model                    |
+| WHA-DSL lexer/parser/compiler               | P0       | Not started | PEG or hand-written parser        |
+| DSL → GlyphAST bidirectional                | P1       | Not started | Draw → DSL, DSL → Draw            |
+| Effect parameter system                     | P1       | Not started | force, spread, focus, range, etc. |
+| Runtime type validation                     | P0       | Not started | Zod or similar                    |
+| Compiler warnings and diagnostics           | P1       | Not started | User-facing error messages        |
 
 ### Visual Effects (Phase 2)
 
-| Feature | Priority | Status | Notes |
-| --- | --- | --- | --- |
-| Element effects (fire, water, wind, earth, light, dark, lightning, ice, nature, arcane) | P0 | Not started | WebGL particle systems |
-| Manifestation effects (column, levitation, convergence, aura, barrier, projectile, area, shield) | P0 | Not started | Composable effects |
-| Directional projection (3D paper plane) | P1 | Not started | z-axis tilt |
-| Spell quality visual feedback | P1 | Not started | Stability, flicker, glow intensity |
-| Effect customization (color, speed, density) | P2 | Not started | User-configurable |
-| Animation presets and timelines | P2 | Not started | Keyframe system |
+| Feature                                                                                          | Priority | Status      | Notes                              |
+| ------------------------------------------------------------------------------------------------ | -------- | ----------- | ---------------------------------- |
+| Element effects (fire, water, wind, earth, light, dark, lightning, ice, nature, arcane)          | P0       | Not started | WebGL particle systems             |
+| Manifestation effects (column, levitation, convergence, aura, barrier, projectile, area, shield) | P0       | Not started | Composable effects                 |
+| Directional projection (3D paper plane)                                                          | P1       | Not started | z-axis tilt                        |
+| Spell quality visual feedback                                                                    | P1       | Not started | Stability, flicker, glow intensity |
+| Effect customization (color, speed, density)                                                     | P2       | Not started | User-configurable                  |
+| Animation presets and timelines                                                                  | P2       | Not started | Keyframe system                    |
 
 ### UI/UX (Phase 1-2)
 
-| Feature | Priority | Status | Notes |
-| --- | --- | --- | --- |
-| Responsive layout (320px–4K) | P0 | Not started | Mobile-first |
-| Dark/light theme | P1 | Not started | CSS variables |
-| i18n (EN/FR minimum) | P0 | Not started | React Context pattern |
-| Undo/redo UI | P1 | Not started | Toolbar buttons + keyboard shortcuts |
-| Dictionary panel with search | P1 | Not started | Sigil/sign browser |
-| Sample spells gallery | P1 | Not started | Reference drawings |
-| Diagnostics panel (collapsible) | P1 | Not started | Parser, AST, IR views |
-| Keyboard shortcuts | P1 | Not started | Full shortcut map |
-| Accessibility (ARIA, keyboard nav, screen reader) | P2 | Not started | WCAG 2.1 AA |
-| Onboarding / tutorial | P2 | Not started | Interactive walkthrough |
-| Tool settings panel | P2 | Not started | Brush size, ink color, opacity |
-| Performance monitor | P3 | Not started | FPS, render time, memory |
+| Feature                                           | Priority | Status      | Notes                                |
+| ------------------------------------------------- | -------- | ----------- | ------------------------------------ |
+| Responsive layout (320px–4K)                      | P0       | Not started | Mobile-first                         |
+| Dark/light theme                                  | P1       | Not started | CSS variables                        |
+| i18n (EN/FR minimum)                              | P0       | Not started | React Context pattern                |
+| Undo/redo UI                                      | P1       | Not started | Toolbar buttons + keyboard shortcuts |
+| Dictionary panel with search                      | P1       | Not started | Sigil/sign browser                   |
+| Sample spells gallery                             | P1       | Not started | Reference drawings                   |
+| Diagnostics panel (collapsible)                   | P1       | Not started | Parser, AST, IR views                |
+| Keyboard shortcuts                                | P1       | Not started | Full shortcut map                    |
+| Accessibility (ARIA, keyboard nav, screen reader) | P2       | Not started | WCAG 2.1 AA                          |
+| Onboarding / tutorial                             | P2       | Not started | Interactive walkthrough              |
+| Tool settings panel                               | P2       | Not started | Brush size, ink color, opacity       |
+| Performance monitor                               | P3       | Not started | FPS, render time, memory             |
 
 ### Community & Sharing (Phase 3)
 
-| Feature | Priority | Status | Notes |
-| --- | --- | --- | --- |
-| Dictionary import/export | P2 | Not started | JSON with validation |
-| Spell gallery (public) | P3 | Not started | Share via URL |
-| Community dictionary hub | P3 | Not started | GitHub-based registry |
-| Embeddable widget | P3 | Not started | `<glyph-weaver>` web component |
+| Feature                  | Priority | Status      | Notes                          |
+| ------------------------ | -------- | ----------- | ------------------------------ |
+| Dictionary import/export | P2       | Not started | JSON with validation           |
+| Spell gallery (public)   | P3       | Not started | Share via URL                  |
+| Community dictionary hub | P3       | Not started | GitHub-based registry          |
+| Embeddable widget        | P3       | Not started | `<glyph-weaver>` web component |
 
 ### Technical Infrastructure (Phase 1)
 
-| Feature | Priority | Status | Notes |
-| --- | --- | --- | --- |
-| TypeScript throughout | P0 | Not started | Strict mode |
-| Monorepo structure (packages/) | P0 | Not started | Core, UI, DSL, Renderer |
-| Test suite (unit, integration, E2E, benchmarks) | P0 | Not started | Vitest + Playwright |
-| CI/CD pipeline | P0 | Not started | GitHub Actions |
-| PWA support | P2 | Not started | Offline-first |
-| Telemetry (opt-in) | P3 | Not started | Basic usage stats |
-| Feature flags | P1 | Not started | Growth/experimental gating |
+| Feature                                         | Priority | Status      | Notes                      |
+| ----------------------------------------------- | -------- | ----------- | -------------------------- |
+| TypeScript throughout                           | P0       | Not started | Strict mode                |
+| Monorepo structure (packages/)                  | P0       | Not started | Core, UI, DSL, Renderer    |
+| Test suite (unit, integration, E2E, benchmarks) | P0       | Not started | Vitest + Playwright        |
+| CI/CD pipeline                                  | P0       | Not started | GitHub Actions             |
+| PWA support                                     | P2       | Not started | Offline-first              |
+| Telemetry (opt-in)                              | P3       | Not started | Basic usage stats          |
+| Feature flags                                   | P1       | Not started | Growth/experimental gating |
 
 ## Architecture
 
@@ -237,16 +237,19 @@ Effects Canvas output
 ## Technical Requirements
 
 ### Platform
+
 - **Primary**: Web (Next.js 15+, React 19+)
 - **Secondary**: Desktop (Tauri 2.x, future)
 - **Mobile**: Responsive PWA (future)
 
 ### Runtime
+
 - Node.js 22.22.3 LTS
 - pnpm 10.33.4
 - TypeScript 5.x strict mode
 
 ### Key Libraries
+
 - **Canvas Rendering**: WebGL 2.0 / WebGPU (via three.js or custom)
 - **UI Framework**: React 19 + Tailwind CSS
 - **State Management**: Zustand or Jotai
@@ -256,6 +259,7 @@ Effects Canvas output
 - **ML Recognition**: TensorFlow.js or ONNX Runtime Web (optional)
 
 ### Performance Targets
+
 - 60 FPS rendering at 1080p
 - < 16ms parse+compile time
 - < 200ms initial load (code-split)
@@ -263,6 +267,7 @@ Effects Canvas output
 - PWA offline support
 
 ### Browser Support
+
 - Chrome 120+, Firefox 120+, Safari 17+, Edge 120+
 - Mobile Safari 17+, Chrome Android 120+
 
@@ -287,15 +292,15 @@ Effects Canvas output
 
 ## Assets Required
 
-| Asset | Type | Source |
-| --- | --- | --- |
-| Paper texture | SVG/PNG | Generated or public domain |
-| Sigil templates (5 core) | JSON stroke data | Dictionary authoring |
-| Sign templates (3 core) | JSON stroke data | Dictionary authoring |
-| Sample spell layouts (8+) | JSON stroke data | Dictionary authoring |
-| Magic sound effects | Audio | Create or license (Phase 3) |
-| App icon / favicon | SVG | Custom design (Phase 2) |
-| Loading animation | SVG/Lottie | Custom (Phase 2) |
+| Asset                     | Type             | Source                      |
+| ------------------------- | ---------------- | --------------------------- |
+| Paper texture             | SVG/PNG          | Generated or public domain  |
+| Sigil templates (5 core)  | JSON stroke data | Dictionary authoring        |
+| Sign templates (3 core)   | JSON stroke data | Dictionary authoring        |
+| Sample spell layouts (8+) | JSON stroke data | Dictionary authoring        |
+| Magic sound effects       | Audio            | Create or license (Phase 3) |
+| App icon / favicon        | SVG              | Custom design (Phase 2)     |
+| Loading animation         | SVG/Lottie       | Custom (Phase 2)            |
 
 ## Gap Analysis vs. Reference Implementation
 
@@ -322,12 +327,12 @@ Effects Canvas output
 
 ## Reference Implementations
 
-| Project | URL | Stars | License | Stack |
-| --- | --- | --- | --- | --- |
-| ytnrvdf/wha-spell-simulator | https://github.com/ytnrvdf/wha-spell-simulator | 288 | MIT | JS, Vite, Canvas |
-| ppabba101/wha-spell-simulator | https://github.com/ppabba101/wha-spell-simulator | 0 | — | JS, SambaNova |
-| Witch Hat Atelier (manga) | Kodansha | 7.5M copies | — | Print |
-| Witch Hat Atelier (anime) | Bug Films, April 2026 | — | — | Crunchyroll |
+| Project                       | URL                                              | Stars       | License | Stack            |
+| ----------------------------- | ------------------------------------------------ | ----------- | ------- | ---------------- |
+| ytnrvdf/wha-spell-simulator   | https://github.com/ytnrvdf/wha-spell-simulator   | 288         | MIT     | JS, Vite, Canvas |
+| ppabba101/wha-spell-simulator | https://github.com/ppabba101/wha-spell-simulator | 0           | —       | JS, SambaNova    |
+| Witch Hat Atelier (manga)     | Kodansha                                         | 7.5M copies | —       | Print            |
+| Witch Hat Atelier (anime)     | Bug Films, April 2026                            | —           | —       | Crunchyroll      |
 
 ## Compliance Notes
 

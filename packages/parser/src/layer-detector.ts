@@ -28,10 +28,7 @@ export function computeRadiusNorm(
   return Math.min(1, dist / ringRadius)
 }
 
-export function computeAngleDeg(
-  candidateCenter: Point,
-  ringCenter: Point,
-): number {
+export function computeAngleDeg(candidateCenter: Point, ringCenter: Point): number {
   const dx = candidateCenter.x - ringCenter.x
   const dy = candidateCenter.y - ringCenter.y
 

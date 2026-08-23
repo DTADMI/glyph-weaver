@@ -28,14 +28,17 @@ export function throttle<Args extends unknown[]>(
     } else {
       pendingArgs = args
       if (pendingTimer === null) {
-        pendingTimer = setTimeout(() => {
-          pendingTimer = null
-          lastTime = Date.now()
-          if (pendingArgs) {
-            fn(...pendingArgs)
-            pendingArgs = null
-          }
-        }, intervalMs - (now - lastTime))
+        pendingTimer = setTimeout(
+          () => {
+            pendingTimer = null
+            lastTime = Date.now()
+            if (pendingArgs) {
+              fn(...pendingArgs)
+              pendingArgs = null
+            }
+          },
+          intervalMs - (now - lastTime),
+        )
       }
     }
   }

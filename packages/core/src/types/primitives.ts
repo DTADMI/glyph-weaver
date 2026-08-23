@@ -29,34 +29,14 @@ export type LayerLabel = 'center' | 'middle' | 'outer' | 'unknown'
 export type RadialFacing = 'inward' | 'outward' | 'clockwise' | 'counterclockwise' | 'unclear'
 
 export type RecognitionStatus =
-  | 'valid'
-  | 'ambiguous'
-  | 'contaminated'
-  | 'valid_messy'
-  | 'unrecognized'
+  'valid' | 'ambiguous' | 'contaminated' | 'valid_messy' | 'unrecognized'
 
 export type DirectionMode = 'position' | 'orientation' | 'inward'
 
 export type ManifestationId =
-  | 'aura'
-  | 'column'
-  | 'levitation'
-  | 'convergence'
-  | 'barrier'
-  | 'projectile'
-  | 'area'
-  | 'shield'
+  'aura' | 'column' | 'levitation' | 'convergence' | 'barrier' | 'projectile' | 'area' | 'shield'
 
 export type ElementId =
-  | 'fire'
-  | 'water'
-  | 'wind'
-  | 'earth'
-  | 'light'
-  | 'dark'
-  | 'lightning'
-  | 'ice'
-  | 'nature'
-  | 'arcane'
+  'fire' | 'water' | 'wind' | 'earth' | 'light' | 'dark' | 'lightning' | 'ice' | 'nature' | 'arcane'
 
 export type SpellState = 'prepared' | 'active' | 'invalid'

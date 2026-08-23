@@ -9,10 +9,7 @@ import { validateSpellInput } from './validate.js'
 import { buildSpellIR, buildInvalidSpell } from './spell-builder.js'
 import { mergeWarnings } from './warnings.js'
 
-export function compileSpell(
-  ast: GlyphAST,
-  config?: CompilerConfig,
-): SpellIR {
+export function compileSpell(ast: GlyphAST, config?: CompilerConfig): SpellIR {
   const validation = validateSpellInput(ast)
   if (!validation.valid) {
     return buildInvalidSpell([
@@ -35,10 +32,7 @@ export function compileSpell(
   const { sigil, hadMultiple } = extractPrimarySigil(ast)
 
   if (!sigil) {
-    return buildInvalidSpell([
-      ...ast.warnings,
-      'no_valid_sigil' as CompilerWarning,
-    ])
+    return buildInvalidSpell([...ast.warnings, 'no_valid_sigil' as CompilerWarning])
   }
 
   if (hadMultiple) {
@@ -57,18 +51,14 @@ export function compileSpell(
 
   if (signResult.recognizedCount > 1) {
     const manifestationTypes = new Set(
-      ast.signs
-        .filter((s) => s.recognized)
-        .map((s) => s.semantic.manifestation),
+      ast.signs.filter((s) => s.recognized).map((s) => s.semantic.manifestation),
     )
     if (manifestationTypes.size > 1) {
       compilerWarnings.push('mixed_manifestations')
     }
   }
 
-  const lowConfidenceSigns = ast.signs.filter(
-    (s) => s.recognized && s.confidence < 0.55,
-  )
+  const lowConfidenceSigns = ast.signs.filter((s) => s.recognized && s.confidence < 0.55)
   if (lowConfidenceSigns.length > 0) {
     compilerWarnings.push('sign_confidence_low')
   }

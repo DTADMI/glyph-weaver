@@ -158,7 +158,14 @@ export class Parser {
     }
 
     const signBlockNode = this.check(TokenType.LBRACE) ? this.block() : null
-    return { type: 'Sign', name: name.value, angle, block: signBlockNode, line: token.line, column: token.column }
+    return {
+      type: 'Sign',
+      name: name.value,
+      angle,
+      block: signBlockNode,
+      line: token.line,
+      column: token.column,
+    }
   }
 
   block(): BlockNode {
@@ -179,6 +186,12 @@ export class Parser {
     this.consume(TokenType.COLON, "Expected ':' in param")
     const value = this.consume(TokenType.NUMBER, "Expected number after ':' in param")
     this.match(TokenType.SEMI)
-    return { type: 'Param', name: name.value, value: Number(value.value), line: token.line, column: token.column }
+    return {
+      type: 'Param',
+      name: name.value,
+      value: Number(value.value),
+      line: token.line,
+      column: token.column,
+    }
   }
 }

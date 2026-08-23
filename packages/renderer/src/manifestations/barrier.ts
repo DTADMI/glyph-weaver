@@ -80,7 +80,12 @@ export class BarrierEffect implements Effect {
   render(): void {
     if (!this.config || !this.particles || !this.program) return
     const gl = this.config.ctx.gl
-    this.particles.render(gl, this.program, this.config.ctx.canvas.width, this.config.ctx.canvas.height)
+    this.particles.render(
+      gl,
+      this.program,
+      this.config.ctx.canvas.width,
+      this.config.ctx.canvas.height,
+    )
   }
 
   dispose(): void {

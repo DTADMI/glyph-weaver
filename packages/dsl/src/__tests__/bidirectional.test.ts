@@ -24,7 +24,8 @@ describe('Bidirectional', () => {
   })
 
   it('roundtrip DSL → AST → DSL preserves structure', () => {
-    const original = 'ring { size: 1.0; } sigil fire-sigil { force: 0.9; focus: 0.8; } sign fire-blast at 45 deg { range: 0.8; };'
+    const original =
+      'ring { size: 1.0; } sigil fire-sigil { force: 0.9; focus: 0.8; } sign fire-blast at 45 deg { range: 0.8; };'
     const ast1 = DSLtoGlyphAST(original)
     const dsl1 = glyphASTtoDSL(ast1)
     const ast2 = DSLtoGlyphAST(dsl1)

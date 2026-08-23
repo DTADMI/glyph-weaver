@@ -74,7 +74,15 @@ describe('computeDirection', () => {
 
     const signRight = makeSign({
       angleDeg: 0,
-      semantic: { manifestation: 'column', directionMode: 'position', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'column',
+        directionMode: 'position',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
 
     const result = computeDirection([signRight], ring)
@@ -89,7 +97,15 @@ describe('computeDirection', () => {
 
     const signUp = makeSign({
       angleDeg: 90,
-      semantic: { manifestation: 'column', directionMode: 'orientation', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'column',
+        directionMode: 'orientation',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
 
     const result = computeDirection([signUp], ring)
@@ -102,7 +118,15 @@ describe('computeDirection', () => {
     const ring = makeRing()
 
     const sign = makeSign({
-      semantic: { manifestation: 'barrier', directionMode: 'inward', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'barrier',
+        directionMode: 'inward',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
 
     const result = computeDirection([sign], ring)
@@ -116,13 +140,29 @@ describe('computeDirection', () => {
 
     const sign1 = makeSign({
       angleDeg: 0,
-      semantic: { manifestation: 'column', directionMode: 'position', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'column',
+        directionMode: 'position',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
     const sign2 = makeSign({
       candidateId: 'sign-2',
       id: 'sign-2',
       angleDeg: 180,
-      semantic: { manifestation: 'column', directionMode: 'position', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'column',
+        directionMode: 'position',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
 
     const result = computeDirection([sign1, sign2], ring)
@@ -136,7 +176,15 @@ describe('computeDirection', () => {
 
     const sign = makeSign({
       angleDeg: 45,
-      semantic: { manifestation: 'column', directionMode: 'position', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'column',
+        directionMode: 'position',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
 
     const result = computeDirection([sign], ring)
@@ -152,7 +200,15 @@ describe('computeDirection', () => {
 
     const sign = makeSign({
       angleDeg: 45,
-      semantic: { manifestation: 'column', directionMode: 'position', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'column',
+        directionMode: 'position',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
 
     const result = computeDirection([sign], ring)
@@ -167,13 +223,29 @@ describe('computeDirection', () => {
 
     const posSign = makeSign({
       angleDeg: 0,
-      semantic: { manifestation: 'column', directionMode: 'position', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'column',
+        directionMode: 'position',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
     const orientSign = makeSign({
       candidateId: 'sign-2',
       id: 'sign-2',
       angleDeg: 90,
-      semantic: { manifestation: 'projectile', directionMode: 'orientation', force: 0.3, focus: 0.3, spread: 0.3, range: 0.3, lifetimeBias: 0.5 },
+      semantic: {
+        manifestation: 'projectile',
+        directionMode: 'orientation',
+        force: 0.3,
+        focus: 0.3,
+        spread: 0.3,
+        range: 0.3,
+        lifetimeBias: 0.5,
+      },
     })
 
     const result = computeDirection([posSign, orientSign], ring)

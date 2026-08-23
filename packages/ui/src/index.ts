@@ -10,9 +10,22 @@ export { SpellStateDisplay } from './components/panels/SpellStateDisplay.js'
 export { SettingsPanel } from './components/panels/SettingsPanel.js'
 export { FeatureFlagGate } from './components/FeatureFlagGate.js'
 
-export { DrawingCanvas, EffectsOverlay, Paper, HistoryManager, getCursorStyle, clearCursorCache } from './canvas/index.js'
+export {
+  DrawingCanvas,
+  EffectsOverlay,
+  Paper,
+  HistoryManager,
+  getCursorStyle,
+  clearCursorCache,
+} from './canvas/index.js'
 
-export { I18nProvider, useI18n, resolveLocale, getServerTranslations, parseAcceptLanguage } from './i18n/index.js'
+export {
+  I18nProvider,
+  useI18n,
+  resolveLocale,
+  getServerTranslations,
+  parseAcceptLanguage,
+} from './i18n/index.js'
 export type { Locale, TranslationMap, I18nContextValue } from './i18n/index.js'
 
 export { ThemeProvider, useTheme } from './theme/index.js'

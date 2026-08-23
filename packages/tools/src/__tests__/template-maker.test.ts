@@ -67,7 +67,10 @@ describe('TemplateMaker', () => {
     it('should return template with correct structure', () => {
       const maker = new TemplateMaker({ canvasWidth: 200, canvasHeight: 100 })
       maker.startRecording()
-      maker.addStroke([{ x: 20, y: 20 }, { x: 180, y: 80 }])
+      maker.addStroke([
+        { x: 20, y: 20 },
+        { x: 180, y: 80 },
+      ])
       const template = maker.finishRecording()
 
       expect(template).toHaveProperty('sourceAspectRatio')
@@ -107,7 +110,10 @@ describe('TemplateMaker', () => {
     it('should compute bounds in normalized space', () => {
       const maker = new TemplateMaker({ canvasWidth: 100, canvasHeight: 100 })
       maker.startRecording()
-      maker.addStroke([{ x: 20, y: 30 }, { x: 80, y: 70 }])
+      maker.addStroke([
+        { x: 20, y: 30 },
+        { x: 80, y: 70 },
+      ])
       const bounds = maker.getBounds()!
 
       expect(bounds.minX).toBeCloseTo(0.2)
@@ -123,7 +129,11 @@ describe('TemplateMaker', () => {
     it('should count total points across strokes', () => {
       const maker = new TemplateMaker({ canvasWidth: 200, canvasHeight: 200 })
       maker.startRecording()
-      maker.addStroke([{ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 2 }])
+      maker.addStroke([
+        { x: 0, y: 0 },
+        { x: 1, y: 1 },
+        { x: 2, y: 2 },
+      ])
       maker.addStroke([{ x: 3, y: 3 }])
       expect(maker.pointCount).toBe(4)
     })

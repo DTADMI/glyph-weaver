@@ -20,16 +20,10 @@ export function importDictionary(json: string): Dictionary {
 
 export function mergeDictionaries(base: Dictionary, overlay: Dictionary): Dictionary {
   const sigilIds = new Set(overlay.sigils.map((s) => s.id))
-  const mergedSigils = [
-    ...base.sigils.filter((s) => !sigilIds.has(s.id)),
-    ...overlay.sigils,
-  ]
+  const mergedSigils = [...base.sigils.filter((s) => !sigilIds.has(s.id)), ...overlay.sigils]
 
   const signIds = new Set(overlay.signs.map((s) => s.id))
-  const mergedSigns = [
-    ...base.signs.filter((s) => !signIds.has(s.id)),
-    ...overlay.signs,
-  ]
+  const mergedSigns = [...base.signs.filter((s) => !signIds.has(s.id)), ...overlay.signs]
 
   const spellIds = new Set(overlay.sampleSpells.map((s) => s.id))
   const mergedSpells = [

@@ -18,12 +18,12 @@ export const sigils: SigilEntry[] = [
       sourceAspectRatio: 1,
       strokes: [
         [
-          { x: 0.50, y: 0.10 },
-          { x: 0.50, y: 0.90 },
+          { x: 0.5, y: 0.1 },
+          { x: 0.5, y: 0.9 },
         ],
         [
-          { x: 0.30, y: 0.35 },
-          { x: 0.70, y: 0.35 },
+          { x: 0.3, y: 0.35 },
+          { x: 0.7, y: 0.35 },
         ],
       ],
     },
@@ -38,18 +38,18 @@ export const sigils: SigilEntry[] = [
       force: 0.08,
       focus: 0.06,
       spread: 0.04,
-      range: 0.10,
+      range: 0.1,
       lifetimeBias: 0.05,
     },
     strokeTemplate: {
       sourceAspectRatio: 1,
       strokes: [
         [
-          { x: 0.20, y: 0.50 },
-          { x: 0.50, y: 0.80 },
-          { x: 0.80, y: 0.50 },
-          { x: 0.50, y: 0.20 },
-          { x: 0.20, y: 0.50 },
+          { x: 0.2, y: 0.5 },
+          { x: 0.5, y: 0.8 },
+          { x: 0.8, y: 0.5 },
+          { x: 0.5, y: 0.2 },
+          { x: 0.2, y: 0.5 },
         ],
       ],
     },
@@ -61,7 +61,7 @@ export const sigils: SigilEntry[] = [
     allowedLayers: ['center', 'middle', 'outer'],
     recognitionRotationInvariant: false,
     semantic: {
-      force: 0.10,
+      force: 0.1,
       focus: 0.02,
       spread: 0.08,
       range: 0.12,
@@ -71,14 +71,14 @@ export const sigils: SigilEntry[] = [
       sourceAspectRatio: 1,
       strokes: [
         [
-          { x: 0.40, y: 0.20 },
-          { x: 0.60, y: 0.50 },
-          { x: 0.40, y: 0.80 },
+          { x: 0.4, y: 0.2 },
+          { x: 0.6, y: 0.5 },
+          { x: 0.4, y: 0.8 },
         ],
         [
-          { x: 0.60, y: 0.20 },
-          { x: 0.40, y: 0.50 },
-          { x: 0.60, y: 0.80 },
+          { x: 0.6, y: 0.2 },
+          { x: 0.4, y: 0.5 },
+          { x: 0.6, y: 0.8 },
         ],
       ],
     },
@@ -94,7 +94,7 @@ export const sigils: SigilEntry[] = [
       focus: 0.12,
       spread: 0.0,
       range: 0.04,
-      lifetimeBias: 0.10,
+      lifetimeBias: 0.1,
     },
     strokeTemplate: {
       sourceAspectRatio: 1,
@@ -119,27 +119,27 @@ export const sigils: SigilEntry[] = [
       force: 0.05,
       focus: 0.15,
       spread: -0.02,
-      range: 0.20,
+      range: 0.2,
       lifetimeBias: 0.06,
     },
     strokeTemplate: {
       sourceAspectRatio: 1,
       strokes: [
         [
-          { x: 0.50, y: 0.05 },
-          { x: 0.50, y: 0.95 },
+          { x: 0.5, y: 0.05 },
+          { x: 0.5, y: 0.95 },
         ],
         [
-          { x: 0.05, y: 0.50 },
-          { x: 0.95, y: 0.50 },
+          { x: 0.05, y: 0.5 },
+          { x: 0.95, y: 0.5 },
         ],
         [
-          { x: 0.20, y: 0.20 },
-          { x: 0.80, y: 0.80 },
+          { x: 0.2, y: 0.2 },
+          { x: 0.8, y: 0.8 },
         ],
         [
-          { x: 0.20, y: 0.80 },
-          { x: 0.80, y: 0.20 },
+          { x: 0.2, y: 0.8 },
+          { x: 0.8, y: 0.2 },
         ],
       ],
     },

@@ -19,15 +19,27 @@ export class LightEffect implements Effect {
     const cap = config.ctx.particleCap
     this.wideGlow = new ParticleSystem(Math.floor(cap * 0.5))
     this.wideGlow.setGravity(0)
-    this.wideGlow.setCenter(config.ctx.canvas.width * 0.5, config.ctx.canvas.height * 0.5, Math.max(config.ctx.canvas.width, config.ctx.canvas.height) * 0.7)
+    this.wideGlow.setCenter(
+      config.ctx.canvas.width * 0.5,
+      config.ctx.canvas.height * 0.5,
+      Math.max(config.ctx.canvas.width, config.ctx.canvas.height) * 0.7,
+    )
 
     this.midBeam = new ParticleSystem(Math.floor(cap * 0.3))
     this.midBeam.setGravity(0)
-    this.midBeam.setCenter(config.ctx.canvas.width * 0.5, config.ctx.canvas.height * 0.5, Math.max(config.ctx.canvas.width, config.ctx.canvas.height) * 0.5)
+    this.midBeam.setCenter(
+      config.ctx.canvas.width * 0.5,
+      config.ctx.canvas.height * 0.5,
+      Math.max(config.ctx.canvas.width, config.ctx.canvas.height) * 0.5,
+    )
 
     this.brightCore = new ParticleSystem(Math.floor(cap * 0.2))
     this.brightCore.setGravity(0)
-    this.brightCore.setCenter(config.ctx.canvas.width * 0.5, config.ctx.canvas.height * 0.5, Math.max(config.ctx.canvas.width, config.ctx.canvas.height) * 0.3)
+    this.brightCore.setCenter(
+      config.ctx.canvas.width * 0.5,
+      config.ctx.canvas.height * 0.5,
+      Math.max(config.ctx.canvas.width, config.ctx.canvas.height) * 0.3,
+    )
 
     this.elapsed = 0
     this.emitTimer = 0

@@ -21,15 +21,18 @@ export function DiagnosticsPanel() {
   const toggle = (section: DiagSection) =>
     setExpanded((prev) => ({ ...prev, [section]: !prev[section] }))
 
-  const copyToClipboard = useCallback(async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopyMsg(t('diagnostics.copySuccess'))
-      setTimeout(() => setCopyMsg(null), 2000)
-    } catch {
-      // clipboard not available
-    }
-  }, [t])
+  const copyToClipboard = useCallback(
+    async (text: string) => {
+      try {
+        await navigator.clipboard.writeText(text)
+        setCopyMsg(t('diagnostics.copySuccess'))
+        setTimeout(() => setCopyMsg(null), 2000)
+      } catch {
+        // clipboard not available
+      }
+    },
+    [t],
+  )
 
   const parserData = JSON.stringify(
     {
@@ -82,9 +85,7 @@ export function DiagnosticsPanel() {
       )
     : t('diagnostics.noData')
 
-  const warningsData = spellState?.warnings?.length
-    ? spellState.warnings.join('\n')
-    : '-'
+  const warningsData = spellState?.warnings?.length ? spellState.warnings.join('\n') : '-'
 
   const sections: {
     id: DiagSection
@@ -99,7 +100,10 @@ export function DiagnosticsPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex justify-between items-center p-2 border-b shrink-0" style={{ borderColor: 'var(--gw-border)' }}>
+      <div
+        className="flex justify-between items-center p-2 border-b shrink-0"
+        style={{ borderColor: 'var(--gw-border)' }}
+      >
         <span className="text-xs font-medium" style={{ color: 'var(--gw-accent-gold)' }}>
           {t('panels.diagnostics')}
         </span>
@@ -138,8 +142,22 @@ export function DiagnosticsPanel() {
                   title={t('buttons.copy')}
                 >
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                    <rect x="3" y="1" width="8" height="8" rx="1" stroke="currentColor" strokeWidth="1" fill="none" />
-                    <path d="M 1 3 L 1 10 Q 1 11 2 11 L 8 11" stroke="currentColor" strokeWidth="1" fill="none" />
+                    <rect
+                      x="3"
+                      y="1"
+                      width="8"
+                      height="8"
+                      rx="1"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      fill="none"
+                    />
+                    <path
+                      d="M 1 3 L 1 10 Q 1 11 2 11 L 8 11"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      fill="none"
+                    />
                   </svg>
                 </button>
                 <svg
@@ -147,7 +165,10 @@ export function DiagnosticsPanel() {
                   height="12"
                   viewBox="0 0 12 12"
                   fill="currentColor"
-                  style={{ transform: expanded[section.id] ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}
+                  style={{
+                    transform: expanded[section.id] ? 'rotate(180deg)' : 'none',
+                    transition: 'transform 0.2s',
+                  }}
                 >
                   <path d="M 3 5 L 6 8 L 9 5" fill="none" stroke="currentColor" strokeWidth="1.5" />
                 </svg>

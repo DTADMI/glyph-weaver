@@ -72,8 +72,10 @@ export class NatureEffect implements Effect {
       const u = t.length / t.maxLength
       const curlOffset = Math.sin(u * t.curlFreq + t.curlPhase) * t.curlAmp * u
 
-      t.currentX = t.baseX + Math.cos(t.angle) * t.length + Math.cos(t.angle + Math.PI * 0.5) * curlOffset
-      t.currentY = t.baseY + Math.sin(t.angle) * t.length + Math.sin(t.angle + Math.PI * 0.5) * curlOffset
+      t.currentX =
+        t.baseX + Math.cos(t.angle) * t.length + Math.cos(t.angle + Math.PI * 0.5) * curlOffset
+      t.currentY =
+        t.baseY + Math.sin(t.angle) * t.length + Math.sin(t.angle + Math.PI * 0.5) * curlOffset
 
       if (Math.random() < 0.4) {
         this.particles.emit({
@@ -103,7 +105,12 @@ export class NatureEffect implements Effect {
   render(): void {
     if (!this.config || !this.particles || !this.program) return
     const gl = this.config.ctx.gl
-    this.particles.render(gl, this.program, this.config.ctx.canvas.width, this.config.ctx.canvas.height)
+    this.particles.render(
+      gl,
+      this.program,
+      this.config.ctx.canvas.width,
+      this.config.ctx.canvas.height,
+    )
   }
 
   dispose(): void {

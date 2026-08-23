@@ -99,7 +99,10 @@ function perpendicularDistance(point: Point, lineStart: Point, lineEnd: Point): 
     const py = point.y - lineStart.y
     return Math.sqrt(px * px + py * py)
   }
-  return Math.abs(dy * point.x - dx * point.y + lineEnd.x * lineStart.y - lineEnd.y * lineStart.x) / Math.sqrt(len)
+  return (
+    Math.abs(dy * point.x - dx * point.y + lineEnd.x * lineStart.y - lineEnd.y * lineStart.x) /
+    Math.sqrt(len)
+  )
 }
 
 export function simplifyStroke(points: Point[], tolerance: number): Point[] {
@@ -124,7 +127,10 @@ export function simplifyStroke(points: Point[], tolerance: number): Point[] {
     return [...left.slice(0, -1), ...right]
   }
 
-  return [{ x: first.x, y: first.y }, { x: last.x, y: last.y }]
+  return [
+    { x: first.x, y: first.y },
+    { x: last.x, y: last.y },
+  ]
 }
 
 export function computeCenterAndBounds(points: Point[]): {

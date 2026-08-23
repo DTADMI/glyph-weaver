@@ -6,62 +6,62 @@ The GlyphAST is the parsed drawing structure produced by the parser pipeline. It
 
 ## Top-Level Fields
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `type` | `'GlyphAST'` | Discriminant literal for the AST object |
-| `version` | `string` | Schema version identifier |
-| `ring` | `RingCandidate` | Detected ring (enclosure) geometry and quality |
-| `candidates` | `SymbolCandidate[]` | All raw stroke-groups candidates before recognition |
-| `primarySigil` | `RecognizedSigil \| null` | Highest-confidence recognized sigil (the primary element source) |
-| `unsupportedMultipleSigils` | `RecognizedSigil[]` | Additional sigils beyond the primary (not yet supported) |
-| `signs` | `RecognizedSign[]` | Recognized modifier signs around the ring |
-| `unknowns` | `UnknownSymbol[]` | Stroke groups that could not be identified |
-| `globalMetrics` | `GlobalMetrics` | Aggregate drawing quality scores |
-| `warnings` | `ParserWarning[]` | Non-fatal issues encountered during parsing |
+| Field                       | Type                      | Description                                                      |
+| --------------------------- | ------------------------- | ---------------------------------------------------------------- |
+| `type`                      | `'GlyphAST'`              | Discriminant literal for the AST object                          |
+| `version`                   | `string`                  | Schema version identifier                                        |
+| `ring`                      | `RingCandidate`           | Detected ring (enclosure) geometry and quality                   |
+| `candidates`                | `SymbolCandidate[]`       | All raw stroke-groups candidates before recognition              |
+| `primarySigil`              | `RecognizedSigil \| null` | Highest-confidence recognized sigil (the primary element source) |
+| `unsupportedMultipleSigils` | `RecognizedSigil[]`       | Additional sigils beyond the primary (not yet supported)         |
+| `signs`                     | `RecognizedSign[]`        | Recognized modifier signs around the ring                        |
+| `unknowns`                  | `UnknownSymbol[]`         | Stroke groups that could not be identified                       |
+| `globalMetrics`             | `GlobalMetrics`           | Aggregate drawing quality scores                                 |
+| `warnings`                  | `ParserWarning[]`         | Non-fatal issues encountered during parsing                      |
 
 ## Ring Fields (`RingCandidate`)
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `found` | `boolean` | Whether a ring was detected at all |
-| `center` | `Point \| null` | Center coordinates (null if `found === false`) |
-| `radius` | `number` | Estimated ring radius |
-| `complete` | `boolean` | Whether the ring forms a closed loop |
-| `activationEvent` | `boolean` | Whether a distinct activation stroke was detected |
-| `completeness` | `number` | 0-1 fraction of the circumference covered |
-| `strokeIds` | `string[]` | Stroke IDs belonging to the ring |
-| `gap` | `number` | Largest gap width in pixels |
-| `gapArcLength` | `number` | Angular extent of the gap in degrees |
-| `coverageRatio` | `number` | Ink coverage ratio along the ring path |
-| `roundness` | `number` | 0-1 shape roundness score |
-| `lineSmoothness` | `number` | Stroke smoothness score |
-| `neatness` | `number` | Overall ring neatness score |
-| `overdrawAmount` | `number` | Excess drawing on top of the ring |
+| Field                      | Type              | Description                                             |
+| -------------------------- | ----------------- | ------------------------------------------------------- |
+| `found`                    | `boolean`         | Whether a ring was detected at all                      |
+| `center`                   | `Point \| null`   | Center coordinates (null if `found === false`)          |
+| `radius`                   | `number`          | Estimated ring radius                                   |
+| `complete`                 | `boolean`         | Whether the ring forms a closed loop                    |
+| `activationEvent`          | `boolean`         | Whether a distinct activation stroke was detected       |
+| `completeness`             | `number`          | 0-1 fraction of the circumference covered               |
+| `strokeIds`                | `string[]`        | Stroke IDs belonging to the ring                        |
+| `gap`                      | `number`          | Largest gap width in pixels                             |
+| `gapArcLength`             | `number`          | Angular extent of the gap in degrees                    |
+| `coverageRatio`            | `number`          | Ink coverage ratio along the ring path                  |
+| `roundness`                | `number`          | 0-1 shape roundness score                               |
+| `lineSmoothness`           | `number`          | Stroke smoothness score                                 |
+| `neatness`                 | `number`          | Overall ring neatness score                             |
+| `overdrawAmount`           | `number`          | Excess drawing on top of the ring                       |
 | `unsupportedMultipleRings` | `RingCandidate[]` | Additional rings beyond the primary (not yet supported) |
-| `unsupportedNestedRings` | `RingCandidate[]` | Rings inside the primary ring (not yet supported) |
+| `unsupportedNestedRings`   | `RingCandidate[]` | Rings inside the primary ring (not yet supported)       |
 
 ## Candidate Fields (`SymbolCandidate`)
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `candidateId` | `string` | Unique candidate identifier |
-| `strokeIds` | `string[]` | Stroke IDs in this group |
-| `rawStrokeCount` | `number` | Original stroke count before cleaning |
-| `cleanedStrokeCount` | `number` | Stroke count after merging/cleaning |
-| `bounds` | `{ minX, minY, maxX, maxY }` | Bounding box |
-| `center` | `Point` | Centroid of the stroke group |
-| `radiusNorm` | `number` | Normalized distance from ring center (0=center, 1=ring edge) |
-| `angleDeg` | `number` | Angular position in degrees (clockwise from top) |
-| `layer` | `LayerLabel` | Ring layer zone: `'center'`, `'middle'`, `'outer'`, or `'unknown'` |
-| `nearBoundary` | `boolean` | Whether the symbol sits near a layer boundary |
-| `sizeNorm` | `number` | Normalized bounding box diagonal (0-1) |
-| `lengthNorm` | `number` | Normalized total stroke length |
-| `orientationDeg` | `number` | Principal orientation angle (0-360) |
-| `directedOrientationDeg` | `number` | Oriented angle (180 wider range) |
-| `radialFacing` | `RadialFacing` | Direction the symbol faces relative to ring center |
-| `closedness` | `number` | 0-1 stroke closedness score |
-| `overdrawAmount` | `number` | Amount of overdraw on this candidate |
-| `neatness` | `number` | Stroke neatness score |
+| Field                    | Type                         | Description                                                        |
+| ------------------------ | ---------------------------- | ------------------------------------------------------------------ |
+| `candidateId`            | `string`                     | Unique candidate identifier                                        |
+| `strokeIds`              | `string[]`                   | Stroke IDs in this group                                           |
+| `rawStrokeCount`         | `number`                     | Original stroke count before cleaning                              |
+| `cleanedStrokeCount`     | `number`                     | Stroke count after merging/cleaning                                |
+| `bounds`                 | `{ minX, minY, maxX, maxY }` | Bounding box                                                       |
+| `center`                 | `Point`                      | Centroid of the stroke group                                       |
+| `radiusNorm`             | `number`                     | Normalized distance from ring center (0=center, 1=ring edge)       |
+| `angleDeg`               | `number`                     | Angular position in degrees (clockwise from top)                   |
+| `layer`                  | `LayerLabel`                 | Ring layer zone: `'center'`, `'middle'`, `'outer'`, or `'unknown'` |
+| `nearBoundary`           | `boolean`                    | Whether the symbol sits near a layer boundary                      |
+| `sizeNorm`               | `number`                     | Normalized bounding box diagonal (0-1)                             |
+| `lengthNorm`             | `number`                     | Normalized total stroke length                                     |
+| `orientationDeg`         | `number`                     | Principal orientation angle (0-360)                                |
+| `directedOrientationDeg` | `number`                     | Oriented angle (180 wider range)                                   |
+| `radialFacing`           | `RadialFacing`               | Direction the symbol faces relative to ring center                 |
+| `closedness`             | `number`                     | 0-1 stroke closedness score                                        |
+| `overdrawAmount`         | `number`                     | Amount of overdraw on this candidate                               |
+| `neatness`               | `number`                     | Stroke neatness score                                              |
 
 ## Recognized Symbol Fields
 
@@ -79,27 +79,27 @@ Candidate groups that could not be matched to any known sigil or sign. Includes 
 
 ## `GlobalMetrics`
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `neatness` | `number` | Global stroke neatness (0-1) |
+| Field            | Type     | Description                                        |
+| ---------------- | -------- | -------------------------------------------------- |
+| `neatness`       | `number` | Global stroke neatness (0-1)                       |
 | `radialSymmetry` | `number` | Symmetry of symbol placement around the ring (0-1) |
-| `instability` | `number` | Estimated handwriting/instability amount |
+| `instability`    | `number` | Estimated handwriting/instability amount           |
 
 ## Parser Warnings
 
-| Value | Meaning |
-| --- | --- |
-| `no_ring_detected` | No enclosing ring found in the drawing |
-| `ring_incomplete` | Ring does not form a closed loop |
-| `unsupported_multiple_rings` | Multiple rings detected (only one supported) |
-| `unsupported_nested_ring` | A ring inside another ring detected |
-| `unsupported_multiple_sigils` | More than one sigil recognized (only one supported) |
-| `missing_primary_sigil` | No sigil found at all |
-| `center_unknown_contamination` | Unknown symbols near the ring center |
-| `symbol_near_layer_boundary` | Symbol straddles a layer boundary zone |
-| `symbol_contaminated` | Symbol strokes overlap/contaminated |
-| `symbol_ambiguous` | Symbol could match multiple patterns |
-| `symbol_messy` | Symbol neatness below acceptable threshold |
+| Value                          | Meaning                                             |
+| ------------------------------ | --------------------------------------------------- |
+| `no_ring_detected`             | No enclosing ring found in the drawing              |
+| `ring_incomplete`              | Ring does not form a closed loop                    |
+| `unsupported_multiple_rings`   | Multiple rings detected (only one supported)        |
+| `unsupported_nested_ring`      | A ring inside another ring detected                 |
+| `unsupported_multiple_sigils`  | More than one sigil recognized (only one supported) |
+| `missing_primary_sigil`        | No sigil found at all                               |
+| `center_unknown_contamination` | Unknown symbols near the ring center                |
+| `symbol_near_layer_boundary`   | Symbol straddles a layer boundary zone              |
+| `symbol_contaminated`          | Symbol strokes overlap/contaminated                 |
+| `symbol_ambiguous`             | Symbol could match multiple patterns                |
+| `symbol_messy`                 | Symbol neatness below acceptable threshold          |
 
 ## JSON Example
 
@@ -160,18 +160,18 @@ Candidate groups that could not be matched to any known sigil or sign. Includes 
     "radiusNorm": 0.05,
     "angleDeg": 0,
     "sizeNorm": 0.15,
-    "lengthNorm": 0.40,
-    "neatness": 0.90,
+    "lengthNorm": 0.4,
+    "neatness": 0.9,
     "shape": {
-      "elongation": 0.30,
+      "elongation": 0.3,
       "dominantAxisStrength": 0.72,
       "strokeCount": 3,
       "closedness": 0.55
     },
     "semantic": {
-      "force": 0.80,
+      "force": 0.8,
       "focus": 0.65,
-      "spread": 0.20,
+      "spread": 0.2,
       "range": 0.45,
       "lifetimeBias": 0.15
     }

@@ -260,7 +260,13 @@ function glyphASTtoSpellIR(ast: GlyphAST): SpellIR {
         case 'aura':
           return { type: 'aura' as const, strength }
         case 'convergence':
-          return { type: 'convergence' as const, point: { x: 0, y: 0 }, radius: 0.5, rigidity: 0.5, strength }
+          return {
+            type: 'convergence' as const,
+            point: { x: 0, y: 0 },
+            radius: 0.5,
+            rigidity: 0.5,
+            strength,
+          }
         default:
           return { type: 'aura' as const, strength }
       }
@@ -325,16 +331,23 @@ export function compileDSL(source: string): CompileResult {
 
   for (const imp of imports) {
     if (!imp.resolved) {
-      const importStmt = program.statements.find(
-        (s) => s.type === 'Import' && s.path === imp.name,
-      )
+      const importStmt = program.statements.find((s) => s.type === 'Import' && s.path === imp.name)
       if (importStmt) {
-        errors.push(new DslError(`Unresolved import: "${imp.name}"`, importStmt.line, importStmt.column, 'warning'))
+        errors.push(
+          new DslError(
+            `Unresolved import: "${imp.name}"`,
+            importStmt.line,
+            importStmt.column,
+            'warning',
+          ),
+        )
       }
     }
   }
 
-  const spellDef = program.statements.find((s): s is import('./ast-nodes.js').SpellDefNode => s.type === 'SpellDef')
+  const spellDef = program.statements.find(
+    (s): s is import('./ast-nodes.js').SpellDefNode => s.type === 'SpellDef',
+  )
 
   if (!spellDef) {
     const ast: GlyphAST = {

@@ -10,16 +10,43 @@ import type {
 import { DEFAULT_CONFIG } from '@glyph-weaver/core'
 import { DEFAULT_DICTIONARY } from '@glyph-weaver/dictionary'
 
-import { normalizeStroke, smoothStroke, simplifyStroke, computeCenterAndBounds } from './stroke-capture.js'
+import {
+  normalizeStroke,
+  smoothStroke,
+  simplifyStroke,
+  computeCenterAndBounds,
+} from './stroke-capture.js'
 import type { CleanedStroke } from './stroke-capture.js'
 export type { CleanedStroke } from './stroke-capture.js'
 
 import { connectedComponents, segmentStrokes } from './stroke-analysis.js'
-import { detectRing, detectCompleteness, computeRingQuality, detectMultipleRings, detectActivation } from './ring-detector.js'
+import {
+  detectRing,
+  detectCompleteness,
+  computeRingQuality,
+  detectMultipleRings,
+  detectActivation,
+} from './ring-detector.js'
 import { roundness, smoothness as ringSmoothness, computeNeatness } from './ring-metrics.js'
-import { templateMatch, rotationInvariantMatch, computeStructuralScore, computeCompositionalScore } from './template-matcher.js'
-import { detectLayer, computeRadiusNorm, computeAngleDeg, computeOrientationDeg } from './layer-detector.js'
-import { computeConfidence, detectAmbiguity, detectContamination, computePositionScore, computeSizeScore } from './confidence-scorer.js'
+import {
+  templateMatch,
+  rotationInvariantMatch,
+  computeStructuralScore,
+  computeCompositionalScore,
+} from './template-matcher.js'
+import {
+  detectLayer,
+  computeRadiusNorm,
+  computeAngleDeg,
+  computeOrientationDeg,
+} from './layer-detector.js'
+import {
+  computeConfidence,
+  detectAmbiguity,
+  detectContamination,
+  computePositionScore,
+  computeSizeScore,
+} from './confidence-scorer.js'
 
 import {
   buildGlyphAST,
@@ -39,36 +66,29 @@ export {
   smoothStroke,
   simplifyStroke,
   computeCenterAndBounds,
-
   connectedComponents,
   segmentStrokes,
-
   detectRing,
   detectCompleteness,
   computeRingQuality,
   detectMultipleRings,
   detectActivation,
-
   roundness,
   ringSmoothness,
   computeNeatness,
-
   templateMatch,
   rotationInvariantMatch,
   computeStructuralScore,
   computeCompositionalScore,
-
   detectLayer,
   computeRadiusNorm,
   computeAngleDeg,
   computeOrientationDeg,
-
   computeConfidence,
   detectAmbiguity,
   detectContamination,
   computePositionScore,
   computeSizeScore,
-
   buildGlyphAST,
   buildRingOutput,
   buildCandidateOutput,
@@ -191,7 +211,10 @@ function createSymbolCandidate(
     sumY += p.y
   }
 
-  const center = { x: allPoints.length > 0 ? sumX / allPoints.length : 0, y: allPoints.length > 0 ? sumY / allPoints.length : 0 }
+  const center = {
+    x: allPoints.length > 0 ? sumX / allPoints.length : 0,
+    y: allPoints.length > 0 ? sumY / allPoints.length : 0,
+  }
   const radiusNorm = ring.center !== null ? computeRadiusNorm(center, ring.center, ring.radius) : 0
   const angleDeg = ring.center !== null ? computeAngleDeg(center, ring.center) : 0
   const layer = ring.center !== null ? detectLayer(center, ring.center, ring.radius) : 'unknown'
@@ -219,12 +242,14 @@ function createSymbolCandidate(
     lengthNorm: computeLengthNorm(strokes),
     orientationDeg,
     directedOrientationDeg: orientationDeg,
-    radialFacing: ring.center !== null ? determineRadialFacing(center, ring.center, orientationDeg) : 'unclear',
+    radialFacing:
+      ring.center !== null ? determineRadialFacing(center, ring.center, orientationDeg) : 'unclear',
     closedness: computeClosedness(strokes.map((s) => ({ points: s.points }))),
     overdrawAmount: 0,
-    neatness: strokes.length > 0
-      ? strokes.reduce((sum, s) => sum + (s.points.length > 2 ? 0.7 : 0.5), 0) / strokes.length
-      : 0,
+    neatness:
+      strokes.length > 0
+        ? strokes.reduce((sum, s) => sum + (s.points.length > 2 ? 0.7 : 0.5), 0) / strokes.length
+        : 0,
   }
 }
 
@@ -287,13 +312,21 @@ function matchSigil(
 
     const inkScore = entry.recognitionRotationInvariant
       ? rotationInvariantMatch(candidateStrokes, entry, config)
-      : templateMatch(candidateStrokes, entry.strokeTemplate, config.rasterGridSize, config.maskRadius)
+      : templateMatch(
+          candidateStrokes,
+          entry.strokeTemplate,
+          config.rasterGridSize,
+          config.maskRadius,
+        )
 
     if (inkScore < config.inkOverlapThreshold) continue
 
     const structuralScore = computeStructuralScore(candidate, entry.strokeTemplate)
     const compositionalScore = computeCompositionalScore(candidate, entry.strokeTemplate)
-    const positionScore = computePositionScore(candidate.layer, entry.allowedLayers as unknown as string[])
+    const positionScore = computePositionScore(
+      candidate.layer,
+      entry.allowedLayers as unknown as string[],
+    )
     const sizeScore = computeSizeScore(candidate.sizeNorm, 0.05, 0.6)
 
     const confidence = computeConfidence(
@@ -349,7 +382,10 @@ function matchSign(
 
     const structuralScore = computeStructuralScore(candidate, entry.strokeTemplate)
     const compositionalScore = computeCompositionalScore(candidate, entry.strokeTemplate)
-    const positionScore = computePositionScore(candidate.layer, entry.allowedLayers as unknown as string[])
+    const positionScore = computePositionScore(
+      candidate.layer,
+      entry.allowedLayers as unknown as string[],
+    )
     const sizeScore = computeSizeScore(candidate.sizeNorm, 0.03, 0.4)
 
     const confidence = computeConfidence(

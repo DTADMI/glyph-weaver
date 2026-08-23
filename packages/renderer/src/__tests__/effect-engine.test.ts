@@ -43,12 +43,32 @@ describe('EffectEngine', () => {
       // We verify the type-level contracts without WebGL
       // by testing with a minimal mock that skips WebGL.
       // Since constructors need canvas, test the concept
-      const factories = ['fire', 'water', 'wind', 'earth', 'light', 'dark', 'lightning', 'ice', 'nature', 'arcane']
+      const factories = [
+        'fire',
+        'water',
+        'wind',
+        'earth',
+        'light',
+        'dark',
+        'lightning',
+        'ice',
+        'nature',
+        'arcane',
+      ]
       expect(factories.length).toBe(10)
     })
 
     it('getManifestationFactory returns factories for known manifestations', () => {
-      const manifestations = ['aura', 'column', 'levitation', 'convergence', 'barrier', 'projectile', 'area', 'shield']
+      const manifestations = [
+        'aura',
+        'column',
+        'levitation',
+        'convergence',
+        'barrier',
+        'projectile',
+        'area',
+        'shield',
+      ]
       expect(manifestations.length).toBe(8)
     })
   })

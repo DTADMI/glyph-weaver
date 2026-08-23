@@ -1,0 +1,21 @@
+# Prettier ignore — Glyph Weaver
+# Files and directories that should not be formatted by Prettier
+
+# Git hooks (shell/PowerShell scripts)
+.githooks/
+
+# Generated files
+.next/
+dist/
+tsconfig.tsbuildinfo
+
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Coverage
+coverage/
+
+# Large data files
+*.min.js
+*.min.css

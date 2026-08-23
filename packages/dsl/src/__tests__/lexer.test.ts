@@ -72,17 +72,13 @@ describe('Lexer', () => {
     const lexer = new Lexer()
     const tokens = lexer.tokenize('import "fire-blast";')
     const types = tokens.map((t) => t.type)
-    expect(types).toEqual([
-      TokenType.IMPORT,
-      TokenType.STRING,
-      TokenType.SEMI,
-      TokenType.EOF,
-    ])
+    expect(types).toEqual([TokenType.IMPORT, TokenType.STRING, TokenType.SEMI, TokenType.EOF])
   })
 
   it('tokenizes a complete spell definition', () => {
     const lexer = new Lexer()
-    const source = 'ring { size: 1.0; } sigil fire-sigil { force: 0.9; } sign fire-blast at 45 deg { range: 0.8; };'
+    const source =
+      'ring { size: 1.0; } sigil fire-sigil { force: 0.9; } sign fire-blast at 45 deg { range: 0.8; };'
     const tokens = lexer.tokenize(source)
     const types = tokens.map((t) => t.type)
     expect(types).toContain(TokenType.RING)

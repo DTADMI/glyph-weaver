@@ -148,7 +148,10 @@ export class Lexer {
     let value = ''
     while (
       !this.isAtEnd() &&
-      (this.isAlpha(this.peek()) || this.isDigit(this.peek()) || this.peek() === '_' || this.peek() === '-')
+      (this.isAlpha(this.peek()) ||
+        this.isDigit(this.peek()) ||
+        this.peek() === '_' ||
+        this.peek() === '-')
     ) {
       value += this.peek()
       this.advance()

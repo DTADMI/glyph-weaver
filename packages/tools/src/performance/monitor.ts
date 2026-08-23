@@ -38,7 +38,9 @@ export class PerformanceMonitor {
   private readonly memoryInterval: ReturnType<typeof setInterval> | null = null
   private droppedFrameThresholdMs: number
 
-  constructor(options: { droppedFrameThresholdMs?: number; memorySamplingIntervalMs?: number } = {}) {
+  constructor(
+    options: { droppedFrameThresholdMs?: number; memorySamplingIntervalMs?: number } = {},
+  ) {
     this.droppedFrameThresholdMs = options.droppedFrameThresholdMs ?? 33.34
 
     if (typeof performance !== 'undefined' && 'memory' in performance) {
@@ -86,14 +88,16 @@ export class PerformanceMonitor {
   }
 
   generateReport(): PerformanceReport {
-    const elapsedMs = this.frameHistory.length > 0
-      ? this.frameHistory[this.frameHistory.length - 1]!.timestamp - this.startTime
-      : 0
+    const elapsedMs =
+      this.frameHistory.length > 0
+        ? this.frameHistory[this.frameHistory.length - 1]!.timestamp - this.startTime
+        : 0
 
     const fpss = this.frameHistory.map((f) => f.fps)
     const frameTimes = this.frameHistory.map((f) => f.frameTimeMs)
     const avgFps = fpss.length > 0 ? fpss.reduce((a, b) => a + b, 0) / fpss.length : 0
-    const avgFrameTime = frameTimes.length > 0 ? frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length : 0
+    const avgFrameTime =
+      frameTimes.length > 0 ? frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length : 0
     const minFps = fpss.length > 0 ? Math.min(...fpss) : 0
     const maxFps = fpss.length > 0 ? Math.max(...fpss) : 0
     const droppedFrames = frameTimes.filter((t) => t > this.droppedFrameThresholdMs).length

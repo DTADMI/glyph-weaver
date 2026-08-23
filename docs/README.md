@@ -1,7 +1,7 @@
 # Glyph Weaver — Spell Glyph Crafting Library
 
 **Owner:** Nebula Forge Digital Studio  
-**Last Updated:** 2025-07-16  
+**Last Updated:** 2025-07-16
 
 A monorepo of TypeScript libraries for creating, parsing, compiling, and rendering magical spell glyphs. Core types, a stroke-to-glyph parser, a glyph compiler, a DSL interpreter, and a WebGL renderer — designed as the magic system foundation for interactive experiences.
 
@@ -33,10 +33,10 @@ glyph-weaver/
 
 ### Prerequisites
 
-| Tool | Version | Check |
-|------|---------|-------|
-| Node.js | 26.3.0 | `node --version` |
-| pnpm | 11.5.0 | `pnpm --version` |
+| Tool    | Version | Check            |
+| ------- | ------- | ---------------- |
+| Node.js | 26.3.0  | `node --version` |
+| pnpm    | 11.5.0  | `pnpm --version` |
 
 ### Install
 
@@ -80,29 +80,33 @@ Stroke (user input)
 
 ### Packages
 
-| Package | Status | Description |
-|---|---|---|
-| **core** | ✅ | `GlyphNode`, `SpellNode`, Zod schemas, glyph/spell config types |
-| **dictionary** | ✅ | Sigil definitions, sign catalog, sample spells for testing |
-| **parser** | 🔵 | Canvas stroke input → touch/pointer events → GlyphAST |
-| **compiler** | 🔵 | GlyphAST → SpellIR with type checking, effect resolution |
-| **dsl** | 🔵 | WHA-DSL lexer, parser (PEG.js), compiler to SpellIR |
-| **renderer** | 🔵 | WebGL particle system, Canvas 2D fallback, animation loop |
+| Package        | Status | Description                                                     |
+| -------------- | ------ | --------------------------------------------------------------- |
+| **core**       | ✅     | `GlyphNode`, `SpellNode`, Zod schemas, glyph/spell config types |
+| **dictionary** | ✅     | Sigil definitions, sign catalog, sample spells for testing      |
+| **parser**     | 🔵     | Canvas stroke input → touch/pointer events → GlyphAST           |
+| **compiler**   | 🔵     | GlyphAST → SpellIR with type checking, effect resolution        |
+| **dsl**        | 🔵     | WHA-DSL lexer, parser (PEG.js), compiler to SpellIR             |
+| **renderer**   | 🔵     | WebGL particle system, Canvas 2D fallback, animation loop       |
 
 ---
 
 ## 🎮 Concepts
 
 ### Glyph
+
 A visual symbol drawn by the user. Defined by strokes, proportions, and spatial relationships.
 
 ### Sigil
+
 The abstract meaning of a glyph. A fire sigil represents the concept of fire.
 
 ### Spell
+
 A combination of glyphs producing an effect. `Fire + Push = Fireball`
 
 ### WHA-DSL
+
 The **W**eaver's **H**igh **A**rcanum **D**omain **S**pecific **L**anguage — a human-readable language for defining and composing spells.
 
 ```
@@ -127,11 +131,11 @@ pnpm run-all-checks   # typecheck + lint + test + build
 
 ## 🔧 Troubleshooting
 
-| Problem | Solution |
-|---|---|
-| `pnpm build` fails | Run `pnpm install` first — package interdependencies need linking |
-| Web demo shows nothing | Ensure `pnpm build` completed (packages must be built) |
-| TypeScript errors in editor | Restart TS server after `pnpm build` |
+| Problem                     | Solution                                                          |
+| --------------------------- | ----------------------------------------------------------------- |
+| `pnpm build` fails          | Run `pnpm install` first — package interdependencies need linking |
+| Web demo shows nothing      | Ensure `pnpm build` completed (packages must be built)            |
+| TypeScript errors in editor | Restart TS server after `pnpm build`                              |
 
 ---
 

@@ -6,11 +6,7 @@ function distance(a: Point, b: Point): number {
   return Math.sqrt(dx * dx + dy * dy)
 }
 
-export function roundness(
-  points: Point[],
-  center: Point,
-  radius: number,
-): number {
+export function roundness(points: Point[], center: Point, radius: number): number {
   if (points.length < 4) return 0
   if (radius <= 0) return 0
 
@@ -35,7 +31,7 @@ export function roundness(
   const circularity = Math.max(0, 1 - Math.sqrt(variance))
   const amplitude = Math.sqrt(variance)
 
-  return 1 / (1 + amplitude) * circularity
+  return (1 / (1 + amplitude)) * circularity
 }
 
 export function smoothness(points: Point[]): number {
@@ -72,11 +68,7 @@ export function smoothness(points: Point[]): number {
   return Math.max(0, 1 - avgCurvature / Math.PI)
 }
 
-export function computeNeatness(
-  points: Point[],
-  center: Point,
-  radius: number,
-): number {
+export function computeNeatness(points: Point[], center: Point, radius: number): number {
   const r = roundness(points, center, radius)
   const s = smoothness(points)
   return 0.6 * r + 0.4 * s

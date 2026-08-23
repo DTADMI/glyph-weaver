@@ -2,11 +2,7 @@
 
 import { useRef, useEffect, useCallback } from 'react'
 
-function generatePaperTexture(
-  canvas: HTMLCanvasElement,
-  width: number,
-  height: number,
-): void {
+function generatePaperTexture(canvas: HTMLCanvasElement, width: number, height: number): void {
   const dpr = window.devicePixelRatio || 1
   canvas.width = width * dpr
   canvas.height = height * dpr

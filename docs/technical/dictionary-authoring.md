@@ -28,32 +28,32 @@ Sigils are central glyphs that determine a spell's element.
     "sourceAspectRatio": 1,
     "strokes": [
       [
-        { "x": 0.50, "y": 0.10 },
-        { "x": 0.50, "y": 0.90 }
+        { "x": 0.5, "y": 0.1 },
+        { "x": 0.5, "y": 0.9 }
       ],
       [
-        { "x": 0.30, "y": 0.35 },
-        { "x": 0.70, "y": 0.35 }
+        { "x": 0.3, "y": 0.35 },
+        { "x": 0.7, "y": 0.35 }
       ]
     ]
   }
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | string | Unique identifier (kebab-case) |
-| `displayName` | string | Human-readable name |
-| `element` | ElementId | One of: fire, water, wind, earth, light, dark, lightning, ice, nature, arcane |
-| `allowedLayers` | LayerLabel[] | Where the sigil can appear: center, middle, outer |
-| `recognitionRotationInvariant` | boolean | Whether the sigil can be drawn at any rotation |
-| `semantic.force` | number | Force modifier for spell behavior |
-| `semantic.focus` | number | Focus modifier |
-| `semantic.spread` | number | Spread modifier |
-| `semantic.range` | number | Range modifier |
-| `semantic.lifetimeBias` | number | Duration bias |
-| `strokeTemplate.sourceAspectRatio` | number | Aspect ratio of the source drawing area |
-| `strokeTemplate.strokes` | StrokeTemplatePoint[][] | Array of stroke arrays, each stroke is an array of points in normalized [0-1] coordinates |
+| Field                              | Type                    | Description                                                                               |
+| ---------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------- |
+| `id`                               | string                  | Unique identifier (kebab-case)                                                            |
+| `displayName`                      | string                  | Human-readable name                                                                       |
+| `element`                          | ElementId               | One of: fire, water, wind, earth, light, dark, lightning, ice, nature, arcane             |
+| `allowedLayers`                    | LayerLabel[]            | Where the sigil can appear: center, middle, outer                                         |
+| `recognitionRotationInvariant`     | boolean                 | Whether the sigil can be drawn at any rotation                                            |
+| `semantic.force`                   | number                  | Force modifier for spell behavior                                                         |
+| `semantic.focus`                   | number                  | Focus modifier                                                                            |
+| `semantic.spread`                  | number                  | Spread modifier                                                                           |
+| `semantic.range`                   | number                  | Range modifier                                                                            |
+| `semantic.lifetimeBias`            | number                  | Duration bias                                                                             |
+| `strokeTemplate.sourceAspectRatio` | number                  | Aspect ratio of the source drawing area                                                   |
+| `strokeTemplate.strokes`           | StrokeTemplatePoint[][] | Array of stroke arrays, each stroke is an array of points in normalized [0-1] coordinates |
 
 ### SignEntry
 
@@ -68,7 +68,7 @@ Signs are peripheral glyphs that modify how the sigil manifests.
   "semantic": {
     "manifestation": "column",
     "directionMode": "orientation",
-    "force": 0.10,
+    "force": 0.1,
     "focus": 0.08,
     "spread": -0.04,
     "range": 0.12,
@@ -78,28 +78,28 @@ Signs are peripheral glyphs that modify how the sigil manifests.
     "sourceAspectRatio": 1,
     "strokes": [
       [
-        { "x": 0.50, "y": 0.05 },
-        { "x": 0.50, "y": 0.95 }
+        { "x": 0.5, "y": 0.05 },
+        { "x": 0.5, "y": 0.95 }
       ]
     ]
   }
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | string | Unique identifier (kebab-case) |
-| `displayName` | string | Human-readable name |
-| `allowedLayers` | LayerLabel[] | Where the sign can appear: middle, outer |
-| `sourceNotes` | string? | Optional notes about the sign's origin or behavior |
+| Field                    | Type            | Description                                                                      |
+| ------------------------ | --------------- | -------------------------------------------------------------------------------- |
+| `id`                     | string          | Unique identifier (kebab-case)                                                   |
+| `displayName`            | string          | Human-readable name                                                              |
+| `allowedLayers`          | LayerLabel[]    | Where the sign can appear: middle, outer                                         |
+| `sourceNotes`            | string?         | Optional notes about the sign's origin or behavior                               |
 | `semantic.manifestation` | ManifestationId | One of: aura, column, levitation, convergence, barrier, projectile, area, shield |
-| `semantic.directionMode` | DirectionMode | One of: position, orientation, inward |
-| `semantic.force` | number | Force modifier |
-| `semantic.focus` | number | Focus modifier |
-| `semantic.spread` | number | Spread modifier (negative values compress) |
-| `semantic.range` | number | Range modifier |
-| `semantic.lifetimeBias` | number | Duration bias |
-| `strokeTemplate` | StrokeTemplate | Same structure as SigilEntry |
+| `semantic.directionMode` | DirectionMode   | One of: position, orientation, inward                                            |
+| `semantic.force`         | number          | Force modifier                                                                   |
+| `semantic.focus`         | number          | Focus modifier                                                                   |
+| `semantic.spread`        | number          | Spread modifier (negative values compress)                                       |
+| `semantic.range`         | number          | Range modifier                                                                   |
+| `semantic.lifetimeBias`  | number          | Duration bias                                                                    |
+| `strokeTemplate`         | StrokeTemplate  | Same structure as SigilEntry                                                     |
 
 ### SampleSpellEntry
 
@@ -116,14 +116,14 @@ Sample spells provide predefined spell layouts for the spell gallery and tutoria
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | string | Unique identifier (kebab-case) |
-| `displayName` | string | Human-readable name |
-| `description` | string | Description of what the spell does |
-| `element` | ElementId | Primary element |
-| `manifestations` | ManifestationId[] | List of manifestation effects |
-| `strokes` | StrokeTemplatePoint[][] | Stroke data for rendering the sample (empty = use template defaults) |
+| Field            | Type                    | Description                                                          |
+| ---------------- | ----------------------- | -------------------------------------------------------------------- |
+| `id`             | string                  | Unique identifier (kebab-case)                                       |
+| `displayName`    | string                  | Human-readable name                                                  |
+| `description`    | string                  | Description of what the spell does                                   |
+| `element`        | ElementId               | Primary element                                                      |
+| `manifestations` | ManifestationId[]       | List of manifestation effects                                        |
+| `strokes`        | StrokeTemplatePoint[][] | Stroke data for rendering the sample (empty = use template defaults) |
 
 ## Validation
 
@@ -154,6 +154,7 @@ The dictionary is validated against Zod schemas on load. Invalid entries produce
 ## Coordinate System
 
 All stroke templates use normalized coordinates `[0, 1]` where:
+
 - `(0, 0)` is top-left
 - `(1, 0)` is top-right
 - `(0, 1)` is bottom-left

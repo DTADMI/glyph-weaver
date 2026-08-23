@@ -1,8 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import {
-  MemoryStorageAdapter,
-  PersistenceManager,
-} from '../persistence/storage.js'
+import { MemoryStorageAdapter, PersistenceManager } from '../persistence/storage.js'
 
 describe('MemoryStorageAdapter', () => {
   let adapter: MemoryStorageAdapter

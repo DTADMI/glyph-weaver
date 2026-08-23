@@ -25,7 +25,10 @@ export function DictionaryPanel() {
 
   const filteredSigils = useMemo(() => filter(dictionary.sigils), [search, dictionary.sigils])
   const filteredSigns = useMemo(() => filter(dictionary.signs), [search, dictionary.signs])
-  const filteredSamples = useMemo(() => filter(dictionary.sampleSpells), [search, dictionary.sampleSpells])
+  const filteredSamples = useMemo(
+    () => filter(dictionary.sampleSpells),
+    [search, dictionary.sampleSpells],
+  )
 
   const tabs: { id: DictionaryTab; label: string }[] = [
     { id: 'sigils', label: t('labels.sigils') },
@@ -35,7 +38,10 @@ export function DictionaryPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center border-b shrink-0" style={{ borderColor: 'var(--gw-border)' }}>
+      <div
+        className="flex items-center border-b shrink-0"
+        style={{ borderColor: 'var(--gw-border)' }}
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -43,7 +49,8 @@ export function DictionaryPanel() {
             className="flex-1 px-2 py-1.5 text-xs font-medium transition-colors"
             style={{
               color: activeTab === tab.id ? 'var(--gw-accent-gold)' : 'var(--gw-text-muted)',
-              borderBottom: activeTab === tab.id ? '2px solid var(--gw-accent-gold)' : '2px solid transparent',
+              borderBottom:
+                activeTab === tab.id ? '2px solid var(--gw-accent-gold)' : '2px solid transparent',
             }}
           >
             {tab.label}
@@ -94,7 +101,11 @@ function SigilList({
   t: (key: string) => string
 }) {
   if (sigils.length === 0) {
-    return <p className="text-xs text-center py-4" style={{ color: 'var(--gw-text-muted)' }}>{emptyMessage}</p>
+    return (
+      <p className="text-xs text-center py-4" style={{ color: 'var(--gw-text-muted)' }}>
+        {emptyMessage}
+      </p>
+    )
   }
   return (
     <div className="flex flex-col gap-2">
@@ -105,14 +116,26 @@ function SigilList({
           style={{ borderColor: 'var(--gw-border)', backgroundColor: 'var(--gw-bg-tertiary)' }}
         >
           <div className="flex justify-between items-center mb-1">
-            <span className="font-medium" style={{ color: 'var(--gw-accent-gold)' }}>{sigil.displayName}</span>
-            <span className="opacity-60" style={{ color: 'var(--gw-text-muted)' }}>{sigil.element}</span>
+            <span className="font-medium" style={{ color: 'var(--gw-accent-gold)' }}>
+              {sigil.displayName}
+            </span>
+            <span className="opacity-60" style={{ color: 'var(--gw-text-muted)' }}>
+              {sigil.element}
+            </span>
           </div>
           <div className="flex flex-wrap gap-1" style={{ color: 'var(--gw-text-secondary)' }}>
-            <span>{t('labels.force')}: {sigil.semantic.force}</span>
-            <span>{t('labels.focus')}: {sigil.semantic.focus}</span>
-            <span>{t('labels.spread')}: {sigil.semantic.spread}</span>
-            <span>{t('labels.range')}: {sigil.semantic.range}</span>
+            <span>
+              {t('labels.force')}: {sigil.semantic.force}
+            </span>
+            <span>
+              {t('labels.focus')}: {sigil.semantic.focus}
+            </span>
+            <span>
+              {t('labels.spread')}: {sigil.semantic.spread}
+            </span>
+            <span>
+              {t('labels.range')}: {sigil.semantic.range}
+            </span>
           </div>
           <div className="mt-1" style={{ color: 'var(--gw-text-muted)' }}>
             {t('dictionary.layer')}: {sigil.allowedLayers.join(', ')}
@@ -133,7 +156,11 @@ function SignList({
   t: (key: string) => string
 }) {
   if (signs.length === 0) {
-    return <p className="text-xs text-center py-4" style={{ color: 'var(--gw-text-muted)' }}>{emptyMessage}</p>
+    return (
+      <p className="text-xs text-center py-4" style={{ color: 'var(--gw-text-muted)' }}>
+        {emptyMessage}
+      </p>
+    )
   }
   return (
     <div className="flex flex-col gap-2">
@@ -144,16 +171,28 @@ function SignList({
           style={{ borderColor: 'var(--gw-border)', backgroundColor: 'var(--gw-bg-tertiary)' }}
         >
           <div className="flex justify-between items-center mb-1">
-            <span className="font-medium" style={{ color: 'var(--gw-accent-gold)' }}>{sign.displayName}</span>
-            <span className="opacity-60" style={{ color: 'var(--gw-text-muted)' }}>{sign.semantic.manifestation}</span>
+            <span className="font-medium" style={{ color: 'var(--gw-accent-gold)' }}>
+              {sign.displayName}
+            </span>
+            <span className="opacity-60" style={{ color: 'var(--gw-text-muted)' }}>
+              {sign.semantic.manifestation}
+            </span>
           </div>
           {sign.sourceNotes && (
-            <p className="mb-1" style={{ color: 'var(--gw-text-secondary)' }}>{sign.sourceNotes}</p>
+            <p className="mb-1" style={{ color: 'var(--gw-text-secondary)' }}>
+              {sign.sourceNotes}
+            </p>
           )}
           <div className="flex flex-wrap gap-1" style={{ color: 'var(--gw-text-secondary)' }}>
-            <span>{t('labels.force')}: {sign.semantic.force}</span>
-            <span>{t('labels.focus')}: {sign.semantic.focus}</span>
-            <span>{t('labels.spread')}: {sign.semantic.spread}</span>
+            <span>
+              {t('labels.force')}: {sign.semantic.force}
+            </span>
+            <span>
+              {t('labels.focus')}: {sign.semantic.focus}
+            </span>
+            <span>
+              {t('labels.spread')}: {sign.semantic.spread}
+            </span>
           </div>
           <div className="mt-1" style={{ color: 'var(--gw-text-muted)' }}>
             {t('dictionary.layer')}: {sign.allowedLayers.join(', ')}
@@ -174,7 +213,11 @@ function SampleList({
   t: (key: string) => string
 }) {
   if (samples.length === 0) {
-    return <p className="text-xs text-center py-4" style={{ color: 'var(--gw-text-muted)' }}>{emptyMessage}</p>
+    return (
+      <p className="text-xs text-center py-4" style={{ color: 'var(--gw-text-muted)' }}>
+        {emptyMessage}
+      </p>
+    )
   }
   return (
     <div className="flex flex-col gap-2">
@@ -185,8 +228,12 @@ function SampleList({
           style={{ borderColor: 'var(--gw-border)', backgroundColor: 'var(--gw-bg-tertiary)' }}
         >
           <div className="flex justify-between items-center mb-1">
-            <span className="font-medium" style={{ color: 'var(--gw-accent-gold)' }}>{sample.displayName}</span>
-            <span className="opacity-60" style={{ color: 'var(--gw-text-muted)' }}>{sample.element}</span>
+            <span className="font-medium" style={{ color: 'var(--gw-accent-gold)' }}>
+              {sample.displayName}
+            </span>
+            <span className="opacity-60" style={{ color: 'var(--gw-text-muted)' }}>
+              {sample.element}
+            </span>
           </div>
           <p style={{ color: 'var(--gw-text-secondary)' }}>{sample.description}</p>
           <div className="mt-1" style={{ color: 'var(--gw-text-muted)' }}>

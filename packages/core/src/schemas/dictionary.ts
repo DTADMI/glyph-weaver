@@ -1,5 +1,10 @@
 import { z } from 'zod'
-import { ElementIdSchema, ManifestationIdSchema, DirectionModeSchema, LayerLabelSchema } from './primitives.js'
+import {
+  ElementIdSchema,
+  ManifestationIdSchema,
+  DirectionModeSchema,
+  LayerLabelSchema,
+} from './primitives.js'
 
 export const StrokeTemplatePointSchema = z.object({
   x: z.number(),

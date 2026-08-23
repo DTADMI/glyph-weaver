@@ -164,7 +164,12 @@ export class EffectEngine {
           this.gl.clear(this.gl.COLOR_BUFFER_BIT)
           this.gl.enable(this.gl.BLEND)
           this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA)
-          this.gl.blendFuncSeparate(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA, this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA)
+          this.gl.blendFuncSeparate(
+            this.gl.SRC_ALPHA,
+            this.gl.ONE_MINUS_SRC_ALPHA,
+            this.gl.ONE,
+            this.gl.ONE_MINUS_SRC_ALPHA,
+          )
 
           if (this.activeEffects.element) {
             this.activeEffects.element.render()
@@ -249,6 +254,9 @@ export class EffectEngine {
   }
 }
 
-export function createRenderer(canvas: HTMLCanvasElement, config?: Partial<AppConfig>): EffectEngine {
+export function createRenderer(
+  canvas: HTMLCanvasElement,
+  config?: Partial<AppConfig>,
+): EffectEngine {
   return new EffectEngine(canvas, config)
 }

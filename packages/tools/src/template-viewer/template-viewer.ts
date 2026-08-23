@@ -79,7 +79,11 @@ export class TemplateViewer {
     }
   }
 
-  renderNormalized(canvas: HTMLCanvasElement, strokeColor: string = '#7b68ee', lineWidth: number = 2): void {
+  renderNormalized(
+    canvas: HTMLCanvasElement,
+    strokeColor: string = '#7b68ee',
+    lineWidth: number = 2,
+  ): void {
     if (!this.template) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
@@ -105,8 +109,16 @@ export class TemplateViewer {
       ctx.lineJoin = 'round'
       for (let i = 0; i < stroke.length; i++) {
         const pt = stroke[i]!
-        const x = pt.x * (this.template.sourceAspectRatio > 1 ? canvas.width : canvas.height * this.template.sourceAspectRatio)
-        const y = pt.y * (this.template.sourceAspectRatio > 1 ? canvas.width / this.template.sourceAspectRatio : canvas.height)
+        const x =
+          pt.x *
+          (this.template.sourceAspectRatio > 1
+            ? canvas.width
+            : canvas.height * this.template.sourceAspectRatio)
+        const y =
+          pt.y *
+          (this.template.sourceAspectRatio > 1
+            ? canvas.width / this.template.sourceAspectRatio
+            : canvas.height)
         const tx = x * scale + offsetX
         const ty = y * scale + offsetY
         if (i === 0) ctx.moveTo(tx, ty)

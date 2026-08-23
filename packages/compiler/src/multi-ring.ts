@@ -2,10 +2,7 @@ import type { GlyphAST, SpellIR, CompilerConfig, CompilerWarning } from '@glyph-
 import { DEFAULT_CONFIG } from '@glyph-weaver/core'
 import { compileSpell } from './compile.js'
 
-export function compileMultiRing(
-  asts: GlyphAST[],
-  config?: CompilerConfig,
-): SpellIR {
+export function compileMultiRing(asts: GlyphAST[], config?: CompilerConfig): SpellIR {
   if (asts.length === 0) {
     return {
       type: 'SpellIR',
@@ -109,10 +106,7 @@ export function compileMultiRing(
   return result
 }
 
-export function compileLinkedRings(
-  asts: GlyphAST[],
-  config?: CompilerConfig,
-): SpellIR {
+export function compileLinkedRings(asts: GlyphAST[], config?: CompilerConfig): SpellIR {
   if (asts.length === 0) {
     return {
       type: 'SpellIR',
@@ -223,10 +217,10 @@ export function compileLinkedRings(
 
   return {
     ...first,
-    force: clamp(totalForce / count * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxForce),
-    spread: clamp(totalSpread / count * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxSpread),
-    focus: clamp(totalFocus / count * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxFocus),
-    range: clamp(totalRange / count * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxRange),
+    force: clamp((totalForce / count) * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxForce),
+    spread: clamp((totalSpread / count) * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxSpread),
+    focus: clamp((totalFocus / count) * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxFocus),
+    range: clamp((totalRange / count) * additiveBoost, 0, DEFAULT_CONFIG.compiler.maxRange),
     quality: clamp(avgQuality, 0, 1),
     neatness: clamp(totalNeatness / count, 0, 1),
     directionCoherence: clamp(totalCoherence / count, 0, 1),

@@ -1,4 +1,9 @@
-import type { GlyphAST, RecognizedSign, ManifestationId, AnyManifestationProfile } from '@glyph-weaver/core'
+import type {
+  GlyphAST,
+  RecognizedSign,
+  ManifestationId,
+  AnyManifestationProfile,
+} from '@glyph-weaver/core'
 
 export interface SignAggregationResult {
   manifestations: Record<string, AnyManifestationProfile>
@@ -10,7 +15,9 @@ export interface SignAggregationResult {
 const VALID_RECOGNITION_STATUSES = new Set(['valid', 'valid_messy'])
 
 export function aggregateSigns(ast: GlyphAST): SignAggregationResult {
-  const recognized = ast.signs.filter((s) => s.recognized && VALID_RECOGNITION_STATUSES.has(s.recognitionStatus))
+  const recognized = ast.signs.filter(
+    (s) => s.recognized && VALID_RECOGNITION_STATUSES.has(s.recognitionStatus),
+  )
 
   if (recognized.length === 0) {
     return {

@@ -1,4 +1,10 @@
-import type { Dictionary, RecognizedSigil, RecognizedSign, UnknownSymbol, GlyphAST } from '@glyph-weaver/core'
+import type {
+  Dictionary,
+  RecognizedSigil,
+  RecognizedSign,
+  UnknownSymbol,
+  GlyphAST,
+} from '@glyph-weaver/core'
 
 export interface DetectionResult {
   sigil: RecognizedSigil | null
@@ -95,9 +101,7 @@ export class DetectorLab {
   }
 
   getAvailableDictionaries(): string[] {
-    return this.dictionary
-      ? this.dictionary.sigils.map((s) => s.id)
-      : []
+    return this.dictionary ? this.dictionary.sigils.map((s) => s.id) : []
   }
 
   getElementLabel(element: string): string {

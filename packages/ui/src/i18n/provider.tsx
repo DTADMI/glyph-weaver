@@ -86,11 +86,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     [locale],
   )
 
-  return React.createElement(
-    I18nContext.Provider,
-    { value: { locale, setLocale, t } },
-    children,
-  )
+  return React.createElement(I18nContext.Provider, { value: { locale, setLocale, t } }, children)
 }
 
 export function useI18n(): I18nContextValue {

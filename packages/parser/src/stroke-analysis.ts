@@ -76,11 +76,7 @@ export function connectedComponents(
   return uf.groups()
 }
 
-export function segmentStrokes(
-  strokes: CleanedStroke[],
-  eps: number,
-  minPts: number,
-): number[][] {
+export function segmentStrokes(strokes: CleanedStroke[], eps: number, minPts: number): number[][] {
   if (strokes.length === 0) return []
 
   const visited = new Array(strokes.length).fill(false)

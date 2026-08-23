@@ -121,9 +121,10 @@ function computePositionDirection(
   }
 }
 
-function computeOrientationDirection(
-  signs: RecognizedSign[],
-): { direction: Direction3D; coherence: number } {
+function computeOrientationDirection(signs: RecognizedSign[]): {
+  direction: Direction3D
+  coherence: number
+} {
   if (signs.length === 0) {
     return { direction: defaultDirection(), coherence: 0 }
   }
@@ -163,9 +164,10 @@ function computeOrientationDirection(
   }
 }
 
-function computeInwardDirection(
-  ring: RingCandidate,
-): { direction: Direction3D; coherence: number } {
+function computeInwardDirection(ring: RingCandidate): {
+  direction: Direction3D
+  coherence: number
+} {
   const center = ring.center
   if (!center) {
     return { direction: defaultDirection(), coherence: 1 }

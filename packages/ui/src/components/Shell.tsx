@@ -83,16 +83,15 @@ export function GlyphWeaverShell() {
 
   useKeyboardShortcuts(handleAction)
 
-  const activeRightPanel =
-    panels.diagnostics
-      ? 'diagnostics'
-      : panels.spellState
-        ? 'spellState'
-        : panels.settings
-          ? 'settings'
-          : panels.dictionary
-            ? 'dictionary'
-            : null
+  const activeRightPanel = panels.diagnostics
+    ? 'diagnostics'
+    : panels.spellState
+      ? 'spellState'
+      : panels.settings
+        ? 'settings'
+        : panels.dictionary
+          ? 'dictionary'
+          : null
 
   const rightPanelHasContent = activeRightPanel !== null
 
@@ -134,8 +133,14 @@ export function GlyphWeaverShell() {
                     borderColor: 'var(--gw-border)',
                   }}
                 >
-                  <div className="flex justify-between items-center p-2 border-b lg:hidden" style={{ borderColor: 'var(--gw-border)' }}>
-                    <span className="text-xs font-medium" style={{ color: 'var(--gw-text-secondary)' }}>
+                  <div
+                    className="flex justify-between items-center p-2 border-b lg:hidden"
+                    style={{ borderColor: 'var(--gw-border)' }}
+                  >
+                    <span
+                      className="text-xs font-medium"
+                      style={{ color: 'var(--gw-text-secondary)' }}
+                    >
                       {t(`panels.${activeRightPanel}`)}
                     </span>
                     <button
@@ -145,7 +150,11 @@ export function GlyphWeaverShell() {
                       aria-label={t('buttons.close')}
                     >
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M 4 4 L 12 12 M 12 4 L 4 12" stroke="currentColor" strokeWidth="2" />
+                        <path
+                          d="M 4 4 L 12 12 M 12 4 L 4 12"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
                       </svg>
                     </button>
                   </div>

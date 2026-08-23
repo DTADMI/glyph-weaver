@@ -1,4 +1,10 @@
-import type { ElementId, SpellIR, GlyphAST, CompilerConfig, CompilerWarning } from '@glyph-weaver/core'
+import type {
+  ElementId,
+  SpellIR,
+  GlyphAST,
+  CompilerConfig,
+  CompilerWarning,
+} from '@glyph-weaver/core'
 import { DEFAULT_CONFIG } from '@glyph-weaver/core'
 import { compileSpell } from './compile.js'
 
@@ -115,10 +121,7 @@ export const ELEMENT_COMBINATION_RULES: Record<string, { [key: string]: ElementI
   },
 }
 
-export function getCombinedElement(
-  a: ElementId,
-  b: ElementId,
-): ElementId {
+export function getCombinedElement(a: ElementId, b: ElementId): ElementId {
   if (a === b) {
     return a
   }
@@ -140,10 +143,7 @@ export interface MultiElementInput {
   elementB: ElementId
 }
 
-export function compileMultiElement(
-  input: MultiElementInput,
-  config?: CompilerConfig,
-): SpellIR {
+export function compileMultiElement(input: MultiElementInput, config?: CompilerConfig): SpellIR {
   const { primary, secondary, elementA, elementB } = input
   const combinedElement = getCombinedElement(elementA, elementB)
 
@@ -158,7 +158,10 @@ export function compileMultiElement(
   const secondaryResult = compileSpell(secondary, config)
 
   primaryResult.element = combinedElement
-  primaryResult.elementConfidence = Math.min(primaryResult.elementConfidence, secondaryResult.elementConfidence || 0.6)
+  primaryResult.elementConfidence = Math.min(
+    primaryResult.elementConfidence,
+    secondaryResult.elementConfidence || 0.6,
+  )
 
   const weightA = 0.6
   const weightB = 0.4

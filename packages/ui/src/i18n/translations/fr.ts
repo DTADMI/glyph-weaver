@@ -3,7 +3,7 @@ import type { TranslationMap } from '../config.js'
 const fr: TranslationMap = {
   app: {
     name: 'Glyph Weaver',
-    tagline: 'Façonnez des sorts par l\'encre',
+    tagline: "Façonnez des sorts par l'encre",
     version: 'Version',
   },
   tools: {
@@ -17,7 +17,7 @@ const fr: TranslationMap = {
     size: 'Taille',
     opacity: 'Opacité',
     color: 'Couleur',
-    inkType: 'Type d\'encre',
+    inkType: "Type d'encre",
     standard: 'Standard',
     watercolor: 'Aquarelle',
     charcoal: 'Fusain',
@@ -48,7 +48,7 @@ const fr: TranslationMap = {
     dictionary: 'Dictionnaire',
     sigils: 'Sigils',
     signs: 'Signes',
-    sampleSpells: 'Sorts d\'exemple',
+    sampleSpells: "Sorts d'exemple",
     search: 'Rechercher',
     filter: 'Filtrer',
     warnings: 'Avertissements',
@@ -91,7 +91,7 @@ const fr: TranslationMap = {
     showStack: 'Afficher',
     reset: 'Réinitialiser',
     save: 'Échec de la sauvegarde.',
-    export: 'Échec de l\'exportation.',
+    export: "Échec de l'exportation.",
     load: 'Échec du chargement.',
     browserOnly: 'Cette fonctionnalité nécessite un navigateur.',
   },
@@ -106,8 +106,8 @@ const fr: TranslationMap = {
     diagnostics: 'Basculer les diagnostics',
     browseDictionary: 'Parcourir le dictionnaire',
     settings: 'Ouvrir les paramètres',
-    help: 'Afficher l\'aide',
-    toolSelect: 'Sélectionner l\'outil',
+    help: "Afficher l'aide",
+    toolSelect: "Sélectionner l'outil",
     search: 'Rechercher',
   },
   panels: {
@@ -122,14 +122,14 @@ const fr: TranslationMap = {
   dictionary: {
     noSigils: 'Aucun sigil trouvé.',
     noSigns: 'Aucun signe trouvé.',
-    noSamples: 'Aucun sort d\'exemple trouvé.',
+    noSamples: "Aucun sort d'exemple trouvé.",
     preview: 'Aperçu',
     description: 'Description',
     layer: 'Couche',
     semanticParams: 'Paramètres sémantiques',
   },
   diagnostics: {
-    rawParser: 'Sortie de l\'analyseur (brute)',
+    rawParser: "Sortie de l'analyseur (brute)",
     structuredAST: 'ASA (arbre structuré)',
     spellBehavior: 'IR de sort (table de comportement)',
     warnings: 'Avertissements',
@@ -160,15 +160,15 @@ const fr: TranslationMap = {
   },
   about: {
     description:
-      'Glyph Weaver est un projet amateur inspiré du système de magie de L\'Atelier des Sorciers. Dessinez des anneaux de glyphe, inscrivez des sigils et des signes, et regardez vos sorts prendre vie à travers l\'encre.',
+      "Glyph Weaver est un projet amateur inspiré du système de magie de L'Atelier des Sorciers. Dessinez des anneaux de glyphe, inscrivez des sigils et des signes, et regardez vos sorts prendre vie à travers l'encre.",
     disclaimer:
-      'Ce projet est un projet amateur non officiel et non affilié. L\'Atelier des Sorciers est créé par Kamome Shirahama et publié par Kodansha.',
+      "Ce projet est un projet amateur non officiel et non affilié. L'Atelier des Sorciers est créé par Kamome Shirahama et publié par Kodansha.",
     license: 'Licence MIT',
   },
   site: {
     title: 'Glyph Weaver — Studio de création de sorts',
     description:
-      'Dessinez des anneaux de glyphe et créez des sorts magiques dans cet outil interactif inspiré du système de magie de L\'Atelier des Sorciers.',
+      "Dessinez des anneaux de glyphe et créez des sorts magiques dans cet outil interactif inspiré du système de magie de L'Atelier des Sorciers.",
   },
 }
 

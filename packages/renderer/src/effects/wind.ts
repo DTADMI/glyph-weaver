@@ -37,7 +37,10 @@ export class WindEffect implements Effect {
     const focus = this.config.focus
     const emissionRate = 0.012 - focus * 0.005
 
-    if (this.emitTimer >= emissionRate && this.particles.activeCount < this.config.ctx.particleCap) {
+    if (
+      this.emitTimer >= emissionRate &&
+      this.particles.activeCount < this.config.ctx.particleCap
+    ) {
       const canvasW = this.config.ctx.canvas.width
       const canvasH = this.config.ctx.canvas.height
       const speed = 100 + force * 200
@@ -62,7 +65,8 @@ export class WindEffect implements Effect {
           alphaMin: 0.15 + force * 0.2,
           alphaMax: 0.35 + force * 0.3,
           vxBase: this.config.direction.x * speed,
-          vyBase: this.config.direction.y * speed + (Math.sin(this.elapsed * 5 + j * 2) * curlAmplitude),
+          vyBase:
+            this.config.direction.y * speed + Math.sin(this.elapsed * 5 + j * 2) * curlAmplitude,
         })
       }
 
@@ -81,7 +85,12 @@ export class WindEffect implements Effect {
   render(): void {
     if (!this.config || !this.particles || !this.program) return
     const gl = this.config.ctx.gl
-    this.particles.render(gl, this.program, this.config.ctx.canvas.width, this.config.ctx.canvas.height)
+    this.particles.render(
+      gl,
+      this.program,
+      this.config.ctx.canvas.width,
+      this.config.ctx.canvas.height,
+    )
   }
 
   dispose(): void {

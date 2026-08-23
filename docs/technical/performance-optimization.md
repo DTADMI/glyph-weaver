@@ -1,17 +1,19 @@
 <!-- CLUSTER-C CANONICAL: NF-root rules. Project-specific delta below. -->
+
 > **Canonical rules/process**: `../../../docs/technical/performance-optimization.md` (NF root). This doc keeps project-specific values/catalog only.
+
 # Performance Optimization
 
 ## SSR Strategy
 
 Glyph Weaver uses React Server Components (RSC) for the Next.js web application. Pages are classified into tiers:
 
-| Tier | Pages | Strategy | Revalidation |
-| --- | --- | --- | --- |
-| Public | Landing, Docs | SSG + ISR | `revalidate = 3600` |
-| Drawing | Canvas Shell | Static shell, client-hydrated canvas | `revalidate = false` |
-| Library | Dictionary, Spells | ISR | `revalidate = 300` |
-| Admin | User management, Analytics | SSR with `force-dynamic` | N/A |
+| Tier    | Pages                      | Strategy                             | Revalidation         |
+| ------- | -------------------------- | ------------------------------------ | -------------------- |
+| Public  | Landing, Docs              | SSG + ISR                            | `revalidate = 3600`  |
+| Drawing | Canvas Shell               | Static shell, client-hydrated canvas | `revalidate = false` |
+| Library | Dictionary, Spells         | ISR                                  | `revalidate = 300`   |
+| Admin   | User management, Analytics | SSR with `force-dynamic`             | N/A                  |
 
 - Public content pages export `revalidate` with a value appropriate to the content change rate.
 - Dynamic routes serving public content implement `generateStaticParams` for high-traffic entries.
@@ -19,12 +21,12 @@ Glyph Weaver uses React Server Components (RSC) for the Next.js web application.
 
 ## Caching Layers
 
-| Layer | Mechanism | Purpose |
-| --- | --- | --- |
-| React | `React.cache()` | Deduplicate expensive data-fetching functions within a render tree |
-| Next.js | `fetch` cache | Automatic HTTP fetch deduplication |
-| Client | `localStorage` / `MemoryStorageAdapter` | Persist project state, strokes, config between sessions |
-| CDN | Vercel Edge Cache | Static assets, ISR pages |
+| Layer   | Mechanism                               | Purpose                                                            |
+| ------- | --------------------------------------- | ------------------------------------------------------------------ |
+| React   | `React.cache()`                         | Deduplicate expensive data-fetching functions within a render tree |
+| Next.js | `fetch` cache                           | Automatic HTTP fetch deduplication                                 |
+| Client  | `localStorage` / `MemoryStorageAdapter` | Persist project state, strokes, config between sessions            |
+| CDN     | Vercel Edge Cache                       | Static assets, ISR pages                                           |
 
 - Use `React.cache()` for `createClient()`, `getShellContext()`, `getUser()`, and any function called from multiple components in the same render tree.
 - Configure `experimental.staleTimes` in `next.config.mjs` for client-side cache duration.
@@ -61,14 +63,14 @@ Glyph Weaver uses React Server Components (RSC) for the Next.js web application.
 
 ## Target Budgets
 
-| Metric | Desktop | Mobile |
-| --- | --- | --- |
-| FPS (canvas draw) | >= 55 | >= 30 |
-| FPS (effect preview) | >= 30 | >= 20 |
-| First Contentful Paint | < 1.5s | < 2.5s |
-| Time to Interactive | < 3s | < 5s |
-| Bundle size (tools) | < 50KB gzip | < 50KB gzip |
-| Bundle size (ui) | < 30KB gzip | < 30KB gzip |
+| Metric                 | Desktop     | Mobile      |
+| ---------------------- | ----------- | ----------- |
+| FPS (canvas draw)      | >= 55       | >= 30       |
+| FPS (effect preview)   | >= 30       | >= 20       |
+| First Contentful Paint | < 1.5s      | < 2.5s      |
+| Time to Interactive    | < 3s        | < 5s        |
+| Bundle size (tools)    | < 50KB gzip | < 50KB gzip |
+| Bundle size (ui)       | < 30KB gzip | < 30KB gzip |
 
 ## Tips
 

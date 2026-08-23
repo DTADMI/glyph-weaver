@@ -32,11 +32,12 @@ export class FireEffect implements Effect {
     this.elapsed += dt
     this.emitTimer += dt
 
-    const emissionRate = this.config.gravity > 0.5
-      ? 0.016
-      : 0.04
+    const emissionRate = this.config.gravity > 0.5 ? 0.016 : 0.04
 
-    if (this.emitTimer >= emissionRate && this.particles.activeCount < this.config.ctx.particleCap) {
+    if (
+      this.emitTimer >= emissionRate &&
+      this.particles.activeCount < this.config.ctx.particleCap
+    ) {
       const canvasW = this.config.ctx.canvas.width
       const canvasH = this.config.ctx.canvas.height
       const force = this.config.force
@@ -45,7 +46,8 @@ export class FireEffect implements Effect {
       const speedBase = 60 + force * 120
       const flicker = 1 - this.config.stability
 
-      const count = this.config.gravity > 0.3 ? 4 + Math.floor(force * 6) : 2 + Math.floor(force * 3)
+      const count =
+        this.config.gravity > 0.3 ? 4 + Math.floor(force * 6) : 2 + Math.floor(force * 3)
 
       this.particles.emit({
         count,
@@ -75,7 +77,12 @@ export class FireEffect implements Effect {
   render(): void {
     if (!this.config || !this.particles || !this.program) return
     const gl = this.config.ctx.gl
-    this.particles.render(gl, this.program, this.config.ctx.canvas.width, this.config.ctx.canvas.height)
+    this.particles.render(
+      gl,
+      this.program,
+      this.config.ctx.canvas.width,
+      this.config.ctx.canvas.height,
+    )
   }
 
   dispose(): void {

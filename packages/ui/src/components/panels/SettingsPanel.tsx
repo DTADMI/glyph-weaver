@@ -13,7 +13,10 @@ export function SettingsPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex justify-between items-center p-2 border-b shrink-0" style={{ borderColor: 'var(--gw-border)' }}>
+      <div
+        className="flex justify-between items-center p-2 border-b shrink-0"
+        style={{ borderColor: 'var(--gw-border)' }}
+      >
         <span className="text-xs font-medium" style={{ color: 'var(--gw-accent-gold)' }}>
           {t('panels.settings')}
         </span>
@@ -177,8 +180,13 @@ export function SettingsPanel() {
           <p className="text-xs mt-1 opacity-70" style={{ color: 'var(--gw-text-muted)' }}>
             {t('about.disclaimer')}
           </p>
-          <div className="flex items-center gap-2 mt-2 text-xs" style={{ color: 'var(--gw-text-muted)' }}>
-            <span>{t('app.version')} {config.appVersion}</span>
+          <div
+            className="flex items-center gap-2 mt-2 text-xs"
+            style={{ color: 'var(--gw-text-muted)' }}
+          >
+            <span>
+              {t('app.version')} {config.appVersion}
+            </span>
             <span>{t('about.license')}</span>
           </div>
         </section>

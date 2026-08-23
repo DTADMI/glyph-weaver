@@ -1,9 +1,4 @@
-import type {
-  SpellIR,
-  ElementId,
-  ManifestationId,
-  ParserWarning,
-} from '@glyph-weaver/core'
+import type { SpellIR, ElementId, ManifestationId, ParserWarning } from '@glyph-weaver/core'
 import type { CompilerWarning } from '@glyph-weaver/core/types'
 import type { ComputedParameters } from './parameter-computer.js'
 import type { DirectionResult } from './direction-computer.js'
@@ -64,7 +59,12 @@ export function buildSpellIR(input: SpellBuilderInput): SpellIR {
     quality: qualityResult.quality,
     neatness: qualityResult.neatness,
     warnings,
-    signature: generateSignature(sigilElement, signResult.primaryManifestation, params, qualityResult),
+    signature: generateSignature(
+      sigilElement,
+      signResult.primaryManifestation,
+      params,
+      qualityResult,
+    ),
   }
 }
 

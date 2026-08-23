@@ -1,6 +1,17 @@
 import { describe, it, expect } from 'vitest'
-import { templateMatch, rotationInvariantMatch, computeStructuralScore, computeCompositionalScore } from '../template-matcher.js'
-import type { Point, StrokeTemplate, SymbolCandidate, RecognitionConfig, SigilEntry } from '@glyph-weaver/core'
+import {
+  templateMatch,
+  rotationInvariantMatch,
+  computeStructuralScore,
+  computeCompositionalScore,
+} from '../template-matcher.js'
+import type {
+  Point,
+  StrokeTemplate,
+  SymbolCandidate,
+  RecognitionConfig,
+  SigilEntry,
+} from '@glyph-weaver/core'
 
 const testConfig: RecognitionConfig = {
   minConfidence: 0.65,
@@ -17,24 +28,38 @@ const testConfig: RecognitionConfig = {
 function templateFromPoints(strokes: Point[][]): StrokeTemplate {
   return {
     sourceAspectRatio: 1,
-    strokes: strokes.map((s) =>
-      s.map((p) => ({ x: (p.x + 1) / 2, y: (p.y + 1) / 2 })),
-    ),
+    strokes: strokes.map((s) => s.map((p) => ({ x: (p.x + 1) / 2, y: (p.y + 1) / 2 }))),
   }
 }
 
 function makeVerticalLine(): Point[][] {
-  return [[{ x: 0, y: -0.8 }, { x: 0, y: 0.8 }]]
+  return [
+    [
+      { x: 0, y: -0.8 },
+      { x: 0, y: 0.8 },
+    ],
+  ]
 }
 
 function makeHorizontalLine(): Point[][] {
-  return [[{ x: -0.8, y: 0 }, { x: 0.8, y: 0 }]]
+  return [
+    [
+      { x: -0.8, y: 0 },
+      { x: 0.8, y: 0 },
+    ],
+  ]
 }
 
 function makeCross(): Point[][] {
   return [
-    [{ x: 0, y: -0.8 }, { x: 0, y: 0.8 }],
-    [{ x: -0.8, y: 0 }, { x: 0.8, y: 0 }],
+    [
+      { x: 0, y: -0.8 },
+      { x: 0, y: 0.8 },
+    ],
+    [
+      { x: -0.8, y: 0 },
+      { x: 0.8, y: 0 },
+    ],
   ]
 }
 
@@ -78,7 +103,12 @@ describe('templateMatch', () => {
 
   it('returns some score for slightly offset shapes', () => {
     const points = makeVerticalLine()
-    const offset: Point[][] = [[{ x: 0.02, y: -0.8 }, { x: 0.02, y: 0.8 }]]
+    const offset: Point[][] = [
+      [
+        { x: 0.02, y: -0.8 },
+        { x: 0.02, y: 0.8 },
+      ],
+    ]
     const template = templateFromPoints(points)
     const score = templateMatch(offset, template, 64, 3)
     expect(score).toBeGreaterThan(0.3)

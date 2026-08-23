@@ -1,4 +1,5 @@
-export type FeatureFlag = 'enableMultiRing'
+export type FeatureFlag =
+  | 'enableMultiRing'
   | 'enableMultiSigil'
   | 'enableDSL'
   | 'enableExperimentalEffects'

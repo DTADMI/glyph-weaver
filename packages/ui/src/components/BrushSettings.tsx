@@ -13,10 +13,7 @@ export function BrushSettings({ settings, onChange }: BrushSettingsProps) {
 
   return (
     <div className="flex flex-col gap-3 p-2">
-      <span
-        className="text-xs font-medium px-1"
-        style={{ color: 'var(--gw-text-muted)' }}
-      >
+      <span className="text-xs font-medium px-1" style={{ color: 'var(--gw-text-muted)' }}>
         {t('labels.brushSettings')}
       </span>
 
@@ -37,7 +34,8 @@ export function BrushSettings({ settings, onChange }: BrushSettingsProps) {
 
       <label className="flex flex-col gap-1">
         <span className="text-xs" style={{ color: 'var(--gw-text-secondary)' }}>
-          {t('brush.opacity')}: {Math.round(settings.opacity * 100)}{t('labels.percent')}
+          {t('brush.opacity')}: {Math.round(settings.opacity * 100)}
+          {t('labels.percent')}
         </span>
         <input
           type="range"
@@ -71,9 +69,7 @@ export function BrushSettings({ settings, onChange }: BrushSettingsProps) {
         </span>
         <select
           value={settings.inkType}
-          onChange={(e) =>
-            onChange({ inkType: e.target.value as BrushSettings['inkType'] })
-          }
+          onChange={(e) => onChange({ inkType: e.target.value as BrushSettings['inkType'] })}
           className="text-xs p-1.5 rounded border bg-transparent"
           style={{
             color: 'var(--gw-text-primary)',

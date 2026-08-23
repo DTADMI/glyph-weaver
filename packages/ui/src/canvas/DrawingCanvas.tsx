@@ -94,20 +94,17 @@ export function DrawingCanvas() {
     redrawAll()
   }, [redrawAll])
 
-  const getCanvasPoint = useCallback(
-    (e: React.PointerEvent<HTMLCanvasElement>): Point => {
-      const canvas = canvasRef.current
-      if (!canvas) return { x: 0, y: 0 }
-      const rect = canvas.getBoundingClientRect()
-      return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-        t: Date.now(),
-        pressure: e.pressure || 0.5,
-      }
-    },
-    [],
-  )
+  const getCanvasPoint = useCallback((e: React.PointerEvent<HTMLCanvasElement>): Point => {
+    const canvas = canvasRef.current
+    if (!canvas) return { x: 0, y: 0 }
+    const rect = canvas.getBoundingClientRect()
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      t: Date.now(),
+      pressure: e.pressure || 0.5,
+    }
+  }, [])
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent<HTMLCanvasElement>) => {
@@ -191,7 +188,10 @@ export function DrawingCanvas() {
   const cursorStyle = getCursorStyle(currentTool)
 
   return (
-    <div className="relative w-full h-full overflow-hidden" style={{ background: 'var(--gw-canvas-bg)' }}>
+    <div
+      className="relative w-full h-full overflow-hidden"
+      style={{ background: 'var(--gw-canvas-bg)' }}
+    >
       <canvas
         ref={canvasRef}
         className="absolute inset-0 touch-none"

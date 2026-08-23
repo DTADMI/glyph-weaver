@@ -65,7 +65,14 @@ export function Header({
           aria-label={t('buttons.undo')}
           title={`${t('buttons.undo')} (Ctrl+Z)`}
         >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
             <path d="M 4 7 L 1 10 L 4 13" />
             <path d="M 1 10 H 10 Q 15 10 15 5 V 4" />
           </svg>
@@ -79,7 +86,14 @@ export function Header({
           aria-label={t('buttons.redo')}
           title={`${t('buttons.redo')} (Ctrl+Shift+Z)`}
         >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
             <path d="M 14 7 L 17 10 L 14 13" />
             <path d="M 17 10 H 8 Q 3 10 3 5 V 4" />
           </svg>
@@ -132,7 +146,12 @@ export function Header({
           {theme === 'dark' ? (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
               <circle cx="9" cy="9" r="4" />
-              <path d="M 9 1 V 3 M 9 15 V 17 M 1 9 H 3 M 15 9 H 17 M 3.3 3.3 L 4.7 4.7 M 13.3 13.3 L 14.7 14.7 M 3.3 14.7 L 4.7 13.3 M 13.3 4.7 L 14.7 3.3" stroke="currentColor" strokeWidth="1.5" fill="none" />
+              <path
+                d="M 9 1 V 3 M 9 15 V 17 M 1 9 H 3 M 15 9 H 17 M 3.3 3.3 L 4.7 4.7 M 13.3 13.3 L 14.7 14.7 M 3.3 14.7 L 4.7 13.3 M 13.3 4.7 L 14.7 3.3"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
             </svg>
           ) : (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
@@ -150,9 +169,24 @@ export function Header({
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
             <circle cx="9" cy="9" r="2" />
-            <path d="M 9 1 V 4 M 9 14 V 17 M 1 9 H 4 M 14 9 H 17" stroke="currentColor" strokeWidth="1.5" fill="none" />
-            <path d="M 3.3 3.3 L 5.4 5.4 M 12.6 12.6 L 14.7 14.7" stroke="currentColor" strokeWidth="1" fill="none" />
-            <path d="M 3.3 14.7 L 5.4 12.6 M 12.6 5.4 L 14.7 3.3" stroke="currentColor" strokeWidth="1" fill="none" />
+            <path
+              d="M 9 1 V 4 M 9 14 V 17 M 1 9 H 4 M 14 9 H 17"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <path
+              d="M 3.3 3.3 L 5.4 5.4 M 12.6 12.6 L 14.7 14.7"
+              stroke="currentColor"
+              strokeWidth="1"
+              fill="none"
+            />
+            <path
+              d="M 3.3 14.7 L 5.4 12.6 M 12.6 5.4 L 14.7 3.3"
+              stroke="currentColor"
+              strokeWidth="1"
+              fill="none"
+            />
           </svg>
         </button>
       </div>

@@ -10,7 +10,7 @@ export const signs: SignEntry[] = [
     semantic: {
       manifestation: 'column',
       directionMode: 'orientation',
-      force: 0.10,
+      force: 0.1,
       focus: 0.08,
       spread: -0.04,
       range: 0.12,
@@ -20,8 +20,8 @@ export const signs: SignEntry[] = [
       sourceAspectRatio: 1,
       strokes: [
         [
-          { x: 0.50, y: 0.05 },
-          { x: 0.50, y: 0.95 },
+          { x: 0.5, y: 0.05 },
+          { x: 0.5, y: 0.95 },
         ],
       ],
     },
@@ -45,9 +45,9 @@ export const signs: SignEntry[] = [
       sourceAspectRatio: 1,
       strokes: [
         [
-          { x: 0.30, y: 0.70 },
-          { x: 0.50, y: 0.30 },
-          { x: 0.70, y: 0.70 },
+          { x: 0.3, y: 0.7 },
+          { x: 0.5, y: 0.3 },
+          { x: 0.7, y: 0.7 },
         ],
       ],
     },
@@ -63,7 +63,7 @@ export const signs: SignEntry[] = [
       directionMode: 'inward',
       force: 0.06,
       focus: 0.14,
-      spread: -0.10,
+      spread: -0.1,
       range: -0.02,
       lifetimeBias: 0.0,
     },
@@ -71,14 +71,14 @@ export const signs: SignEntry[] = [
       sourceAspectRatio: 1,
       strokes: [
         [
-          { x: 0.10, y: 0.50 },
-          { x: 0.50, y: 0.80 },
-          { x: 0.90, y: 0.50 },
+          { x: 0.1, y: 0.5 },
+          { x: 0.5, y: 0.8 },
+          { x: 0.9, y: 0.5 },
         ],
         [
-          { x: 0.10, y: 0.50 },
-          { x: 0.50, y: 0.20 },
-          { x: 0.90, y: 0.50 },
+          { x: 0.1, y: 0.5 },
+          { x: 0.5, y: 0.2 },
+          { x: 0.9, y: 0.5 },
         ],
       ],
     },

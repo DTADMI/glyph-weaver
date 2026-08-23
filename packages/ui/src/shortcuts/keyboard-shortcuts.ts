@@ -54,7 +54,7 @@ export function useKeyboardShortcuts(
 
       for (const shortcut of shortcuts) {
         const keyMatch = e.key === shortcut.key || e.code === shortcut.key
-        const ctrlMatch = shortcut.ctrlKey ? (e.ctrlKey || e.metaKey) : !e.ctrlKey && !e.metaKey
+        const ctrlMatch = shortcut.ctrlKey ? e.ctrlKey || e.metaKey : !e.ctrlKey && !e.metaKey
         const shiftMatch = shortcut.shiftKey ? e.shiftKey : !e.shiftKey
         const altMatch = shortcut.altKey ? e.altKey : !e.altKey
 
@@ -73,7 +73,10 @@ export function useKeyboardShortcuts(
   }, [shortcuts, isEditable])
 }
 
-export function getShortcutLabel(action: string, shortcuts: ShortcutAction[] = DEFAULT_SHORTCUTS): string {
+export function getShortcutLabel(
+  action: string,
+  shortcuts: ShortcutAction[] = DEFAULT_SHORTCUTS,
+): string {
   const found = shortcuts.find((s) => s.action === action)
   if (!found) return ''
 

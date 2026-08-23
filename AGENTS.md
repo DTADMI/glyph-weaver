@@ -56,7 +56,8 @@ Drawing Canvas → Parser → GlyphAST → Compiler → SpellIR → Renderer →
 
 ## Fan Project Status
 
-This project is inspired by the magic system in *Witch Hat Atelier* (Kamome Shirahama / Kodansha). It is an unofficial, unaffiliated fan project. Do not:
+This project is inspired by the magic system in _Witch Hat Atelier_ (Kamome Shirahama / Kodansha). It is an unofficial, unaffiliated fan project. Do not:
+
 - Use copyrighted manga/anime artwork or panels as assets
 - Use "Witch Hat Atelier" in product branding
 - Claim official association

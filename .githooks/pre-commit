@@ -2,11 +2,11 @@
 # Glyph Weaver pre-commit hook
 # Invokes PowerShell script for checks
 
-DIR=$(cd "$(dirname "$0")" && pwd)
+GIT_ROOT=$(cd "$(dirname "$0")/../.." && pwd -W)
 if command -v pwsh.exe >/dev/null 2>&1; then
-    pwsh.exe -NoProfile -File "$DIR/pre-commit.ps1"
+    pwsh.exe -NoProfile -File "$GIT_ROOT/.githooks/pre-commit.ps1"
 elif command -v pwsh >/dev/null 2>&1; then
-    pwsh -NoProfile -File "$DIR/pre-commit.ps1"
+    pwsh -NoProfile -File "$GIT_ROOT/.githooks/pre-commit.ps1"
 else
     echo "WARNING: pwsh not found, skipping pre-commit checks"
     exit 0

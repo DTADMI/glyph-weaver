@@ -37,7 +37,10 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           transform: open ? 'translateX(0)' : 'translateX(-100%)',
         }}
       >
-        <div className="flex justify-between items-center p-2 border-b lg:hidden" style={{ borderColor: 'var(--gw-border)' }}>
+        <div
+          className="flex justify-between items-center p-2 border-b lg:hidden"
+          style={{ borderColor: 'var(--gw-border)' }}
+        >
           <span className="text-xs font-medium" style={{ color: 'var(--gw-text-secondary)' }}>
             {t('app.name')}
           </span>
@@ -83,7 +86,16 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <rect x="2" y="1" width="12" height="14" rx="1" stroke="currentColor" strokeWidth="1.5" fill="none" />
+              <rect
+                x="2"
+                y="1"
+                width="12"
+                height="14"
+                rx="1"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
               <line x1="2" y1="5" x2="14" y2="5" stroke="currentColor" strokeWidth="1" />
               <line x1="6" y1="5" x2="6" y2="15" stroke="currentColor" strokeWidth="1" />
             </svg>
@@ -114,8 +126,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M 8 1 L 10.5 5.5 L 15 6.5 L 11.5 10 L 12 14.5 L 8 12.5 L 4 14.5 L 4.5 10 L 1 6.5 L 5.5 5.5 Z"
-                stroke="currentColor" strokeWidth="1.5" fill="none" />
+              <path
+                d="M 8 1 L 10.5 5.5 L 15 6.5 L 11.5 10 L 12 14.5 L 8 12.5 L 4 14.5 L 4.5 10 L 1 6.5 L 5.5 5.5 Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
             </svg>
             {t('panels.spellState')}
           </button>
@@ -130,7 +146,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
               <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.5" fill="none" />
-              <path d="M 8 1 V 3 M 8 13 V 15 M 1 8 H 3 M 13 8 H 15 M 3.05 3.05 L 4.46 4.46 M 11.54 11.54 L 12.95 12.95 M 3.05 12.95 L 4.46 11.54 M 11.54 4.46 L 12.95 3.05" stroke="currentColor" strokeWidth="1.5" fill="none" />
+              <path
+                d="M 8 1 V 3 M 8 13 V 15 M 1 8 H 3 M 13 8 H 15 M 3.05 3.05 L 4.46 4.46 M 11.54 11.54 L 12.95 12.95 M 3.05 12.95 L 4.46 11.54 M 11.54 4.46 L 12.95 3.05"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
             </svg>
             {t('panels.settings')}
           </button>

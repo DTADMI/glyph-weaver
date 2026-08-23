@@ -12,7 +12,8 @@ export const sampleSpells: SampleSpellEntry[] = [
   {
     id: 'fire-column',
     displayName: 'Fire Column',
-    description: 'Fire sigil with a column sign at the bottom. Produces a directional beam of fire.',
+    description:
+      'Fire sigil with a column sign at the bottom. Produces a directional beam of fire.',
     element: 'fire',
     manifestations: ['column'],
     strokes: [],
@@ -28,7 +29,8 @@ export const sampleSpells: SampleSpellEntry[] = [
   {
     id: 'wind-convergence',
     displayName: 'Focusing Wind',
-    description: 'Wind sigil with convergence signs. Compresses wind into a narrow, focused stream.',
+    description:
+      'Wind sigil with convergence signs. Compresses wind into a narrow, focused stream.',
     element: 'wind',
     manifestations: ['convergence'],
     strokes: [],
