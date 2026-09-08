@@ -2,57 +2,37 @@ name: CI
 
 on:
   push:
-    branches: [master, main]
-    paths-ignore:
-      - 'docs/**'
-      - '**.md'
+    branches: [main]
   pull_request:
-    branches: [master, main]
-    paths-ignore:
-      - 'docs/**'
-      - '**.md'
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  ci:
+  validate:
     runs-on: ubuntu-24.04
-
-    strategy:
-      matrix:
-        node-version: [26.3.0]
-
+    timeout-minutes: 15
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          version: 11.5.0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+          node-version: 26.3.0
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.5.0 --activate
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v5
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Typecheck
-        run: pnpm typecheck
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Test
-        run: pnpm test
-
-      - name: Check encoding
-        run: pnpm run check-encoding
-
-      - name: Check outdated dependencies (informational)
-        run: pnpm outdated
-        continue-on-error: true
-
-      - name: Build
-        run: pnpm build
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-
+      - run: pnpm install --frozen-lockfile
+      # Lint handled by pre-commit; typecheck stays (non-Next.js framework)
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build

@@ -3,6 +3,12 @@
 # Invokes PowerShell script for checks
 
 GIT_ROOT=$(cd "$(dirname "$0")/../.." && pwd -W)
+
+# Workflow YAML validation (Node.js, no deps needed)
+if [ -f "$GIT_ROOT/scripts/validate-workflows.mjs" ]; then
+  node "$GIT_ROOT/scripts/validate-workflows.mjs" || exit 1
+fi
+
 if command -v pwsh.exe >/dev/null 2>&1; then
     pwsh.exe -NoProfile -File "$GIT_ROOT/.githooks/pre-commit.ps1"
 elif command -v pwsh >/dev/null 2>&1; then
