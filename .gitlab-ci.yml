@@ -39,6 +39,7 @@ validate:
 build:
   <<: *node_base
   stage: build
+  needs: [validate]
   script:
     - pnpm install --frozen-lockfile
     - pnpm build
