@@ -2,7 +2,8 @@
 # Glyph Weaver pre-commit hook
 # Invokes PowerShell script for checks
 
-GIT_ROOT=$(cd "$(dirname "$0")/../.." && pwd -W)
+# Robust repo-root resolution (works regardless of how git invokes the hook)
+GIT_ROOT=$(git rev-parse --show-toplevel)
 
 # Workflow YAML validation (Node.js, no deps needed)
 if [ -f "$GIT_ROOT/scripts/validate-workflows.mjs" ]; then
