@@ -4,7 +4,7 @@
 
 The Glyph Weaver renderer (Milestone 5, `@glyph-weaver/renderer`) generates WebGL2 particle effects that
 visualise spells based on the `SpellIR` intermediate representation. Rendering is organised into two
-orthogonal layers — **element effects** (visual style tied to the spell's element) and **manifestation
+orthogonal layers - **element effects** (visual style tied to the spell's element) and **manifestation
 effects** (spatial behaviour tied to the manifestation type). The `EffectEngine` orchestrates both
 layers and manages the render lifecycle.
 
@@ -83,25 +83,25 @@ unnecessary WebGL shader recompilation and particle system reallocation.
 
 ## WebGL Helpers
 
-- `createWebGLContext(canvas)` — obtains WebGL2 context with high-performance preference, enables
+- `createWebGLContext(canvas)` - obtains WebGL2 context with high-performance preference, enables
   blending, sets transparent clear colour.
-- `createShaderProgram(gl, vertexSrc, fragmentSrc)` — compiles vertex and fragment shaders, links
+- `createShaderProgram(gl, vertexSrc, fragmentSrc)` - compiles vertex and fragment shaders, links
   program, handles errors with descriptive messages.
-- `createQuad(gl)` — creates a VAO with full-screen quad geometry (position + texcoord attributes).
+- `createQuad(gl)` - creates a VAO with full-screen quad geometry (position + texcoord attributes).
 
 ## Direction Mapping
 
 The `direction.ts` module provides 3D-to-2D projection utilities:
 
-- `screenDirection(direction3D)` — converts `Direction3D` to a normalised 2D screen-space vector.
-- `applyTilt(x, y, tiltDeg)` — applies z-axis tilt rotation to simulate 3D perspective.
-- `project3Dto2D(point3D, camera)` — conventional perspective projection with field-of-view camera.
+- `screenDirection(direction3D)` - converts `Direction3D` to a normalised 2D screen-space vector.
+- `applyTilt(x, y, tiltDeg)` - applies z-axis tilt rotation to simulate 3D perspective.
+- `project3Dto2D(point3D, camera)` - conventional perspective projection with field-of-view camera.
 
 ## Portal Plane
 
 The `portal-plane.ts` module handles ring-to-ellipse projection:
 
-- `projectPortal(ring, direction?)` — converts a `RingCandidate` into a projected 2D ellipse with
+- `projectPortal(ring, direction?)` - converts a `RingCandidate` into a projected 2D ellipse with
   centre, radii, rotation, and tilt parameters.
-- `portalOutDirection(direction)` — maps `Direction3D` to a unit-length 2D vector for particle
+- `portalOutDirection(direction)` - maps `Direction3D` to a unit-length 2D vector for particle
   emission direction.

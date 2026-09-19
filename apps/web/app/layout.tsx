@@ -4,7 +4,7 @@ import { resolveLocale } from '@glyph-weaver/ui'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Glyph Weaver — Spell Crafting Studio',
+  title: 'Glyph Weaver - Spell Crafting Studio',
   description:
     'Draw glyph rings and craft magic spells in this interactive tool inspired by the Witch Hat Atelier magic system.',
   viewport: 'width=device-width, initial-scale=1, minimum-scale=1',

@@ -1,4 +1,4 @@
-# AGENTS.md — Glyph Weaver
+# AGENTS.md - Glyph Weaver
 
 Project-specific rules and guidance for coding agents.
 

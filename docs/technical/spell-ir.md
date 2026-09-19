@@ -19,7 +19,7 @@ The SpellIR is the compiled spell behavior representation produced by the compil
 
 | `valid` | `active` | `prepared` | Meaning                                                    |
 | ------- | -------- | ---------- | ---------------------------------------------------------- |
-| `false` | `false`  | `false`    | Compilation failed — invalid spell                         |
+| `false` | `false`  | `false`    | Compilation failed - invalid spell                         |
 | `true`  | `false`  | `false`    | Compiled but not armed (rare intermediate state)           |
 | `true`  | `false`  | `true`     | Spell compiled and armed, awaiting activation              |
 | `true`  | `true`   | `false`    | Spell is currently active (left prepared after activation) |

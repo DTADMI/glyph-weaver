@@ -46,9 +46,9 @@ pnpm run-all-checks
 
 ## Docs
 
-- [Project Specification](docs/project-spec.md) — Full feature catalog, architecture, requirements
-- [Action Plan](docs/action-plan.md) — Milestone-based implementation plan
-- [AGENTS.md](AGENTS.md) — Project rules for coding agents
+- [Project Specification](docs/project-spec.md) - Full feature catalog, architecture, requirements
+- [Action Plan](docs/action-plan.md) - Milestone-based implementation plan
+- [AGENTS.md](AGENTS.md) - Project rules for coding agents
 
 ## License
 

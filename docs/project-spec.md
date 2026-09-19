@@ -1,4 +1,4 @@
-# Glyph Weaver — Project Specification
+# Glyph Weaver - Project Specification
 
 ## Overview
 
@@ -6,7 +6,7 @@ Glyph Weaver is a tool for crafting and manipulating symbolic glyph systems, run
 
 ## Source Material Research
 
-### Witch Hat Atelier — The Manga (Source Canon)
+### Witch Hat Atelier - The Manga (Source Canon)
 
 - **Creator**: Kamome Shirahama (Kodansha, 2016–present, 16 volumes, 7.5M+ copies)
 - **Magic System**: Magic is performed by drawing precise glyphs with "conjuring ink" on special paper. The act of drawing IS the spell.
@@ -22,7 +22,7 @@ Glyph Weaver is a tool for crafting and manipulating symbolic glyph systems, run
 
 - **Artistic Philosophy**: Shirahama draws with traditional wooden ink pens on paper. The art draws from Renaissance art, Art Nouveau, Art Deco, American comics, and bande dessinée. The series is praised for diversity in casting and themes of accessibility, education, and self-discovery.
 
-### Spell Simulator (ytnrvdf/wha-spell-simulator) — Reference Implementation
+### Spell Simulator (ytnrvdf/wha-spell-simulator) - Reference Implementation
 
 - **Stack**: JavaScript, Vite, HTML5 Canvas, Node.js test suite, Playwright E2E
 - **Architecture**: Parser → GlyphAST → Compiler → SpellIR → Renderer pipeline
@@ -41,8 +41,8 @@ Glyph Weaver is a tool for crafting and manipulating symbolic glyph systems, run
   - GlyphAST and SpellIR contract documentation
 
 - **Limitations / Gaps Identified**:
-  1. Single ring only — no nested or multi-ring spells
-  2. Single sigil only — no multi-element mixing
+  1. Single ring only - no nested or multi-ring spells
+  2. Single sigil only - no multi-element mixing
   3. Template-based recognition is fragile and limited (5 sigils, 3 signs)
   4. No DSL for defining spells programmatically
   5. No undo/redo stack (single-step undo only)
@@ -62,7 +62,7 @@ Glyph Weaver is a tool for crafting and manipulating symbolic glyph systems, run
   19. Recognition can't handle cursive/flowing strokes well
   20. No procedural glyph generation
 
-### ppabba101 Fork — Additional Features
+### ppabba101 Fork - Additional Features
 
 - WHA-DSL primitives (domain-specific language for defining spells textually)
 - LLM-as-judge glyph interpretation using SambaNova (streaming)
@@ -330,9 +330,9 @@ Effects Canvas output
 | Project                       | URL                                              | Stars       | License | Stack            |
 | ----------------------------- | ------------------------------------------------ | ----------- | ------- | ---------------- |
 | ytnrvdf/wha-spell-simulator   | https://github.com/ytnrvdf/wha-spell-simulator   | 288         | MIT     | JS, Vite, Canvas |
-| ppabba101/wha-spell-simulator | https://github.com/ppabba101/wha-spell-simulator | 0           | —       | JS, SambaNova    |
-| Witch Hat Atelier (manga)     | Kodansha                                         | 7.5M copies | —       | Print            |
-| Witch Hat Atelier (anime)     | Bug Films, April 2026                            | —           | —       | Crunchyroll      |
+| ppabba101/wha-spell-simulator | https://github.com/ppabba101/wha-spell-simulator | 0           | -       | JS, SambaNova    |
+| Witch Hat Atelier (manga)     | Kodansha                                         | 7.5M copies | -       | Print            |
+| Witch Hat Atelier (anime)     | Bug Films, April 2026                            | -           | -       | Crunchyroll      |
 
 ## Compliance Notes
 

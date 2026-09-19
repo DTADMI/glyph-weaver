@@ -1,4 +1,4 @@
-# Action Plan — Glyph Weaver
+# Action Plan - Glyph Weaver
 
 ## Legend
 

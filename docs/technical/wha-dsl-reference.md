@@ -1,6 +1,6 @@
 # WHA-DSL Reference
 
-**W**eaver **H**ieroglyphic **A**lgebra — Domain-Specific Language for defining glyph spells textually.
+**W**eaver **H**ieroglyphic **A**lgebra - Domain-Specific Language for defining glyph spells textually.
 
 ## Grammar
 

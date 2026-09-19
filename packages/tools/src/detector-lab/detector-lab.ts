@@ -77,7 +77,7 @@ export class DetectorLab {
     const confidence = sigil?.confidence ?? 0
 
     if (!this.dictionary) {
-      warnings.push('No dictionary loaded — results are from AST only')
+      warnings.push('No dictionary loaded - results are from AST only')
     }
 
     const endTime = performance.now()

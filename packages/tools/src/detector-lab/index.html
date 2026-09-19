@@ -306,7 +306,7 @@
 
         const warnings = []
         if (totalStrokes < 2) warnings.push('Minimum 2 strokes recommended for detection')
-        if (totalPoints < 10) warnings.push('Low point count — strokes may be too short')
+        if (totalPoints < 10) warnings.push('Low point count - strokes may be too short')
         document.getElementById('warningsList').innerHTML = warnings
           .map((w) => '<div class="warn">' + w + '</div>')
           .join('')

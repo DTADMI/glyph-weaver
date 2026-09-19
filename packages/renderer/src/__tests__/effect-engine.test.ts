@@ -35,7 +35,7 @@ function createMockSpellIR(overrides: Partial<SpellIR> = {}): SpellIR {
 }
 
 describe('EffectEngine', () => {
-  // Tests that do NOT require a real canvas — we test via mocks and the factory methods.
+  // Tests that do NOT require a real canvas - we test via mocks and the factory methods.
   // EffectEngine constructor requires a real canvas for WebGL, so we test minimal surface.
 
   describe('factory methods', () => {

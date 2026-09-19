@@ -1,9 +1,9 @@
-# Glyph Weaver — Spell Glyph Crafting Library
+# Glyph Weaver - Spell Glyph Crafting Library
 
 **Owner:** Nebula Forge Digital Studio  
 **Last Updated:** 2025-07-16
 
-A monorepo of TypeScript libraries for creating, parsing, compiling, and rendering magical spell glyphs. Core types, a stroke-to-glyph parser, a glyph compiler, a DSL interpreter, and a WebGL renderer — designed as the magic system foundation for interactive experiences.
+A monorepo of TypeScript libraries for creating, parsing, compiling, and rendering magical spell glyphs. Core types, a stroke-to-glyph parser, a glyph compiler, a DSL interpreter, and a WebGL renderer - designed as the magic system foundation for interactive experiences.
 
 ---
 
@@ -107,7 +107,7 @@ A combination of glyphs producing an effect. `Fire + Push = Fireball`
 
 ### WHA-DSL
 
-The **W**eaver's **H**igh **A**rcanum **D**omain **S**pecific **L**anguage — a human-readable language for defining and composing spells.
+The **W**eaver's **H**igh **A**rcanum **D**omain **S**pecific **L**anguage - a human-readable language for defining and composing spells.
 
 ```
 spell Fireball {
@@ -133,7 +133,7 @@ pnpm run-all-checks   # typecheck + lint + test + build
 
 | Problem                     | Solution                                                          |
 | --------------------------- | ----------------------------------------------------------------- |
-| `pnpm build` fails          | Run `pnpm install` first — package interdependencies need linking |
+| `pnpm build` fails          | Run `pnpm install` first - package interdependencies need linking |
 | Web demo shows nothing      | Ensure `pnpm build` completed (packages must be built)            |
 | TypeScript errors in editor | Restart TS server after `pnpm build`                              |
 

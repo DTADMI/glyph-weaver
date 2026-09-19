@@ -91,7 +91,7 @@ import { FeatureFlagGate } from '@glyph-weaver/ui'
 
 ## Guardrails
 
-- Flags default to `false` — no experimental or incomplete features ship by default
+- Flags default to `false` - no experimental or incomplete features ship by default
 - Flag overrides are in-memory only and reset on page reload
 - `FeatureFlagGate` renders nothing (or configured fallback) when a flag is disabled
 - All new pre-release features must be gated behind a flag

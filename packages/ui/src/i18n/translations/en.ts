@@ -166,7 +166,7 @@ const en: TranslationMap = {
     license: 'MIT License',
   },
   site: {
-    title: 'Glyph Weaver — Spell Crafting Studio',
+    title: 'Glyph Weaver - Spell Crafting Studio',
     description:
       'Draw glyph rings and craft magic spells in this interactive tool inspired by the Witch Hat Atelier magic system.',
   },

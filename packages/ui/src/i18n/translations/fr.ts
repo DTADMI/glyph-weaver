@@ -166,7 +166,7 @@ const fr: TranslationMap = {
     license: 'Licence MIT',
   },
   site: {
-    title: 'Glyph Weaver — Studio de création de sorts',
+    title: 'Glyph Weaver - Studio de création de sorts',
     description:
       "Dessinez des anneaux de glyphe et créez des sorts magiques dans cet outil interactif inspiré du système de magie de L'Atelier des Sorciers.",
   },

@@ -1,4 +1,4 @@
-# Dictionary Authoring — Glyph Weaver
+# Dictionary Authoring - Glyph Weaver
 
 ## Overview
 
