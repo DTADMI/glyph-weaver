@@ -9,7 +9,7 @@ steps:
   validate:
     image: node:26
     commands:
-      - npm install -g pnpm@11.5.0
+      - npm install -g pnpm@12.8.1
       - pnpm install --frozen-lockfile
       - pnpm typecheck
       - pnpm lint
@@ -19,6 +19,6 @@ steps:
     image: node:26
     depends_on: [validate]
     commands:
-      - npm install -g pnpm@11.5.0
+      - npm install -g pnpm@12.8.1
       - pnpm build
 
