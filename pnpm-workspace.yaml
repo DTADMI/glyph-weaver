@@ -1,6 +1,10 @@
 packages:
   - 'packages/*'
   - 'apps/*'
+overrides:
+  vite: '>=6.4.3'
+  postcss: '^8.5.23'
+  vitest: '^3.2.6'
 allowBuilds:
   esbuild: true
   sharp: true
