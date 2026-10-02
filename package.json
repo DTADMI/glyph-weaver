@@ -17,7 +17,7 @@
     "test": "vitest run",
     "run-all-checks": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
     "check-encoding": "pwsh scripts/check-encoding.ps1",
-    "clean": "pnpm -r exec rm -rf dist .tsbuildinfo"
+    "clean": "pnpm -r exec rm -rf dist *.tsbuildinfo"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
