@@ -11,6 +11,7 @@ import { SettingsPanel } from './panels/SettingsPanel.js'
 import { FeatureFlagGate } from './FeatureFlagGate.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
+import { OnboardingTour } from './OnboardingTour.js'
 import { useStore } from '../state/store.js'
 import { useKeyboardShortcuts } from '../shortcuts/keyboard-shortcuts.js'
 import { useI18n } from '../i18n/index.js'
@@ -173,6 +174,8 @@ export function GlyphWeaverShell() {
           </div>
         )}
       </ErrorBoundary>
+
+      <OnboardingTour />
     </div>
   )
 }

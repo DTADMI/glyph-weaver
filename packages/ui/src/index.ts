@@ -1,4 +1,5 @@
 export { GlyphWeaverShell } from './components/Shell.js'
+export { OnboardingTour } from './components/OnboardingTour.js'
 export { Header } from './components/Header.js'
 export { Sidebar } from './components/Sidebar.js'
 export { CanvasArea } from './components/CanvasArea.js'
