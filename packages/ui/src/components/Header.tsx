@@ -109,7 +109,7 @@ export function Header({
                   : spellState.status === 'prepared'
                     ? 'var(--gw-warning)'
                     : 'var(--gw-text-muted)',
-              color: '#fff',
+              color: 'var(--gw-bg-primary)',
             }}
           >
             {spellState.status === 'active'

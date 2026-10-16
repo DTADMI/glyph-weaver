@@ -100,7 +100,7 @@ export function OnboardingTour() {
             type="button"
             onClick={() => (isLast ? dismiss() : setStep((value) => value + 1))}
             className="rounded px-4 py-1.5 text-sm font-medium"
-            style={{ backgroundColor: 'var(--gw-accent-purple)', color: 'var(--gw-text-primary)' }}
+            style={{ backgroundColor: 'var(--gw-accent-purple)', color: '#fff' }}
           >
             {isLast ? t('onboarding.done') : t('onboarding.next')}
           </button>

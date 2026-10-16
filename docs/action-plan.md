@@ -229,7 +229,7 @@
 | 7.3.1 | Loading states and skeletons | 🟢     | Spinner + skeleton components   |
 | 7.3.2 | Error boundaries             | 🟢     | Fallback UI, retry button       |
 | 7.3.3 | Performance optimization     | 🟢     | debounce, throttle, FPS monitor |
-| 7.3.4 | Accessibility audit          | 🔵     | WCAG 2.1 AA (deferred)          |
+| 7.3.4 | Accessibility audit          | 🟢     | Fait 2026-10-16 : contraste WCAG AA recalcule et corrige sur les deux themes (sombre : text-muted, error, success ; clair : text-muted, accent-gold, success, warning, error), pastille d'etat et bouton d'onboarding repasses au-dessus de 4.5:1. Garde `theme-contrast.test.ts` (10 tests) qui recalcule les ratios des deux fichiers CSS et echoue sous le seuil, et detecte la derive entre `theme.css` et `globals.css`. Detail : `docs/technical/accessibility-audit.md`. Limite assumee : le canevas reste sans equivalent lecteur d'ecran. |
 | 7.3.5 | Onboarding tutorial          | 🟢     | Fait 2026-10-16 : `OnboardingTour` (4 etapes : bienvenue, tracer, encrer, valider), dialogue accessible (`role=dialog`, Escape), affiche une seule fois (localStorage), i18n EN/FR. Verifie en navigateur : affichage, progression, derniere etape, et persistance apres rechargement ; 3 tests de parite i18n. |
 | 7.3.6 | PWA support                  | 🟢     | Fait 2026-10-16 : `manifest.ts`, icones generees par code (`/icons/192`, `/icons/512`), service worker (`public/sw.js` : navigation network-first + repli `/offline`, statiques cache-first), page hors ligne i18n EN/FR. Verifie : build OK, et `/manifest.webmanifest`, `/icons/192`, `/icons/512`, `/sw.js`, `/offline` repondent 200 (PNG 192 et 512 relus). |
 
