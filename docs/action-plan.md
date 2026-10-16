@@ -231,7 +231,7 @@
 | 7.3.3 | Performance optimization     | 🟢     | debounce, throttle, FPS monitor |
 | 7.3.4 | Accessibility audit          | 🔵     | WCAG 2.1 AA (deferred)          |
 | 7.3.5 | Onboarding tutorial          | 🔵     | Phase 2                         |
-| 7.3.6 | PWA support                  | 🔵     | Phase 2                         |
+| 7.3.6 | PWA support                  | 🟢     | Fait 2026-10-16 : `manifest.ts`, icones generees par code (`/icons/192`, `/icons/512`), service worker (`public/sw.js` : navigation network-first + repli `/offline`, statiques cache-first), page hors ligne i18n EN/FR. Verifie : build OK, et `/manifest.webmanifest`, `/icons/192`, `/icons/512`, `/sw.js`, `/offline` repondent 200 (PNG 192 et 512 relus). |
 
 ## Additional Completed Features
 

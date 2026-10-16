@@ -6,6 +6,12 @@ const fr: TranslationMap = {
     tagline: "Façonnez des sorts par l'encre",
     version: 'Version',
   },
+  offline: {
+    title: 'Vous êtes hors ligne',
+    message:
+      'Glyph Weaver ne peut pas joindre le réseau. Votre dessin reste dans le navigateur ; rien n\u2019a été envoyé. Rechargez dès que la connexion revient.',
+    retry: 'Réessayer',
+  },
   tools: {
     pen: 'Plume',
     eraser: 'Gomme',

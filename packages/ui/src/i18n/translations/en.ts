@@ -6,6 +6,12 @@ const en: TranslationMap = {
     tagline: 'Craft spells through ink',
     version: 'Version',
   },
+  offline: {
+    title: 'You are offline',
+    message:
+      'Glyph Weaver cannot reach the network. Your drawing stays in the browser; nothing was sent anywhere. Reload once the connection returns.',
+    retry: 'Try again',
+  },
   tools: {
     pen: 'Pen',
     eraser: 'Eraser',
